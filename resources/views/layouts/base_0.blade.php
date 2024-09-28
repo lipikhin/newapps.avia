@@ -45,32 +45,16 @@
 <body>
 
 <!--start header-->
-{{--<header class="top-header">--}}
-{{--    <nav class="navbar navbar-expand align-items-center justify-content-between">--}}
-{{--        <div class="btn-toggle">--}}
-{{--            <a href="#offcanvasPrimaryMenu" data-bs-toggle="offcanvas"><i class="material-icons-outlined">menu</i></a>--}}
-{{--        </div>--}}
-
-{{--        @include('includes.top_header_navbar')--}}
-{{--    </nav>--}}
-{{--</header> //avia--}}
-
-
 <header class="top-header">
-    <nav class="navbar navbar-expand align-items-center justify-content-between gap-3">
+    <nav class="navbar navbar-expand align-items-center justify-content-between">
         <div class="btn-toggle">
             <a href="#offcanvasPrimaryMenu" data-bs-toggle="offcanvas"><i class="material-icons-outlined">menu</i></a>
         </div>
 
-        <div class="search-bar "></div>
-        <div class="search-popup"></div>
-        <div class="card-body search-content"></div>
-        <div class="notify-list"></div>
-        <ul class="navbar-nav"></ul>
-
-
+        @include('includes.top_header_navbar')
     </nav>
 </header>
+
 <!--end top header-->
 
 <!--start mini sidebar-->
@@ -81,10 +65,14 @@
             @if( Auth::user()->avatar )
                 <img src="/storage/avatars/{{ Auth::user()->avatar }}"
                      class="rounded-circle justify-content-center elevation-2"
-                     alt="User Image" style="width: 40px">
+                     alt="User Image" style="width: 60px">
             @else
                 <i class="material-icons-outlined">account_circle</i>
             @endif
+
+            {{--            <div class="image">--}}
+            {{--                <--}}
+            {{--            </div>--}}
 
         </a>
     </div>
@@ -259,13 +247,13 @@
 <script src="{{asset('assets/js/jquery.min.js')}}"></script>
 {{--<!--plugins-->--}}
 <script src="{{asset('assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js')}}"></script>
-<script src="{{asset('assets/plugins/metismenu/metisMenu.min.js')}}"></script>
-<script src="{{asset('assets/plugins/apexchart/apexcharts.min.js')}}"></script>
-<script src="{{asset('assets/js/index.js')}}"></script>
-<script src="{{asset('assets/plugins/peity/jquery.peity.min.js')}}"></script>
-<script>
-    $(".data-attributes span").peity("donut")
-</script>
+{{--<script src="assets/plugins/metismenu/metisMenu.min.js"></script>--}}
+{{--<script src="assets/plugins/apexchart/apexcharts.min.js"></script>--}}
+{{--<script src="assets/js/index.js"></script>--}}
+{{--<script src="assets/plugins/peity/jquery.peity.min.js"></script>--}}
+{{--<script>--}}
+{{--    $(".data-attributes span").peity("donut")--}}
+{{--</script>--}}
 <script src="{{asset('assets/js/main.js')}}"></script>
 
 

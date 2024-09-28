@@ -68,7 +68,7 @@
         <div class="notify-list"></div>
         <ul class="navbar-nav"></ul>
 
-
+        @include('includes.top_header_navbar')
     </nav>
 </header>
 <!--end top header-->
@@ -256,7 +256,7 @@
 <script src="{{asset('assets/js/bootstrap.bundle.min.js')}}"></script>
 
 <!--plugins-->
-<script src="{{asset('assets/js/jquery.min.js')}}"></script>
+{{--<script src="{{asset('assets/js/jquery.min.js')}}"></script>--}}
 {{--<!--plugins-->--}}
 <script src="{{asset('assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js')}}"></script>
 <script src="{{asset('assets/plugins/metismenu/metisMenu.min.js')}}"></script>

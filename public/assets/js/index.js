@@ -65,8 +65,8 @@ $(function () {
     }
   };
 
-  var chart = new ApexCharts(document.querySelector("#chart1"), options);
-  chart.render();
+  // var chart = new ApexCharts(document.querySelector("#chart1"), options);
+  // chart.render();
 
 
 
@@ -153,8 +153,8 @@ $(function () {
     labels: ['Total Orders'],
   };
 
-  var chart = new ApexCharts(document.querySelector("#chart2"), options);
-  chart.render();
+  // var chart = new ApexCharts(document.querySelector("#chart2"), options);
+  // chart.render();
 
 
 
@@ -231,8 +231,8 @@ $(function () {
     }
   };
 
-  var chart = new ApexCharts(document.querySelector("#chart3"), options);
-  chart.render();
+  // var chart = new ApexCharts(document.querySelector("#chart3"), options);
+  // chart.render();
 
 
 
@@ -326,8 +326,8 @@ $(function () {
     }
   };
 
-  var chart = new ApexCharts(document.querySelector("#chart4"), options);
-  chart.render();
+  // var chart = new ApexCharts(document.querySelector("#chart4"), options);
+  // chart.render();
 
 
 
@@ -396,8 +396,8 @@ $(function () {
     }
   };
 
-  var chart = new ApexCharts(document.querySelector("#chart5"), options);
-  chart.render();
+  // var chart = new ApexCharts(document.querySelector("#chart5"), options);
+  // chart.render();
 
 
 

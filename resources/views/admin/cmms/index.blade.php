@@ -50,11 +50,11 @@
 
             <div class="card-body">
                 <table id="cmmTable"
-                    data-toggle="table"
-                    data-search="true"
-                    data-pagination="false"
-                    data-page-size="5"
-                    class="table table-bordered">
+                       data-toggle="table"
+                       data-search="true"
+                       data-pagination="false"
+                       data-page-size="5"
+                       class="table table-bordered">
                     <thead>
                     <tr>
                         <th data-field="number" data-visible="true"
@@ -131,12 +131,12 @@
         </div>
 
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-{{--        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>--}}
+        {{--        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>--}}
         <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
 
 
 
-@endsection
+        @endsection
         @push('scripts')
             <script>
                 document.addEventListener('DOMContentLoaded', function () {
@@ -176,4 +176,4 @@
                 window.onload = checkScreenWidth;
                 window.onresize = checkScreenWidth;
             </script>
-        @endpush
+    @endpush
