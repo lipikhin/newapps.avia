@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('stamp')->nullable();
             $table->string('sign')->nullable();
 
-            $table->foreignId('role_id')->nullable(); // Внешний ключ
+            $table->foreignId('roles_id')->nullable(); // Внешний ключ
             $table->foreignId('teams_id')->nullable();
 
 

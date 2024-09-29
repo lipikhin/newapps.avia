@@ -22,10 +22,16 @@ return new class extends Migration
                 ->onDelete('set null'); // при удалении роли юзер остается
         });
 
-        DB::table('roles')->insert([
+        DB::table('teams')->insert([
             ['name' => 'Management'],
             ['name' => 'Akimov`s team'],
-            ['name' => 'Shop Certifying Authority (SCA)'],
+            ['name' => 'Blinov`s team'],
+            ['name' => 'Steblyk`s team'],
+            ['name' => 'Tchalyi`s team'],
+            ['name' => 'Barysevich`s team'],
+            ['name' => 'Volker`s team'],
+            ['name' => 'Never stop`s team'],
+            ['name' => 'Lipikhin`s team'],
         ]);
     }
 
