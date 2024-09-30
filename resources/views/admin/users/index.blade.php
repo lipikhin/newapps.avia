@@ -1,4 +1,4 @@
-@extends('layouts.app_old')
+@extends('layouts.apps')
 
 @section('content')
     <style>
@@ -7,7 +7,8 @@
             .table th:nth-child(7),
             .table td:nth-child(7), /* Phone */
             .table th:nth-child(8),
-            .table td:nth-child(8)  /* Stamp */ {
+            .table td:nth-child(8) /* Stamp */
+            {
                 display: none;
             }
         }
@@ -25,7 +26,8 @@
             .table th:nth-child(7),
             .table td:nth-child(7), /* Phone */
             .table th:nth-child(8),
-            .table td:nth-child(8)  /* Stamp */ {
+            .table td:nth-child(8) /* Stamp */
+            {
                 display: none;
             }
         }
@@ -33,7 +35,8 @@
         /* Скрываем колонку Avatar при ширине экрана < 412px */
         @media (max-width: 412px) {
             .table th:nth-child(1),
-            .table td:nth-child(1)  /* Avatar */ {
+            .table td:nth-child(1) /* Avatar */
+            {
                 display: none;
             }
 
@@ -41,6 +44,7 @@
             .table {
                 display: none;
             }
+
             #mobile-message {
                 display: block;
             }
@@ -83,7 +87,9 @@
                     @foreach($users as $user)
                         <tr>
                             <td>
-                                <img src="{{ asset('storage/avatars/' . $user->avatar) }}" style="height: 50px; cursor: pointer;" onclick="openModal('{{ asset('storage/avatars/' . $user->avatar) }}')" />
+                                <img src="{{ asset('storage/avatars/' . $user->avatar) }}"
+                                     style="height: 50px; cursor: pointer;"
+                                     onclick="openModal('{{ asset('storage/avatars/' . $user->avatar) }}')"/>
 
                             </td>
 
@@ -96,11 +102,15 @@
                             <td>{{ $user->phone }}</td>
                             <td>{{ $user->stamp }}</td>
                             <td>
-                                <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                                <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" style="display:inline;">
+                                <a href="{{ route('admin.users.edit', $user->id) }}"
+                                   class="btn btn-primary btn-sm">Edit</a>
+                                <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST"
+                                      style="display:inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');">Delete</button>
+                                    <button type="submit" class="btn btn-danger btn-sm"
+                                            onclick="return confirm('Are you sure?');">Delete
+                                    </button>
                                 </form>
                             </td>
                         </tr>
@@ -125,7 +135,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <img id="avatarModalImage" src="" alt="Avatar" class="img-fluid" />
+                    <img id="avatarModalImage" src="" alt="Avatar" class="img-fluid"/>
                 </div>
             </div>
         </div>

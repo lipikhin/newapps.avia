@@ -1,10 +1,11 @@
-@extends('layouts.app_old')
+@extends('layouts.apps')
 
 @section('content')
     <style>
         .container {
             max-width: 450px;
         }
+
         .push-top {
             margin-top: 50px;
         }
@@ -53,7 +54,8 @@
                                 <option value="{{ $role->id }}">{{ $role->name }}</option>
                             @endforeach
                         </select>
-                        <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#addRoleModal">
+                        <button type="button" class="btn btn-link" data-bs-toggle="modal"
+                                data-bs-target="#addRoleModal">
                             {{ __('Add Role') }}
                         </button>
                     </div>
@@ -67,7 +69,8 @@
                                 <option value="{{ $team->id }}">{{ $team->name }}</option>
                             @endforeach
                         </select>
-                        <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#addTeamModal">
+                        <button type="button" class="btn btn-link" data-bs-toggle="modal"
+                                data-bs-target="#addTeamModal">
                             {{ __('Add Team') }}
                         </button>
                     </div>
@@ -75,12 +78,12 @@
                     <!-- Остальные поля -->
                     <div class="mt-2">
                         <label for="phone">{{ __('Phone') }}</label>
-                        <input id="phone" type="text" class="form-control" name="phone" >
+                        <input id="phone" type="text" class="form-control" name="phone">
                     </div>
 
                     <div class="mt-2">
                         <label for="stamp">{{ __('Stamp') }}</label>
-                        <input id="stamp" type="text" class="form-control" name="stamp" >
+                        <input id="stamp" type="text" class="form-control" name="stamp">
                     </div>
 
                     <!-- Кнопка для создания пользователя -->
@@ -91,7 +94,7 @@
     </div>
 
     <!-- Модальное окно для добавления роли -->
-    <div class="modal fade" id="addRoleModal" tabindex="-1"  aria-labelledby="addRoleLabel" aria-hidden="true">
+    <div class="modal fade" id="addRoleModal" tabindex="-1" aria-labelledby="addRoleLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -99,7 +102,7 @@
                      Role') }}</h5>
                     {{--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--}}
                 </div>
-                <form  method="POST" id="addRoleForm">
+                <form method="POST" id="addRoleForm">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
@@ -121,8 +124,8 @@
     </div>
 
     <!-- Модальное окно для добавления команды -->
-    <div class="modal fade" id="addTeamModal" tabindex="-1"  aria-labelledby="addTeamLabel" aria-hidden="true">
-        <div class="modal-dialog" >
+    <div class="modal fade" id="addTeamModal" tabindex="-1" aria-labelledby="addTeamLabel" aria-hidden="true">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="addTeamModalLabel">{{ __('Add Team') }}</h5>
@@ -199,14 +202,13 @@
         }
 
         // Пример использования для ролей
-        handleFormSubmission('addRoleForm', 'addRoleModal','{{ route('admin.roles.store')
+        handleFormSubmission('addRoleForm', 'addRoleModal', '{{ route('admin.roles.store')
         }}', 'roles_id', 'id', 'name');
 
         // Пример использования для команд
-        handleFormSubmission('addTeamForm', 'addTeamModal','{{ route('admin.teams.store')
+        handleFormSubmission('addTeamForm', 'addTeamModal', '{{ route('admin.teams.store')
         }}', 'teams_id', 'id', 'name');
     </script>
-
 
 @endsection
 

@@ -1,4 +1,4 @@
-@extends('layouts.app_old')
+@extends('layouts.apps')
 
 @section('content')
     <style>
@@ -15,7 +15,8 @@
             </div>
 
             <div class="card-body">
-                <form method="POST" action="{{ route('admin.cmms.update', $cmm->id) }}" enctype="multipart/form-data" id="editCMMForm">
+                <form method="POST" action="{{ route('admin.cmms.update', $cmm->id) }}" enctype="multipart/form-data"
+                      id="editCMMForm">
                     @csrf
                     @method('PUT')
 
@@ -25,14 +26,16 @@
                                 <label for="cmm_num">{{ __('CMM Number')
                                 }}</label>
                                 <input id='cmm_num' type="text"
-                                       class="form-control" name="number" value="{{ old('number', $cmm->number) }}" required>
+                                       class="form-control" name="number" value="{{ old('number', $cmm->number) }}"
+                                       required>
                                 @error('number')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="mt-2">
                                 <label for="title">{{ __('Description') }}</label>
-                                <input id='title' type="text" class="form-control" name="title" value="{{ old('title', $cmm->title) }}" required>
+                                <input id='title' type="text" class="form-control" name="title"
+                                       value="{{ old('title', $cmm->title) }}" required>
                             </div>
 
                             <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
@@ -45,7 +48,8 @@
 
                             <div class="">
                                 <label for="revision_date">{{ __('Revision Date') }}</label>
-                                <input id='revision_date' type="date" class="form-control" name="revision_date" value="{{ old('revision_date', $cmm->revision_date) }}" required>
+                                <input id='revision_date' type="date" class="form-control" name="revision_date"
+                                       value="{{ old('revision_date', $cmm->revision_date) }}" required>
                             </div>
                             <div class="mt-2">
                                 <label for="units_pn">{{ __('Units PN') }}</label>
@@ -103,7 +107,8 @@
                             </div>
                             <div class="">
                                 <label for="lib">{{ __('Library Number') }}</label>
-                                <input id='lib' type="text" class="form-control" name="lib" value="{{ old('lib', $cmm->lib) }}" required>
+                                <input id='lib' type="text" class="form-control" name="lib"
+                                       value="{{ old('lib', $cmm->lib) }}" required>
                             </div>
 
                         </div>
@@ -119,7 +124,8 @@
     </div>
 
     <!-- Модальное окно для добавления самолета -->
-    <div class="modal fade" id="addAirCraftModal" tabindex="-1" aria-labelledby="addAirCraftModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addAirCraftModal" tabindex="-1" aria-labelledby="addAirCraftModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -196,7 +202,7 @@
     <script>
         // Функция для обработки отправки форм для самолетов, MFR и Scope
         function handleFormSubmission(formId, modalId, route, selectId, dataKey, dataValue) {
-            document.getElementById(formId).addEventListener('submit', function(event) {
+            document.getElementById(formId).addEventListener('submit', function (event) {
                 event.preventDefault();
                 let formData = new FormData(this);
                 fetch(route, {
@@ -234,10 +240,10 @@
             });
         }
 
-        handleFormSubmission('addAirCraftForm','addAirCraftModal', '{{ route('admin.planes.store') }}',
+        handleFormSubmission('addAirCraftForm', 'addAirCraftModal', '{{ route('admin.planes.store') }}',
             'planes_id', 'id', 'type');
-        handleFormSubmission('addMFRForm','addMFRModal', '{{ route('admin.builders.store') }}', 'builders_id', 'id',
+        handleFormSubmission('addMFRForm', 'addMFRModal', '{{ route('admin.builders.store') }}', 'builders_id', 'id',
             'name');
-        handleFormSubmission('addScopeForm','addScopeModal', '{{ route('admin.scopes.store') }}', 'scopes_id', 'id', 'scope');
+        handleFormSubmission('addScopeForm', 'addScopeModal', '{{ route('admin.scopes.store') }}', 'scopes_id', 'id', 'scope');
     </script>
 @endsection

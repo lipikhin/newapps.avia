@@ -43,13 +43,7 @@
             text-align: center;
             color: white;
         }
-        .colored-svg {
-            width: 180px; /* Установите желаемую ширину */
-            height: auto; /* Высота будет автоматически скорректирована пропорционально */
-            /*filter: invert(31%) sepia(84%) saturate(5873%) hue-rotate(355deg) brightness(101%) contrast(106%);*/
-            filter: brightness(0) saturate(100%) invert(24%) sepia(95%) saturate(2178%) hue-rotate(210deg) brightness(108%) contrast(98%);
-            /* Настройте фильтры для получения желаемого цвета */
-        }
+
     </style>
 
 </head>

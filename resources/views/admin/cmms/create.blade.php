@@ -1,10 +1,11 @@
-@extends('layouts.app_old')
+@extends('layouts.apps')
 
 @section('content')
     <style>
         .container {
             max-width: 600px;
         }
+
         .push-top {
             margin-top: 50px;
         }
@@ -23,7 +24,7 @@
 
                     <div class="form-group d-flex">
                         <div class="mt-2 m-3 border p-2">
-                            <div >
+                            <div>
                                 <label for="wo">{{ __('Номер CMM') }}</label>
                                 <input id='wo' type="text" class="form-control" name="number" required>
                                 @error('number')
@@ -44,7 +45,8 @@
 
                             <div class="mt-1">
                                 <label for="revision_date">{{ __('Revision Date') }}</label>
-                                <input id='revision_date' type="date" class="form-control" name="revision_date" required>
+                                <input id='revision_date' type="date" class="form-control" name="revision_date"
+                                       required>
                             </div>
                             <div class="mt-2">
                                 <label for="units_pn">{{ __('Units PN') }}</label>
@@ -59,50 +61,50 @@
                                        required>
                             </div>
                         </div>
-                       <div style="width: 320px" class="m-3 p-2 border">
-                           <div class="form-group ">
-                               <label for="planes_id">{{ __('AirCraft Type')
+                        <div style="width: 320px" class="m-3 p-2 border">
+                            <div class="form-group ">
+                                <label for="planes_id">{{ __('AirCraft Type')
                             }}</label>
-                               <select id="planes_id" name="planes_id" class="form-control" required>
-                                   <option value="">{{ __('Select AirCraft')
+                                <select id="planes_id" name="planes_id" class="form-control" required>
+                                    <option value="">{{ __('Select AirCraft')
                                 }}</option>
-                                   @foreach ($planes as $plane)
-                                       <option value="{{ $plane->id }}">{{ $plane->type }}</option>
-                                   @endforeach
-                               </select>
-                               <button type="button" class="btn btn-link" data-bs-toggle="modal"
-                                       data-bs-target="#addAirCraftModal">{{ __('Add AirCraft') }}</button>
-                           </div>
+                                    @foreach ($planes as $plane)
+                                        <option value="{{ $plane->id }}">{{ $plane->type }}</option>
+                                    @endforeach
+                                </select>
+                                <button type="button" class="btn btn-link" data-bs-toggle="modal"
+                                        data-bs-target="#addAirCraftModal">{{ __('Add AirCraft') }}</button>
+                            </div>
 
-                           <div class="form-group ">
-                               <label for="builders_id">{{ __('MFR') }}</label>
-                               <select id="builders_id" name="builders_id" class="form-control" required>
-                                   <option value="">{{ __('Select MFR') }}</option>
-                                   @foreach ($builders as $builder)
-                                       <option value="{{ $builder->id }}">{{ $builder->name }}</option>
-                                   @endforeach
-                               </select>
-                               <button type="button" class="btn btn-link" data-bs-toggle="modal"
-                                       data-bs-target="#addMFRModal">{{ __('Add MFR') }}</button>
-                           </div>
+                            <div class="form-group ">
+                                <label for="builders_id">{{ __('MFR') }}</label>
+                                <select id="builders_id" name="builders_id" class="form-control" required>
+                                    <option value="">{{ __('Select MFR') }}</option>
+                                    @foreach ($builders as $builder)
+                                        <option value="{{ $builder->id }}">{{ $builder->name }}</option>
+                                    @endforeach
+                                </select>
+                                <button type="button" class="btn btn-link" data-bs-toggle="modal"
+                                        data-bs-target="#addMFRModal">{{ __('Add MFR') }}</button>
+                            </div>
 
-                           <div class="form-group ">
-                               <label for="scopes_id">{{ __('Scope') }}</label>
-                               <select id="scopes_id" name="scopes_id" class="form-control" required>
-                                   <option value="">{{ __('Select Scope') }}</option>
-                                   @foreach ($scopes as $scope)
-                                       <option value="{{ $scope->id }}">{{ $scope->scope }}</option>
-                                   @endforeach
-                               </select>
-                               <button type="button" class="btn btn-link" data-bs-toggle="modal"
-                                       data-bs-target="#addScopeModal">{{ __('Add Scope') }}</button>
-                           </div>
-                           <div >
-                               <label for="lib">{{ __('Library Number') }}</label>
-                               <input id='lib' type="text" class="form-control" name="lib" required>
-                           </div>
+                            <div class="form-group ">
+                                <label for="scopes_id">{{ __('Scope') }}</label>
+                                <select id="scopes_id" name="scopes_id" class="form-control" required>
+                                    <option value="">{{ __('Select Scope') }}</option>
+                                    @foreach ($scopes as $scope)
+                                        <option value="{{ $scope->id }}">{{ $scope->scope }}</option>
+                                    @endforeach
+                                </select>
+                                <button type="button" class="btn btn-link" data-bs-toggle="modal"
+                                        data-bs-target="#addScopeModal">{{ __('Add Scope') }}</button>
+                            </div>
+                            <div>
+                                <label for="lib">{{ __('Library Number') }}</label>
+                                <input id='lib' type="text" class="form-control" name="lib" required>
+                            </div>
 
-                       </div>
+                        </div>
 
                     </div>
 
@@ -115,7 +117,8 @@
     </div>
 
     <!-- Модальное окно для добавления самолета -->
-    <div class="modal fade" id="addAirCraftModal" tabindex="-1" aria-labelledby="addAirCraftModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addAirCraftModal" tabindex="-1" aria-labelledby="addAirCraftModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -192,7 +195,7 @@
     <script>
         // Функция для обработки отправки форм для самолетов, MFR и Scope
         function handleFormSubmission(formId, route, selectId, dataKey, dataValue, modalId) {
-            document.getElementById(formId).addEventListener('submit', function(event) {
+            document.getElementById(formId).addEventListener('submit', function (event) {
                 event.preventDefault();
                 if (this.submitted) {
                     return;

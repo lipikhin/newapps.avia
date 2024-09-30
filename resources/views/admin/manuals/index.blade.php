@@ -1,4 +1,4 @@
-@extends('layouts.app_old')
+@extends('layouts.apps')
 
 @section('content')
     <style>
@@ -8,20 +8,21 @@
                 display: none;
             }
         }
+
         @media (max-width: 770px) {
             .table th:nth-child(3),
-            .table td:nth-child(3),/* Revision Date */
+            .table td:nth-child(3), /* Revision Date */
             .table th:nth-child(5),
-            .table td:nth-child(5),/* Revision Date */
+            .table td:nth-child(5), /* Revision Date */
             .table th:nth-child(6),
-            .table td:nth-child(6)  {
+            .table td:nth-child(6) {
                 display: none;
             }
         }
+
         @media (max-width: 490px) {
             .table th:nth-child(3), /* Image */
             .table td:nth-child(3),
-
             .table th:nth-child(4), /* Revision Date */
             .table td:nth-child(4),
             .table th:nth-child(5), /* Revision Date */
@@ -48,11 +49,11 @@
             </div>
             <div class="card-body">
                 <table id="cmmTable"
-                    data-toggle="table"
-                    data-search="true"
-                    data-pagination="false"
-                    data-page-size="5"
-                    class="table table-bordered">
+                       data-toggle="table"
+                       data-search="true"
+                       data-pagination="false"
+                       data-page-size="5"
+                       class="table table-bordered">
                     <thead>
                     <tr>
                         <th data-field="number" data-visible="true"
@@ -90,11 +91,14 @@
                             <td class="text-center">{{$cmm->revision_date}}</td>
                             <td class="text-center">{{$cmm->lib}}</td>
                             <td class="text-center">
-                                <a href="{{ route('admin.cmms.edit', $cmm->id) }}" class="btn btn-primary btn-sm">{{__('Edit')}}</a>
-                                <form action="{{ route('admin.cmms.destroy', $cmm->id) }}" method="POST" style="display:inline;">
+                                <a href="{{ route('admin.cmms.edit', $cmm->id) }}"
+                                   class="btn btn-primary btn-sm">{{__('Edit')}}</a>
+                                <form action="{{ route('admin.cmms.destroy', $cmm->id) }}" method="POST"
+                                      style="display:inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');">{{__('Delete')}}</button>
+                                    <button type="submit" class="btn btn-danger btn-sm"
+                                            onclick="return confirm('Are you sure?');">{{__('Delete')}}</button>
                                 </form>
                             </td>
                         </tr>
@@ -124,12 +128,11 @@
         </div>
 
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-{{--        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>--}}
+        {{--        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>--}}
         <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
 
 
-
-@endsection
+        @endsection
         @push('scripts')
             <script>
                 document.addEventListener('DOMContentLoaded', function () {
@@ -169,4 +172,4 @@
                 window.onload = checkScreenWidth;
                 window.onresize = checkScreenWidth;
             </script>
-        @endpush
+    @endpush

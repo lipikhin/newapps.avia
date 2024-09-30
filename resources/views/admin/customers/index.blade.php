@@ -1,4 +1,4 @@
-@extends('layouts.app_old')
+@extends('layouts.apps')
 
 @section('content')
     <style>
@@ -41,7 +41,8 @@
                        class="table table-bordered">
                     <thead>
                     <tr>
-                        <th data-field="name" data-align="center" data-sortable="true" class="text-center custom-sort-icon">{{__('Name')}}</th>
+                        <th data-field="name" data-align="center" data-sortable="true"
+                            class="text-center custom-sort-icon">{{__('Name')}}</th>
                         <th data-field="action" data-align="center" class="text-center">{{__('Action')}}</th>
                     </tr>
                     </thead>
@@ -51,10 +52,12 @@
                             <td>{{$cust->name}}</td>
                             <td>
                                 <a href="{{ route('admin.customers.edit', $cust->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                                <form action="{{ route('admin.customers.destroy', $cust->id) }}" method="POST" style="display:inline;">
+                                <form action="{{ route('admin.customers.destroy', $cust->id) }}" method="POST"
+                                      style="display:inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');">{{__('Delete')}}</button>
+                                    <button type="submit" class="btn btn-danger btn-sm"
+                                            onclick="return confirm('Are you sure?');">{{__('Delete')}}</button>
                                 </form>
                             </td>
                         </tr>
@@ -66,7 +69,7 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-{{--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>--}}
+    {{--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>--}}
     <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
 
 @endsection

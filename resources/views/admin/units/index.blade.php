@@ -1,4 +1,4 @@
-@extends('layouts.app_old')
+@extends('layouts.apps')
 
 @section('content')
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -28,7 +28,8 @@
                        class="table table-bordered data-table">
                     <thead>
                     <tr>
-                        <th data-field="number" data-visible="true" data-priority="1" class="text-center">{{__('#')}}</th>
+                        <th data-field="number" data-visible="true" data-priority="1"
+                            class="text-center">{{__('#')}}</th>
                         <th data-field="part_title" data-visible="true"
                             data-priority="2" class="text-center">{{__('Unit
                             Description')
@@ -43,7 +44,8 @@
                         <th data-field="img" data-visible="true"
                             data-priority="4" class="text-center">{{__('Image')
                             }}</th>
-                        <th data-field="action" data-visible="true" data-priority="5" class="text-center">{{__('Действие')}}</th>
+                        <th data-field="action" data-visible="true" data-priority="5"
+                            class="text-center">{{__('Действие')}}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -62,12 +64,13 @@
                             </td>
                             <td>
                                 <select class="form-select">
-                                    @foreach($units as $unit)  <!-- Итерируем по $units, а не $groupedUnits -->
-                                    @if ($unit->manuals)
-                                        <option value="{{ $unit->part_number }}">{{ $unit->part_number }}</option>
-                                    @else
-                                        <option value="" disabled>Нет данных CMM</option>
-                                    @endif
+                                    @foreach($units as $unit)
+                                        <!-- Итерируем по $units, а не $groupedUnits -->
+                                        @if ($unit->manuals)
+                                            <option value="{{ $unit->part_number }}">{{ $unit->part_number }}</option>
+                                        @else
+                                            <option value="" disabled>Нет данных CMM</option>
+                                        @endif
                                     @endforeach
                                 </select>
                             </td>
@@ -84,8 +87,10 @@
 
                             <td class="text-center">
                                 @if ($units->isNotEmpty() && $units->first()->manuals)
-                                    <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal{{ $units->first()->manuals->id }}">
-                                        <img src="{{ asset('storage/image/cmm/' . $units->first()->manuals->img) }}" style="max-width: 50px; border:1px" alt="Изображение">
+                                    <a href="#" data-bs-toggle="modal"
+                                       data-bs-target="#imageModal{{ $units->first()->manuals->id }}">
+                                        <img src="{{ asset('storage/image/cmm/' . $units->first()->manuals->img) }}"
+                                             style="max-width: 50px; border:1px" alt="Изображение">
                                     </a>
                                 @else
                                     <img src="{{ asset
@@ -109,7 +114,7 @@
                                             data-manuals-id="{{ $unit->manuals_id }}"
                                             data-manual="{{ $unit->manuals->title }}"
                                             data-manual-number="{{ $unit->manuals->number }}"
-{{--                                            data-manual-image="{{ $unit->manuals->img }}"--}}
+                                            {{--                                            data-manual-image="{{ $unit->manuals->img }}"--}}
                                             data-manual-image="{{
                                            $units->first()->manuals->img}}"
                                             data-bs-toggle="modal"
@@ -118,10 +123,12 @@
                                         <i class="bi bi-pencil-square"></i>
                                     </button>
 
-                           <form action="{{ route('admin.units.destroy', $manualNumber) }}" method="post" style="display: inline-block">
+                                    <form action="{{ route('admin.units.destroy', $manualNumber) }}" method="post"
+                                          style="display: inline-block">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-danger btn-sm" type="submit" onclick="return confirm('Вы уверены, что хотите удалить все юниты в этой группе?');">
+                                        <button class="btn btn-danger btn-sm" type="submit"
+                                                onclick="return confirm('Вы уверены, что хотите удалить все юниты в этой группе?');">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </form>
@@ -134,15 +141,21 @@
 
                         @if ($units->first()->manuals && $units->first()->manuals->img)
                             <!-- Модальное окно для показа большого изображения -->
-                            <div class="modal fade" id="imageModal{{ $units->first()->manuals->id }}" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel{{ $units->first()->manuals->id }}" aria-hidden="true">
+                            <div class="modal fade" id="imageModal{{ $units->first()->manuals->id }}" tabindex="-1"
+                                 role="dialog" aria-labelledby="imageModalLabel{{ $units->first()->manuals->id }}"
+                                 aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="imageModalLabel{{ $units->first()->manuals->id }}">{{ $units->first()->manuals->title }}</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                                            <h5 class="modal-title"
+                                                id="imageModalLabel{{ $units->first()->manuals->id }}">{{ $units->first()->manuals->title }}</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Закрыть"></button>
                                         </div>
                                         <div class="modal-body text-center">
-                                            <img src="{{ asset('storage/image/cmm/' . $units->first()->manuals->img) }}" style="max-width: 100%; max-height: 100%;" alt="{{ $units->first()->manuals->title }}">
+                                            <img src="{{ asset('storage/image/cmm/' . $units->first()->manuals->img) }}"
+                                                 style="max-width: 100%; max-height: 100%;"
+                                                 alt="{{ $units->first()->manuals->title }}">
                                         </div>
                                     </div>
                                 </div>
@@ -176,7 +189,7 @@
                             <div class="d-flex">
                                 <div class="me-2">
                                     <img src="{{ asset('storage/image/cmm/' .
-                                     $manual->img) }}"  style="max-width:
+                                     $manual->img) }}" style="max-width:
                                      200px;" alt="Image CMM">
                                 </div>
                                 <div>
@@ -218,7 +231,9 @@
                         <label for="cmmSelect" class="form-label">Select CMM</label>
                         <select class="form-select" id="cmmSelect">
                             @foreach($restManuals as $restManual)
-                                <option value="{{ $restManual->id }}">{{ $restManual->title }} ({{ $restManual->number }})</option>
+                                <option value="{{ $restManual->id }}">{{ $restManual->title }}
+                                    ({{ $restManual->number }})
+                                </option>
                             @endforeach
                         </select>
                     </div>
@@ -231,16 +246,19 @@
                                    placeholder="Enter PN" style="width: 200px;"
                                    name="pn[]">
                             <button class="btn btn-secondary" type="button"
-                                    id="addPnField">Add PN</button>
+                                    id="addPnField">Add PN
+                            </button>
                         </div>
                     </div>
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary"
-                            data-bs-dismiss="modal">Close</button>
+                            data-bs-dismiss="modal">Close
+                    </button>
                     <button type="button" id="createUnitBtn" class="btn
-                    btn-primary"> Add Unit</button>
+                    btn-primary"> Add Unit
+                    </button>
                 </div>
             </div>
         </div>
@@ -248,14 +266,15 @@
 
     <!-- Модальное окно Edit Unit  -->
 
-    <div class="modal fade" id="editUnitModal" tabindex="-1" role="dialog" aria-labelledby="editUnitModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editUnitModal" tabindex="-1" role="dialog" aria-labelledby="editUnitModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                            <h5 class="modal-title" id="editUnitModalLabel"> </h5>
-                            <button type="button" class="btn btn-primary"
-                                    id="addUnitButton"><i class="bi bi-file-plus"></i></button>
-{{--                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--}}
+                    <h5 class="modal-title" id="editUnitModalLabel"></h5>
+                    <button type="button" class="btn btn-primary"
+                            id="addUnitButton"><i class="bi bi-file-plus"></i></button>
+                    {{--                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--}}
 
                 </div>
                 <div class="modal-body">
@@ -269,12 +288,12 @@
                         </div>
                         <div class="col">
 
-{{--                            @if ($units && $units->count() > 0)--}}
-                                <p id="editUnitModalNumber"></p>
-                                <div id="partNumbersList"></div>
-{{--                            @else--}}
-                                <p>No part numbers found for this manual.</p>
-{{--                            @endif--}}
+                            {{--                            @if ($units && $units->count() > 0)--}}
+                            <p id="editUnitModalNumber"></p>
+                            <div id="partNumbersList"></div>
+                            {{--                            @else--}}
+                            <p>No part numbers found for this manual.</p>
+                            {{--                            @endif--}}
                         </div>
                     </div>
                 </div>
@@ -294,7 +313,6 @@
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
 
     <script>
-
 
 
         document.addEventListener('DOMContentLoaded', function () {
@@ -339,10 +357,8 @@
         });
 
 
-
-
         // Добавление нового поля ввода PN
-        document.getElementById('addPnField').addEventListener('click', function() {
+        document.getElementById('addPnField').addEventListener('click', function () {
             const newPnField = document.createElement('div');
             newPnField.className = 'input-group mb-2 pn-field';
             newPnField.innerHTML = ` <input type="text" class="form-control"
@@ -355,14 +371,14 @@
         });
 
         // Удаление поля ввода PN
-        document.addEventListener('click', function(event) {
+        document.addEventListener('click', function (event) {
             if (event.target.classList.contains('removePnField')) {
                 event.target.parentElement.remove();
             }
         });
 
         // Add Unit
-        document.getElementById('createUnitBtn').addEventListener('click', function() {
+        document.getElementById('createUnitBtn').addEventListener('click', function () {
             const cmmId = document.getElementById('cmmSelect').value;
             const pnValues = Array.from(document.querySelectorAll('input[name="pn[]"]')).map(input => input.value.trim());
 
@@ -376,12 +392,12 @@
                         part_numbers: pnValues,
                         _token: '{{ csrf_token() }}' // CSRF токен для Laravel
                     },
-                    success: function(response) {
+                    success: function (response) {
                         // Обработка успешного ответа
                         console.log(response);
                         location.reload(); // Перезагрузка страницы, чтобы увидеть новый юнит в таблице
                     },
-                    error: function(xhr) {
+                    error: function (xhr) {
                         // Обработка ошибок
                         console.error(xhr.responseText);
                         alert('An error occurred while creating the unit. Please try again.');
@@ -393,9 +409,9 @@
         });
 
         // Логика для Edit Unit
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.edit-unit-btn').forEach(function(button) {
-                button.addEventListener('click', function() {
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.edit-unit-btn').forEach(function (button) {
+                button.addEventListener('click', function () {
                     const unitId = button.getAttribute('data-id');
                     const manualId = button.getAttribute('data-manuals-id');
                     const manualTitle = button.getAttribute('data-manual');
@@ -410,7 +426,7 @@
 
                     // Установка данных в модальное окно
                     document.getElementById('editUnitModalLabel').innerText = `${manualTitle}`;
-                    document.getElementById('editUnitModalNumber').innerText =`CMM: ${manualNumber}`;
+                    document.getElementById('editUnitModalNumber').innerText = `CMM: ${manualNumber}`;
 
                     // Установка изображения
                     const cmmImage = document.getElementById('cmmImage');
@@ -421,17 +437,17 @@
                         // к изображению по умолчанию
                     }
 
-                        // Очистить текущий список part_number
+                    // Очистить текущий список part_number
                     const partNumbersList = document.getElementById('partNumbersList');
                     partNumbersList.innerHTML = '';
 
 
-                // Отправка запроса для получения юнитов, связанных с мануалом
+                    // Отправка запроса для получения юнитов, связанных с мануалом
                     fetch(`units/${manualId}`)
                         .then(response => response.json())
                         .then(data => {
                             if (data.units && data.units.length > 0) {
-                                data.units.forEach(function(unit) {
+                                data.units.forEach(function (unit) {
                                     addPartNumberRow(unit.part_number);
                                 });
                             } else {
@@ -448,8 +464,8 @@
                     $('#editUnitModal').modal('show');
                 });
             });
-                // Добавить новую строку с вводом для нового part_number
-            document.getElementById('addUnitButton').addEventListener('click', function() {
+            // Добавить новую строку с вводом для нового part_number
+            document.getElementById('addUnitButton').addEventListener('click', function () {
                 addPartNumberRow('');
             });
 
@@ -469,7 +485,7 @@
                 const deleteButton = document.createElement('button');
                 deleteButton.className = 'btn btn-danger btn-sm ms-1';
                 deleteButton.innerText = 'Del';
-                deleteButton.onclick = function() {
+                deleteButton.onclick = function () {
                     listItem.remove();
                 };
 
@@ -479,7 +495,7 @@
             }
 
             // Обработчик кнопки Update
-            document.getElementById('updateUnitButton').addEventListener('click', function() {
+            document.getElementById('updateUnitButton').addEventListener('click', function () {
                 const partNumbers = Array.from(document.querySelectorAll('#partNumbersList input')).map(input => input.value);
                 const manualId = document.querySelector('.edit-unit-btn').getAttribute('data-manuals-id');
 
@@ -520,10 +536,8 @@
         });
 
 
-
-
         // Инициализация DataTables
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#cmmTable').DataTable();
         });
     </script>

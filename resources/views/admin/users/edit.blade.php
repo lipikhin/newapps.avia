@@ -1,10 +1,11 @@
-@extends('layouts.app_old')
+@extends('layouts.apps')
 
 @section('content')
     <style>
         .container {
             max-width: 450px;
         }
+
         .push-top {
             margin-top: 50px;
         }
@@ -23,13 +24,15 @@
                     <!-- Поле для имени -->
                     <div class="form-group">
                         <label for="name">{{ __('Имя') }}</label>
-                        <input type="text" id="name" class="form-control" name="name" value="{{ old('name', $user->name) }}" required>
+                        <input type="text" id="name" class="form-control" name="name"
+                               value="{{ old('name', $user->name) }}" required>
                     </div>
 
                     <!-- Поле для email -->
                     <div class="form-group mt-2">
                         <label for="email">{{ __('Email') }}</label>
-                        <input type="email" id="email" class="form-control" name="email" value="{{ old('email', $user->email) }}" required>
+                        <input type="email" id="email" class="form-control" name="email"
+                               value="{{ old('email', $user->email) }}" required>
                     </div>
 
                     <!-- Поле для аватара -->
@@ -44,7 +47,8 @@
                     <div>
                         <label for="is_admin">{{ __('Admin') }}</label>
                         <input class="form-check-input ms-3" type="checkbox"
-                               id="is_admin" name="is_admin" value="1" {{ old('is_admin', $user->is_admin) ? 'checked' : '' }}>
+                               id="is_admin" name="is_admin"
+                               value="1" {{ old('is_admin', $user->is_admin) ? 'checked' : '' }}>
                     </div>
 
                     <!-- Поле для роли -->
@@ -56,7 +60,8 @@
                                 <option value="{{ $role->id }}" {{ $user->roles_id == $role->id ? 'selected' : '' }}>{{ $role->name }}</option>
                             @endforeach
                         </select>
-                        <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#addRoleModal">
+                        <button type="button" class="btn btn-link" data-bs-toggle="modal"
+                                data-bs-target="#addRoleModal">
                             {{ __('Добавить роль') }}
                         </button>
                     </div>
@@ -70,7 +75,8 @@
                                 <option value="{{ $team->id }}" {{ $user->teams_id == $team->id ? 'selected' : '' }}>{{ $team->name }}</option>
                             @endforeach
                         </select>
-                        <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#addTeamModal">
+                        <button type="button" class="btn btn-link" data-bs-toggle="modal"
+                                data-bs-target="#addTeamModal">
                             {{ __('Добавить команду') }}
                         </button>
                     </div>
@@ -78,12 +84,14 @@
                     <!-- Остальные поля -->
                     <div class="mt-2">
                         <label for="phone">{{ __('Телефон') }}</label>
-                        <input id="phone" type="text" class="form-control" name="phone" value="{{ old('phone', $user->phone) }}">
+                        <input id="phone" type="text" class="form-control" name="phone"
+                               value="{{ old('phone', $user->phone) }}">
                     </div>
 
                     <div class="mt-2">
                         <label for="stamp">{{ __('Штамп') }}</label>
-                        <input id="stamp" type="text" class="form-control" name="stamp" value="{{ old('stamp', $user->stamp) }}">
+                        <input id="stamp" type="text" class="form-control" name="stamp"
+                               value="{{ old('stamp', $user->stamp) }}">
                     </div>
 
                     <!-- Кнопка для сохранения изменений -->
@@ -93,7 +101,7 @@
         </div>
     </div>
     <!-- Модальное окно для добавления роли -->
-    <div class="modal fade" id="addRoleModal" tabindex="-1"  aria-labelledby="addRoleLabel" aria-hidden="true">
+    <div class="modal fade" id="addRoleModal" tabindex="-1" aria-labelledby="addRoleLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -101,7 +109,7 @@
                      Role') }}</h5>
                     {{--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--}}
                 </div>
-                <form  method="POST" id="addRoleForm">
+                <form method="POST" id="addRoleForm">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
@@ -123,8 +131,8 @@
     </div>
 
     <!-- Модальное окно для добавления команды -->
-    <div class="modal fade" id="addTeamModal" tabindex="-1"  aria-labelledby="addTeamLabel" aria-hidden="true">
-        <div class="modal-dialog" >
+    <div class="modal fade" id="addTeamModal" tabindex="-1" aria-labelledby="addTeamLabel" aria-hidden="true">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="addTeamModalLabel">{{ __('Add Team') }}</h5>
@@ -201,15 +209,13 @@
         }
 
         // Пример использования для ролей
-        handleFormSubmission('addRoleForm', 'addRoleModal','{{ route('admin.roles.store')
+        handleFormSubmission('addRoleForm', 'addRoleModal', '{{ route('admin.roles.store')
         }}', 'roles_id', 'id', 'name');
 
         // Пример использования для команд
-        handleFormSubmission('addTeamForm', 'addTeamModal','{{ route('admin.teams.store')
+        handleFormSubmission('addTeamForm', 'addTeamModal', '{{ route('admin.teams.store')
         }}', 'teams_id', 'id', 'name');
     </script>
-
-
 
 @endsection
 

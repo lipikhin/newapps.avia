@@ -1,4 +1,4 @@
-@extends('layouts.app_old')
+@extends('layouts.apps')
 
 @section('content')
 
@@ -14,7 +14,7 @@
                                 <li>{{ $error }}</li>
                             @endforeach
                         </ul>
-                    </div><br />
+                    </div><br/>
                 @endif
 
                 <form method="post" action="{{ route('admin.customers.update', $customer->id) }}">
