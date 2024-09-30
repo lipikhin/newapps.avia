@@ -85,7 +85,8 @@
                     <i class="fas fa-regular fa-plane"></i>
                     <span>{{ __('Company') }}</span>
                 </a>
-                <ul id="company" class="company collapse sidebar-dropdown list-unstyled collapse"
+                <ul id="company" class="company collapse sidebar-dropdown
+                list-unstyled collapsed"
                     data-bs-parent=".sidebar">
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link">{{ __('About') }}</a>
