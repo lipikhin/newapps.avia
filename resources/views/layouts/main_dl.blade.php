@@ -112,7 +112,9 @@
             </div>
         </div>
     </nav>
-
+<section class="home">
+    <div class="text">Dashboard</div>
+</section>
 
     <script src="{{asset('/js/main_dl.js')}}"></script>
 </body>
