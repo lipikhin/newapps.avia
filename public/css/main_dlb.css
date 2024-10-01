@@ -132,11 +132,13 @@ header .image-text .header-text{
     transform: translateY(-50%);
 
 }
-
+.list-link{
+    padding: 0;
+}
 body.dark .sidebar header .toggle{
     color: var(--text-color);
 }
-.sidebar .menu{
+.sidebar .list-item{
     margin-top: 35px ;
 }
 
@@ -162,39 +164,39 @@ body.dark .sidebar li a:hover .icon,
 body.dark .sidebar li a:hover .text{
     color: var(--text-color);
 }
-.sidebar .menu-bar{
+.sidebar .list-bar{
     height: calc(100% - 50px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
-.menu-bar .mode{
+.list-bar .mode{
     position: relative;
     border-radius: 6px;
     background:var(--primary-color-light) ;
 }
-.menu-bar .mode .moon-sun{
+.list-bar .mode .moon-sun{
     height: 50px;
     width: 60px;
     display: flex;
     align-items: center;
 
 }
-.menu-bar .mode i{
+.list-bar .mode i{
     position: absolute;
     transition: var(--tran-03);
 }
-.menu-bar .mode i.sun{
+.list-bar .mode i.sun{
     opacity: 0;
 }
-body.dark .menu-bar .mode i.sun{
+body.dark .list-bar .mode i.sun{
     opacity: 1;
 }
 
-body.dark .menu-bar .mode i.moon{
+body.dark .list-bar .mode i.moon{
     opacity: 0;
 }
-.menu-bar .mode .toggle-switch{
+.list-bar .mode .toggle-switch{
     position: absolute;
     right: 0;
     display: flex;

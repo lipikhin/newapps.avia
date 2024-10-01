@@ -7,11 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Custom Styles -->
-{{--    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">--}}
+
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <link rel="stylesheet" href="{{ asset('css/main_dl.css') }}">
-
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -33,7 +32,12 @@
                          alt="AT_Logo">
                 </span>
                 <div class="text header-text">
-                    <span class="name">Aviatechnik</span>
+{{--                    <span class="name">Aviatechnik</span>--}}
+                    <a class="navbar-brand" href="{{ url('/') }}">
+                        <img src="{{ asset('image/AT_logo-rb.svg') }}"
+                             alt="Logo" class="colored-svg" style="width:
+                             150px">
+                    </a>
                 </div>
             </div>
             <i class='bx bx-chevron-right toggle'></i>
@@ -44,47 +48,47 @@
                 <ul class="menu-links">
                     <li class="nav-link">
                         <a href="#">
-                            <i class='bx bxs-home icon'></i>
+                            <i class='bx bx-home icon'></i>
                             <span class="text nav-text">{{__('Home')}}</span>
                         </a>
                     </li>
                     <li class="nav-link">
                         <a href="#">
 
-                            <i class='bx bxs-trophy icon'></i>
+                            <i class='bx bx-trophy icon'></i>
                             <span class="text nav-text">{{__('Training')
                             }}</span>
                         </a>
                     </li>
                     <li class="nav-link">
                         <a href="#">
-                            <i class='bx bxs-wrench  icon'></i>
+                            <i class='bx bx-wrench  icon'></i>
                             <span class="text nav-text">{{__('Tools')}}</span>
                         </a>
                     </li>
                     <li class="nav-link">
                         <a href="#">
 
-                            <i class='bx bxs-cart-download icon'></i>
+                            <i class='bx bx-cart-download icon'></i>
                             <span class="text nav-text">{{__('Materials')
                             }}</span>
                         </a>
                     </li>
                     <li class="nav-link">
                         <a href="#">
-                            <i class='bx bxs-select-multiple icon'></i>
+                            <i class='bx bx-select-multiple icon'></i>
                             <span class="text nav-text">{{__('Tests')}}</span>
                         </a>
                     </li>
                     <li class="nav-link">
                         <a href="#">
-                            <i class='bx bxs-bell icon'></i>
+                            <i class='bx bx-bell icon'></i>
                             <span class="text nav-text">{{__('Notification')}}</span>
                         </a>
                     </li>
                     <li class="nav-link">
                         <a href="#">
-                            <i class='bx bxs-factory icon'></i>
+                            <i class='bx bxs-grid icon'></i>
                             <span class="text nav-text">{{__('Standart
                             Processes')}}</span>
                         </a>
@@ -94,10 +98,15 @@
 
             <div class="bottom-content">
                 <li class="">
-                    <a href="#">
-                        <i class='bx bxs-log-out icon'></i>
+                    <a href="{{ route('logout') }}"
+                       onclick="event.preventDefault();
+                       document.getElementById('logout-form').submit();">
+                        <i class='bx bx-log-out icon'></i>
                         <span class="text nav-text">{{__('Logout')}}</span>
                     </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
                 </li>
                 <li class="mode">
                     <div class="moon-sun">
@@ -112,8 +121,10 @@
             </div>
         </div>
     </nav>
-<section class="home">
+<section class="home ">
     <div class="text">Dashboard</div>
+
+
 </section>
 
     <script src="{{asset('/js/main_dl.js')}}"></script>
