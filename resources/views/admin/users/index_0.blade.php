@@ -68,7 +68,8 @@
                     data-search="true"
                     data-pagination="true"
                     data-page-size="10"
-                    class="table table-bordered" >
+                    class="table table-bordered"
+                >
                     <thead>
                     <tr>
                         <th data-field="avatar" data-visible="true" data-priority="1">
@@ -100,6 +101,7 @@
                                     <img src="{{ asset('storage/avatars/' . $user->avatar) }}"
                                          style="height: 50px; cursor: pointer;"
                                          alt="Img"
+{{--                                         onclick="openModal('{{ asset('storage/avatars/' . $user->avatar)}}')"--}}
                                     />
                                 </a>
                             </td>
@@ -138,39 +140,56 @@
     </div>
 
 {{--    @if ($user->avatar)--}}
-    <!-- Модальное окно для показа большого изображения -->
-
-    <div class="modal fade" id="imageModal{{$user->id}}" tabindex="-1"
-         role="dialog" aria-labelledby="imageModalLabel{{$user->id}}"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title"
-                        id="imageModalLabel{{$user->id}}">{{$user->name}}
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    @if($user->avatar)
-                        <img src="{{ asset('storage/avatars/' . $user->avatar) }}"
-                             alt="{{ $user->name }}" class="img-fluid"/>
-                    @else
-                        <p>No avatar available.</p>
-                    @endif
-
+        <div class="modal fade" id="imageModal{{$user->id}}" tabindex="-1"
+             role="dialog" aria-labelledby="imageModalLabel{{$user->name}}" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"
+                            id="avatarModalLabel{{$user->id}}">{{$user->name}}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="{{ asset('storage/avatars/',$user->avatar )}}"
+{{--                             alt="{{$user->name}}">--}}
+{{--                        <img id="avatarModalImage" src="" alt="Avatar" class="img-fluid"/>--}}
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+{{--    @endif--}}
 
-    {{--    @endif--}}
+
+
+
+    <!-- Модальное окно для показа аватара -->
+{{--    <div class="modal fade" id="avatarModal" tabindex="-1"--}}
+{{--         aria-labelledby="avatarModalLabel"  aria-hidden="true">--}}
+{{--        <div class="modal-dialog">--}}
+{{--            <div class="modal-content">--}}
+{{--                <div class="modal-header">--}}
+{{--                    <h5 class="modal-title" id="avatarModalLabel">{{$user->name}}</h5>--}}
+{{--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--}}
+{{--                </div>--}}
+{{--                <div class="modal-body">--}}
+{{--                    <img id="avatarModalImage" src="" alt="Avatar" class="img-fluid"/>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
 @endsection
 
 @push('scripts')
     <script>
+        // function openModal(imageUrl) {
+        //     // Устанавливаем путь к изображению в модальное окно
+        //     document.getElementById('avatarModalImage').src = imageUrl;
+        //     // Открываем модальное окно
+        //     мфк modal = new bootstrap.Modal(document.getElementById
+        //     ('avatarModal'));
+        //     modal.show();
+        // }
 
         // Проверка ширины экрана и управление отображением таблицы и сообщения
         function checkScreenWidth() {

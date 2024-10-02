@@ -12,7 +12,8 @@
         @media (max-width: 770px) {
             .table th:nth-child(2),
             .table td:nth-child(2),/* Revision Date */
-
+            .table th:nth-child(4), /* Revision Date */
+            .table td:nth-child(4),
             .table th:nth-child(5),
             .table td:nth-child(5)  {
                 display: none;
@@ -23,8 +24,10 @@
             .table td:nth-child(2),
             .table th:nth-child(4), /* Revision Date */
             .table td:nth-child(4),
-            .table th:nth-child(5),
-            .table td:nth-child(5) {
+            .table th:nth-child(5), /* Revision Date */
+            .table td:nth-child(5),
+            .table th:nth-child(6),
+            .table td:nth-child(6) {
                 display: none;
             }
 
@@ -35,8 +38,16 @@
                 .table td:nth-child(4),
                 .table th:nth-child(5), /* Revision Date */
                 .table td:nth-child(5),
+                .table th:nth-child(6), /* Revision Date */
+                .table td:nth-child(6),
                 .table th:nth-child(7),
                 .table td:nth-child(7) {
+                    display: none;
+                }
+                .form-switch{
+                    display: none;
+                }
+                .table{
                     display: none;
                 }
             }

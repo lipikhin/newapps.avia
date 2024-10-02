@@ -34,8 +34,8 @@
         }
     </style>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css">
+{{--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">--}}
+{{--    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css">--}}
 
 
     <div class="container">
@@ -70,7 +70,6 @@
                         <th data-field="img" data-visible="true"
                             data-priority="4" class="text-center">{{__
                         ('Unit Image')}}</th>
-
                         <th data-field="revision_date" data-visible="true"
                             data-priority="5"
                             class="text-center">{{__('Revision Date')}}</th>
@@ -85,16 +84,18 @@
                     <tbody>
                     @foreach($cmms as $cmm)
                         <tr>
-                            <td class="text-center">{{$cmm->number}} </td>
+                            <td class="text-center">{{$cmm->number}}</td>
                             <td class="text-center">{{$cmm->title}}</td>
                             <td class="text-center">{{$cmm->units_pn}}</td>
 
                             <td class="text-center">
-                                <img src="{{ asset('storage/image/cmm/' . $cmm->img) }}" style="width: 36px"
-                                     alt="Image" data-bs-toggle="modal" data-bs-target="#imageModal"
-                                     data-image-url="{{ asset('storage/image/cmm/' . $cmm->img) }}"
-                                     data-title="{{ $cmm->title }}">
+                                <a href="#" data-bs-toggle="modal"
+                                   data-bs-target="#imageModal{{$cmm->id}}">
+                                    <img src="{{ asset('storage/image/cmm/' . $cmm->img) }}" style="width: 36px; cursor: pointer;"
+                                         alt="Img">
+                                </a>
                             </td>
+
                             <td class="text-center">{{$cmm->revision_date}}</td>
                             <td class="text-center">{{$cmm->lib}}</td>
                             <td class="text-center">
@@ -109,57 +110,73 @@
                                 </form>
                             </td>
                         </tr>
+
+                        <!-- Image Modal -->
+                        <div class="modal fade" id="imageModal{{$cmm->id}}" tabindex="-1" role="dialog"
+                             aria-labelledby="imageModalLabel{{$cmm->id}}"
+                             aria-hidden="true">
+                            <div class="modal-dialog ">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="imageModalLabel{{$cmm->id}}">
+                                            {{$cmm->title}}
+                                        </h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        @if($cmm->img)
+                                            <img src="{{ asset('storage/image/cmm/' . $cmm->img) }}"
+                                                 alt="{{ $cmm->title }}" class="img-fluid"/>
+                                        @else
+                                            <p>No image available.</p>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     @endforeach
                     </tbody>
+
                 </table>
             </div>
         </div>
-
+    </div>
         <div id="mobile-message" style="display: none; text-align: center;">
             <p>Only desktop version available.</p>
         </div>
 
-        <!-- Image Modal -->
-        <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="imageModalLabel">Image Preview</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body text-center">
-                        <img id="modalImage" src="" alt="Image" style="max-width: 100%; max-height: 80vh;">
-                    </div>
-                </div>
-            </div>
-        </div>
+{{--        <!-- Image Modal -->--}}
+{{--        <div class="modal fade" id="imageModal" tabindex="-1" role="dialog"--}}
+{{--             aria-labelledby="imageModalLabel{{$cmm->title}}"--}}
+{{--             aria-hidden="true">--}}
+{{--            <div class="modal-dialog ">--}}
+{{--                    <div class="modal-content">--}}
+{{--                        <div class="modal-header">--}}
+{{--                            <h5 class="modal-title"--}}
+{{--                                id="imageModalLabel">{{$cmm->title}}--}}
+{{--                            </h5>--}}
+{{--                            <button type="button" class="btn-close" data-bs-dismiss="modal"--}}
+{{--                                    aria-label="Close"></button>--}}
+{{--                        </div>--}}
 
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        {{--        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>--}}
-        <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
+{{--                        <div class="modal-body">--}}
+{{--                            @if($cmm->img)--}}
+{{--                                <img src="{{ asset('storage/image/cmm/' . $cmm->img)}}"--}}
+{{--                                     alt="{{ $cmm->title }}" class="img-fluid"/>--}}
+{{--                            @else--}}
+{{--                                <p>No image available.</p>--}}
+{{--                            @endif--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
 
 
         @endsection
         @push('scripts')
             <script>
-                document.addEventListener('DOMContentLoaded', function () {
-                    const imageModal = document.getElementById('imageModal');
-                    const modalImage = document.getElementById('modalImage');
-                    const modalTitle = document.getElementById('imageModalLabel');
-
-                    imageModal.addEventListener('show.bs.modal', function (event) {
-                        const button = event.relatedTarget; // Button that triggered the modal
-                        const imageUrl = button.getAttribute('data-image-url'); // Extract image URL from data-* attributes
-                        const title = button.getAttribute('data-title'); // Extract title from data-* attributes
-
-                        modalImage.src = imageUrl; // Update the modal's image
-                        modalTitle.textContent = title; // Update the modal's title
-                    });
-
-                    imageModal.addEventListener('hidden.bs.modal', function () {
-                        modalImage.src = ''; // Clear the image when the modal is closed
-                    });
-                });
 
                 // Проверка ширины экрана и управление отображением таблицы и сообщения
                 function checkScreenWidth() {

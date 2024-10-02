@@ -1,6 +1,8 @@
 @extends('layouts.main_dlb')
 
 @section('content')
+{{--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">--}}
+{{--    <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">--}}
 
     <div class="container">
         <div class="card shadow">
@@ -128,7 +130,7 @@
                                         @method('DELETE')
                                         <button class="btn btn-danger btn-sm" type="submit"
                                                 onclick="return confirm('Вы уверены, что хотите удалить все юниты в этой группе?');">
-                                            <i class="bi bi-trash"></i>
+                                            <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </form>
 
@@ -170,8 +172,8 @@
     </div>
 
     <!-- Модальное окно для просмотра деталей CMM -->
-    <div class="modal fade" id="viewCMMModal{{ $units->first()->manuals->id }}" tabindex="-1" role="dialog"
-         aria-labelledby="viewCMMModalLabel{{ $units->first()->manuals->id }}" aria-hidden="true">
+    <div class="modal fade" id="viewCMMModal" tabindex="-1" role="dialog"
+         aria-labelledby="viewCMMModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -182,34 +184,34 @@
                     </button>
                 </div>
                 <div class="modal-body">
-{{--                    @foreach ($manuals as $manual)--}}
-                        <div id="cmm-{{ $units->first()->manuals->id }}" class="cmm-details"
+                    @foreach ($manuals as $manual)
+                        <div id="cmm-{{ $manual->id }}" class="cmm-details"
                              style="display: none;">
                             <div class="d-flex">
                                 <div class="me-2">
                                     <img src="{{ asset('storage/image/cmm/' .
-                                     $units->first()->manuals->img) }}" style="max-width:
+                                     $manual->img) }}" style="max-width:
                                      200px;" alt="Image CMM">
                                 </div>
                                 <div>
-                                    <p><strong>{{ __('CMM:') }}</strong> {{ $units->first()->manuals->number }}</p>
+                                    <p><strong>{{ __('CMM:') }}</strong> {{ $manual->number }}</p>
                                     <p><strong>{{ __('Description:') }}</strong>
-                                        {{ $units->first()->manuals->title }}</p>
+                                        {{ $manual->title }}</p>
                                     <p><strong>{{ __('Revision Date:')
-                                    }}</strong> {{ $units->first()->manuals->revision_date }}</p>
+                                    }}</strong> {{ $manual->revision_date }}</p>
                                     <p><strong>{{ __('AirCraft Type:')
                                     }}</strong>
-                                        {{ $planes[$units->first()->manuals->planes_id] ?? 'N/A' }}</p>
+                                        {{ $planes[$manual->planes_id] ?? 'N/A' }}</p>
                                     <p><strong>{{ __('MFR:') }}</strong> {{
-                                    $builders[$units->first()->manuals->builders_id] ?? 'N/A' }}</p>
+                                    $builders[$manual->builders_id] ?? 'N/A' }}</p>
                                     <p><strong>{{ __('Scope:') }}</strong> {{
-                                    $scopes[$units->first()->manuals->scopes_id] ?? 'N/A' }}</p>
+                                    $scopes[$manual->scopes_id] ?? 'N/A' }}</p>
                                     <p><strong>{{ __('Library:') }}</strong> {{
-                                    $units->first()->manuals->lib }}</p>
+                                    $manual->lib }}</p>
                                 </div>
                             </div>
                         </div>
-{{--                    @endforeach--}}
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -270,11 +272,11 @@
          aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header justify-content-between">
+                <div class="modal-header">
                     <h5 class="modal-title" id="editUnitModalLabel"></h5>
                     <button type="button" class="btn btn-primary"
-                            id="addUnitButton"><i class="bi bi-plus-circle"></i></button>
-{{--                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--}}
+                            id="addUnitButton"><i class="bi bi-file-plus"></i></button>
+                    {{--                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--}}
 
                 </div>
                 <div class="modal-body">
@@ -288,12 +290,12 @@
                         </div>
                         <div class="col">
 
-                            @if ($units && $units->count() > 0)
-                                <p id="editUnitModalNumber"></p>
-                                <div id="partNumbersList"></div>
-                            @else
-                                <p>No part numbers found for this manual.</p>
-                            @endif
+                            {{--                            @if ($units && $units->count() > 0)--}}
+                            <p id="editUnitModalNumber"></p>
+                            <div id="partNumbersList"></div>
+                            {{--                            @else--}}
+                            <p>No part numbers found for this manual.</p>
+                            {{--                            @endif--}}
                         </div>
                     </div>
                 </div>
@@ -306,6 +308,11 @@
     </div>
 
 
+
+{{--    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>--}}
+{{--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>--}}
+{{--    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>--}}
+{{--    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>--}}
 
     <script>
 
