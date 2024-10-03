@@ -174,16 +174,19 @@
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
+                                        <div>
                                             <h5 class="modal-title"
                                                 id="imageModalLabel{{ $units->first()->manuals->id }}">
-                                                {{ $units->first()
-                                                ->manuals->title }}{{__(': ')}}
-                                                {{ $units->first()
-                                                ->manuals->units_pn }}
-                                            </h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                {{ $units->first()->manuals->title }}{{__(': ')}}
+                                            </h5 >
+                                            <h6>{{ $units->first()->manuals->units_pn }}</h6>
+                                        </div>
+                                            <button type="button"
+                                                    class="btn-close pb-2"
+                                                    data-bs-dismiss="modal"
                                                     aria-label="Закрыть"></button>
                                         </div>
+
                                         <div class="modal-body">
                                             <div class="d-flex">
                                                 <div class="me-2">
@@ -282,7 +285,10 @@
                 <div class="modal-header justify-content-between">
                     <h5 class="modal-title" id="editUnitModalLabel"></h5>
                     <button type="button" class="btn btn-primary"
-                            id="addUnitButton"><i class="bi bi-plus-circle"></i></button>
+                            id="addUnitButton">
+{{--                        <i class="bi bi-plus-circle"></i>--}}
+                        {{__('Add PN')}}
+                    </button>
 {{--                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--}}
 
                 </div>
@@ -313,7 +319,6 @@
             </div>
         </div>
     </div>
-
 
 
     <script>
@@ -375,7 +380,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             document.querySelectorAll('.edit-unit-btn').forEach(function (button) {
                 button.addEventListener('click', function () {
-                    const unitId = button.getAttribute('data-id');
+                    // const unitId = button.getAttribute('data-id');
                     const manualId = button.getAttribute('data-manuals-id');
                     const manualTitle = button.getAttribute('data-manual');
                     const manualImage = button.getAttribute('data-manual-image'); // Получаем путь к изображению
@@ -503,6 +508,6 @@
         // $(document).ready(function () {
         //     $('#cmmTable').DataTable();
         // });
-        //
+
     </script>
 @endsection
