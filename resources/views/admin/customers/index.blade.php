@@ -51,13 +51,19 @@
                         <tr>
                             <td>{{$cust->name}}</td>
                             <td>
-                                <a href="{{ route('admin.customers.edit', $cust->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                <a href="{{ route('admin.customers.edit', $cust->id) }}" class="btn btn-primary btn-sm">
+{{--                                    {{__('Edit')}}--}}
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
                                 <form action="{{ route('admin.customers.destroy', $cust->id) }}" method="POST"
                                       style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm"
-                                            onclick="return confirm('Are you sure?');">{{__('Delete')}}</button>
+                                            onclick="return confirm('Are you sure?');">
+                                        <i class="bi bi-trash"></i>
+{{--                                        {{__('Delete')}}--}}
+                                    </button>
                                 </form>
                             </td>
                         </tr>

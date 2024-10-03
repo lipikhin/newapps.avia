@@ -100,19 +100,13 @@
                             <td class="text-center">{{$cmm->lib}}</td>
                             <td class="text-center">
                                 <a href="{{ route('admin.cmms.edit', $cmm->id) }}"
-                                   class="btn btn-primary btn-sm">
-                                    <i class="bi bi-pencil-square"></i>
-{{--                                    {{__('Edit')}}--}}
-                                </a>
+                                   class="btn btn-primary btn-sm">{{__('Edit')}}</a>
                                 <form action="{{ route('admin.cmms.destroy', $cmm->id) }}" method="POST"
                                       style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm"
-                                            onclick="return confirm('Are you sure?');">
-{{--                                        {{__('Delete')}}--}}
-                                        <i class="bi bi-trash"></i>
-                                    </button>
+                                            onclick="return confirm('Are you sure?');">{{__('Delete')}}</button>
                                 </form>
                             </td>
                         </tr>
@@ -152,6 +146,32 @@
         <div id="mobile-message" style="display: none; text-align: center;">
             <p>Only desktop version available.</p>
         </div>
+
+{{--        <!-- Image Modal -->--}}
+{{--        <div class="modal fade" id="imageModal" tabindex="-1" role="dialog"--}}
+{{--             aria-labelledby="imageModalLabel{{$cmm->title}}"--}}
+{{--             aria-hidden="true">--}}
+{{--            <div class="modal-dialog ">--}}
+{{--                    <div class="modal-content">--}}
+{{--                        <div class="modal-header">--}}
+{{--                            <h5 class="modal-title"--}}
+{{--                                id="imageModalLabel">{{$cmm->title}}--}}
+{{--                            </h5>--}}
+{{--                            <button type="button" class="btn-close" data-bs-dismiss="modal"--}}
+{{--                                    aria-label="Close"></button>--}}
+{{--                        </div>--}}
+
+{{--                        <div class="modal-body">--}}
+{{--                            @if($cmm->img)--}}
+{{--                                <img src="{{ asset('storage/image/cmm/' . $cmm->img)}}"--}}
+{{--                                     alt="{{ $cmm->title }}" class="img-fluid"/>--}}
+{{--                            @else--}}
+{{--                                <p>No image available.</p>--}}
+{{--                            @endif--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
 
 
         @endsection

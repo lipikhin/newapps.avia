@@ -114,13 +114,18 @@
                             <td>{{ $user->stamp }}</td>
                             <td>
                                 <a href="{{ route('admin.users.edit', $user->id) }}"
-                                   class="btn btn-primary btn-sm">Edit</a>
+                                   class="btn btn-primary btn-sm">
+{{--                                    {{__('Edit')}}--}}
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
                                 <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST"
                                       style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm"
-                                            onclick="return confirm('Are you sure?');">Delete
+                                            onclick="return confirm('Are you sure?');">
+{{--                                        {{__('Delete')}}--}}
+                                        <i class="bi bi-trash"></i>
                                     </button>
                                 </form>
                             </td>

@@ -75,7 +75,12 @@
 
                             <td class="text-center">
                                 @if ($units->isNotEmpty() && $units->first()->manuals)
-                                    <a href="#" class="view-cmm-btn" data-cmm-id="{{ $units->first()->manuals->id }}">
+                                    <a href="#"
+{{--                                       class="view-cmm-btn" --}}
+{{--                                       data-cmm-id="{{ $units->first()->manuals->id }}">--}}
+                                        data-bs-toggle="modal"
+                                       data-bs-target="#cmmModal{{
+                                       $units->first()->manuals->id }}">
                                         {{ $manualNumber }}
                                     </a>
                                 @else
@@ -113,7 +118,6 @@
                                             data-manuals-id="{{ $unit->manuals_id }}"
                                             data-manual="{{ $unit->manuals->title }}"
                                             data-manual-number="{{ $unit->manuals->number }}"
-                                            {{--                                            data-manual-image="{{ $unit->manuals->img }}"--}}
                                             data-manual-image="{{
                                            $units->first()->manuals->img}}"
                                             data-bs-toggle="modal"
@@ -159,6 +163,54 @@
                                     </div>
                                 </div>
                             </div>
+
+                            {{--    <!-- Модальное окно для просмотра деталей CMM -->--}}
+
+                            <div class="modal fade" id="cmmModal{{
+                            $units->first()->manuals->id }}" tabindex="-1"
+                                 role="dialog" aria-labelledby="cmmModalLabel{{
+                                  $units->first()->manuals->id }}"
+                                 aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title"
+                                                id="imageModalLabel{{ $units->first()->manuals->id }}">
+                                                {{ $units->first()
+                                                ->manuals->title }}{{__(': ')}}
+                                                {{ $units->first()
+                                                ->manuals->units_pn }}
+                                            </h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Закрыть"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="d-flex">
+                                                <div class="me-2">
+                                                    <img src="{{ asset('storage/image/cmm/' . $units->first()->manuals->img) }}"
+                                                         style="max-width: 200px;"
+                                                         alt="{{ $units->first()->manuals->title }}">
+                                                </div>
+                                                <div>
+                                                    <p><strong>{{ __('CMM:') }}</strong> {{ $units->first()->manuals->number }}</p>
+                                                    <p><strong>{{ __('Description:') }}</strong>
+                                                        {{ $units->first()->manuals->title }}</p>
+                                                    <p><strong>{{ __('Revision Date:')}}</strong> {{ $units->first()->manuals->revision_date }}</p>
+                                                    <p><strong>{{ __('AirCraft Type:')}}</strong>
+                                                        {{ $planes[$units->first()->manuals->planes_id] ?? 'N/A' }}</p>
+                                                    <p><strong>{{ __('MFR:') }}</strong> {{$builders[$units->first()->manuals->builders_id] ?? 'N/A' }}</p>
+                                                    <p><strong>{{ __('Scope:') }}</strong> {{$scopes[$units->first()->manuals->scopes_id] ?? 'N/A' }}</p>
+                                                    <p><strong>{{ __('Library:') }}</strong> {{$units->first()->manuals->lib }}</p>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
                         @endif
                     @endforeach
 
@@ -169,51 +221,8 @@
 
     </div>
 
-    <!-- Модальное окно для просмотра деталей CMM -->
-    <div class="modal fade" id="viewCMMModal{{ $units->first()->manuals->id }}" tabindex="-1" role="dialog"
-         aria-labelledby="viewCMMModalLabel{{ $units->first()->manuals->id }}" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="viewCMMModalLabel">
-                        {{ __('Данные CMM') }}</h5>
-                    <button type="button" class="btn-close"
-                            data-bs-dismiss="modal" aria-label="Закрыть">
-                    </button>
-                </div>
-                <div class="modal-body">
-{{--                    @foreach ($manuals as $manual)--}}
-                        <div id="cmm-{{ $units->first()->manuals->id }}" class="cmm-details"
-                             style="display: none;">
-                            <div class="d-flex">
-                                <div class="me-2">
-                                    <img src="{{ asset('storage/image/cmm/' .
-                                     $units->first()->manuals->img) }}" style="max-width:
-                                     200px;" alt="Image CMM">
-                                </div>
-                                <div>
-                                    <p><strong>{{ __('CMM:') }}</strong> {{ $units->first()->manuals->number }}</p>
-                                    <p><strong>{{ __('Description:') }}</strong>
-                                        {{ $units->first()->manuals->title }}</p>
-                                    <p><strong>{{ __('Revision Date:')
-                                    }}</strong> {{ $units->first()->manuals->revision_date }}</p>
-                                    <p><strong>{{ __('AirCraft Type:')
-                                    }}</strong>
-                                        {{ $planes[$units->first()->manuals->planes_id] ?? 'N/A' }}</p>
-                                    <p><strong>{{ __('MFR:') }}</strong> {{
-                                    $builders[$units->first()->manuals->builders_id] ?? 'N/A' }}</p>
-                                    <p><strong>{{ __('Scope:') }}</strong> {{
-                                    $scopes[$units->first()->manuals->scopes_id] ?? 'N/A' }}</p>
-                                    <p><strong>{{ __('Library:') }}</strong> {{
-                                    $units->first()->manuals->lib }}</p>
-                                </div>
-                            </div>
-                        </div>
-{{--                    @endforeach--}}
-                </div>
-            </div>
-        </div>
-    </div>
+
+
 
 
     <!-- Модальное окно add Unit -->
@@ -309,47 +318,6 @@
 
     <script>
 
-
-        document.addEventListener('DOMContentLoaded', function () {
-            // Initialize DataTable
-            var table = $('.data-table').DataTable({
-                "order": [],
-                "pageLength": 5, // Adjust page length as needed
-                "language": {
-                    "search": "Search:",
-                    "paginate": {
-                        "first": "Первая",
-                        "last": "Последняя",
-                        "next": "Следующая",
-                        "previous": "Предыдущая"
-                    },
-                    "info": "Показано _START_ до _END_ из _TOTAL_ записей",
-                    "lengthMenu": "Показать _MENU_ записей",
-                }
-            });
-
-            // Ensure modal works with pagination
-            $('.data-table').on('draw.dt', function () {
-                bindViewCMMEvent();
-            });
-
-            // Bind view CMM event
-            function bindViewCMMEvent() {
-                document.querySelectorAll('.view-cmm-btn').forEach(function (button) {
-                    button.addEventListener('click', function () {
-                        const cmmId = this.dataset.cmmId;
-                        document.querySelectorAll('.cmm-details').forEach(function (cmmDetail) {
-                            cmmDetail.style.display = 'none';
-                        });
-                        document.getElementById('cmm-' + cmmId).style.display = 'block';
-                        $('#viewCMMModal').modal('show');
-                    });
-                });
-            }
-
-            // Initial binding
-            bindViewCMMEvent();
-        });
 
 
         // Добавление нового поля ввода PN
@@ -531,9 +499,10 @@
         });
 
 
-        // Инициализация DataTables
-        $(document).ready(function () {
-            $('#cmmTable').DataTable();
-        });
+        // // Инициализация DataTables
+        // $(document).ready(function () {
+        //     $('#cmmTable').DataTable();
+        // });
+        //
     </script>
 @endsection
