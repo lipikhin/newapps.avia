@@ -8,7 +8,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Custom Styles -->
 
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
 
@@ -45,7 +44,7 @@
                 </a>
             </div>
         </div>
-        <i class='bx bx-chevron-right toggle'></i>
+        <i class='bi bi-chevron-right toggle' ></i>
     </header>
 
     <div class="list-bar">
@@ -56,7 +55,7 @@
                 <a href="{{ route('logout') }}"
                    onclick="event.preventDefault();
                        document.getElementById('logout-form').submit();">
-                    <i class='bx bx-log-out icon'></i>
+                    <i class="bi bi-box-arrow-left icon"></i>
                     <span class="text nav-text">{{__('Logout')}}</span>
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -104,5 +103,29 @@
 <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('js/main_dl.js')}}"></script>
 
+<script>
+    // document.addEventListener('DOMContentLoaded', function () {
+    //     const themeToggle = document.getElementById('theme-toggle');
+    //     const body = document.body;
+    //
+    //     // Проверка текущей темы в localStorage
+    //     if (localStorage.getItem('theme') === 'dark') {
+    //         body.classList.add('dark');
+    //     }
+    //
+    //     // Обработка переключения темы
+    //     themeToggle.addEventListener('click', function () {
+    //         body.classList.toggle('dark');
+    //
+    //         // Сохранение выбранной темы в localStorage
+    //         if (body.classList.contains('dark')) {
+    //             localStorage.setItem('theme', 'dark');
+    //         } else {
+    //             localStorage.setItem('theme', 'light');
+    //         }
+    //     });
+    // });
+
+</script>
 </body>
 </html>

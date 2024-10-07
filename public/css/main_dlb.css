@@ -15,6 +15,13 @@
     --toggle-color: #DDDDDD;
     --text-color: #545454;
 
+    --table-bg: #ffffff;
+    --table-text: #000000;
+    --table-border: #dddddd;
+    --table-hover-bg: #f1f1f1;
+    --table-header-bg: #e0e0e0;
+
+
     /*Transition*/
     --tran-02: all 0.2s ease;
     --tran-03: all 0.3s ease;
@@ -33,6 +40,12 @@ body.dark{
     --primary-color-light: #3A3B3C;
     --toggle-color: #FFF;
     --text-color: #CCC;
+
+    --table-bg: #242526;
+    --table-text: #e4e6eb;
+    --table-border: #3a3b3c;
+    --table-hover-bg: #3a3b3c;
+    --table-header-bg: #18191A;
 }
 /*--- Sidebar ---*/
 .sidebar{
@@ -252,4 +265,23 @@ body.dark .switch::before{
     left: 88px;
     width: calc(100% - 88px);
 
+}
+.table {
+    background-color: var(--table-bg);
+    color: var(--table-text);
+    border-color: var(--table-border);
+    transition: var(--tran-05);
+}
+
+.table th {
+    background-color: var(--table-header-bg);
+    color: var(--table-text);
+}
+
+.table td {
+    color: var(--table-text);
+}
+
+.table-hover tbody tr:hover {
+    background-color: var(--table-hover-bg);
 }

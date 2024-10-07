@@ -43,7 +43,7 @@
                             data-priority="4" class="text-center">{{__('Image')
                             }}</th>
                         <th data-field="action" data-visible="true" data-priority="5"
-                            class="text-center">{{__('Действие')}}</th>
+                            class="text-center">{{__('Action')}}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -57,7 +57,7 @@
 
                                     {{ $units->first()->manuals->title }}
                                 @else
-                                    <span>Нет данных о руководстве</span>
+                                    <span>No data on CMM</span>
                                 @endif
                             </td>
                             <td>
@@ -67,7 +67,8 @@
                                         @if ($unit->manuals)
                                             <option value="{{ $unit->part_number }}">{{ $unit->part_number }}</option>
                                         @else
-                                            <option value="" disabled>Нет данных CMM</option>
+                                            <option value="" disabled>No data
+                                                on CMM</option>
                                         @endif
                                     @endforeach
                                 </select>
@@ -84,7 +85,7 @@
                                         {{ $manualNumber }}
                                     </a>
                                 @else
-                                    <span>Нет данных о руководстве</span>
+                                    <span>No data on CMM</span>
                                 @endif
                             </td>
 
@@ -153,7 +154,7 @@
                                             <h5 class="modal-title"
                                                 id="imageModalLabel{{ $units->first()->manuals->id }}">{{ $units->first()->manuals->title }}</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Закрыть"></button>
+                                                    aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body text-center">
                                             <img src="{{ asset('storage/image/cmm/' . $units->first()->manuals->img) }}"
@@ -184,7 +185,7 @@
                                             <button type="button"
                                                     class="btn-close pb-2"
                                                     data-bs-dismiss="modal"
-                                                    aria-label="Закрыть"></button>
+                                                    aria-label="Close"></button>
                                         </div>
 
                                         <div class="modal-body">
@@ -223,9 +224,6 @@
         </div>
 
     </div>
-
-
-
 
 
     <!-- Модальное окно add Unit -->
@@ -322,7 +320,6 @@
 
 
     <script>
-
 
 
         // Добавление нового поля ввода PN

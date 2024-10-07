@@ -34,13 +34,8 @@
         }
     </style>
 
-{{--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">--}}
-{{--    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css">--}}
-
-
     <div class="container">
         <div class="card shadow">
-
             <div class="card-header">
                 <div class="d-flex justify-content-between">
                     <h3>{{__('Manage CMMs')}}</h3>

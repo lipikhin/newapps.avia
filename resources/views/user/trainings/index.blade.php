@@ -5,6 +5,27 @@
 
 @section('content')
     <style>
+
+        .table {
+            background-color: var(--table-bg);
+            color: var(--table-text);
+            border-color: var(--table-border);
+            transition: var(--tran-05);
+        }
+
+        .table th {
+            background-color: var(--table-header-bg);
+            color: var(--table-text);
+        }
+
+        .table td {
+            color: var(--table-text);
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: var(--table-hover-bg);
+        }
+
         @media (max-width: 1100px) {
             .table th:nth-child(2),
             .table td:nth-child(2) {
@@ -57,7 +78,9 @@
                 /*    display: none;*/
                 /*}*/
             }
+
         }
+
     </style>
 
 
@@ -117,16 +140,16 @@
                     <tbody>
                     @foreach($formattedTrainingLists as $trainingList)
                         <tr>
-                            <td class="text-center">
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input"
+                            <td class="text-center ">
+                                <div class="form-check form-switch mt-3 ms-5">
+                                    <input class="form-check-input "
                                            type="checkbox"
                                            @if(isset($trainingList['last_training']) && Carbon::parse($trainingList['last_training']->date_training)
                                            ->diffInDays(Carbon::now()) < 340)
                                                disabled
                                            @endif
                                            onchange="handleCheckboxChange(this, '{{ $trainingList['first_training']->manuals_id }}', '{{ $trainingList['first_training']->date_training }}', '{{ $trainingList['first_training']->manual->title ?? 'N/A' }}')">
-                                    <label class="form-check-label"
+                                    <label class="form-check-label justify-content-center"
                                            for="flexSwitchCheckChecked"></label>
 
                                 </div>

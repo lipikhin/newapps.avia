@@ -6,7 +6,7 @@
     <div class="ps-3">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb mb-0 p-0">
-                <li class="breadcrumb-item"><a href="{{url('/home')}}" class="btn btn-primary"><i class="bx bx-home-alt">Home</i></a></li>
+                <li class="breadcrumb-item"><a href="{{url('/home')}}" class="btn btn-primary">Home</a></li>
                 @auth
                     @if(Auth::user()->is_admin)
 

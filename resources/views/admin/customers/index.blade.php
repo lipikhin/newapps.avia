@@ -15,9 +15,6 @@
         /*}*/
     </style>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css">
-
     <div class="container" style="max-width: 550px;">
         <div class="card shadow">
             <div class="card-header">
@@ -35,7 +32,6 @@
                        data-page-size="10"
                        data-page-list="[5, 10, 25, 50]"
                        data-pagination-parts='["pageList", "pageSize", "pageInfo"]'
-
                        data-search-highlight="true"
                        data-sortable="true"
                        class="table table-bordered">
@@ -43,7 +39,8 @@
                     <tr>
                         <th data-field="name" data-align="center" data-sortable="true"
                             class="text-center custom-sort-icon">{{__('Name')}}</th>
-                        <th data-field="action" data-align="center" class="text-center">{{__('Action')}}</th>
+                        <th data-field="action" data-align="center"
+                            class="text-center ">{{__('Action')}}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -74,8 +71,5 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    {{--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>--}}
-    <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
 
 @endsection
