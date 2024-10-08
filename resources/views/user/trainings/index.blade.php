@@ -6,25 +6,6 @@
 @section('content')
     <style>
 
-        .table {
-            background-color: var(--table-bg);
-            color: var(--table-text);
-            border-color: var(--table-border);
-            transition: var(--tran-05);
-        }
-
-        .table th {
-            background-color: var(--table-header-bg);
-            color: var(--table-text);
-        }
-
-        .table td {
-            color: var(--table-text);
-        }
-
-        .table-hover tbody tr:hover {
-            background-color: var(--table-hover-bg);
-        }
 
         @media (max-width: 1100px) {
             .table th:nth-child(2),

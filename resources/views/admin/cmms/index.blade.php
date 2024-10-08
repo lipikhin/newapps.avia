@@ -2,6 +2,9 @@
 
 @section('content')
     <style>
+
+
+
         @media (max-width: 1100px) {
             .table th:nth-child(5),
             .table td:nth-child(5) {

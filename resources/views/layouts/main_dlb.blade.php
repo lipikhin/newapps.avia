@@ -9,12 +9,13 @@
     <!-- Custom Styles -->
 
 
+
+
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
 
     <link rel="stylesheet" href="{{asset('css/bootstrap-icons.css')}}">
 
     <link rel="stylesheet" href="{{ asset('css/main_dlb.css') }}">
-
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -24,6 +25,41 @@
             height: auto;
             filter: brightness(0) saturate(100%) invert(24%) sepia(95%) saturate(2178%) hue-rotate(210deg) brightness(108%) contrast(98%);
         }
+        .table {
+            background-color: var(--table-bg);
+            color: var(--table-text);
+            border-color: var(--table-text);
+            transition: var(--tran-05);
+        }
+
+        .table th {
+            background-color: var(--table-bg);
+            color: var(--table-text);
+            border-color: var(--table-text);
+        }
+
+        .table td {
+            border-color: var(--table-text);
+            background-color: var(--table-bg);
+            color: var(--table-text);
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: var(--table-hover-bg);
+        }
+
+        .card-header{
+            background-color: var(--table-hover-bg);
+            color: var(--table-text);
+        }
+        .card-body{
+            background-color: var(--table-bg);
+            color: var(--table-text);
+        }
+        .btn-primary{
+            background-color: var(--primary-color);
+        }
+
     </style>
 
 </head>
@@ -68,7 +104,7 @@
                     <i class='bx bxs-sun icon sun'></i>
                 </div>
                 <span class="mode-text text">{{__('Dark Mode')}}</span>
-                <div class="toggle-switch">
+                <div class="toggle-switch" >
                     <span class="switch"></span>
                 </div>
             </li>
@@ -104,27 +140,24 @@
 <script src="{{asset('js/main_dl.js')}}"></script>
 
 <script>
-    // document.addEventListener('DOMContentLoaded', function () {
-    //     const themeToggle = document.getElementById('theme-toggle');
-    //     const body = document.body;
-    //
-    //     // Проверка текущей темы в localStorage
-    //     if (localStorage.getItem('theme') === 'dark') {
-    //         body.classList.add('dark');
-    //     }
-    //
-    //     // Обработка переключения темы
-    //     themeToggle.addEventListener('click', function () {
-    //         body.classList.toggle('dark');
-    //
-    //         // Сохранение выбранной темы в localStorage
-    //         if (body.classList.contains('dark')) {
-    //             localStorage.setItem('theme', 'dark');
-    //         } else {
-    //             localStorage.setItem('theme', 'light');
-    //         }
-    //     });
-    // });
+    document.addEventListener('DOMContentLoaded', () => {
+        const themeToggle = document.querySelector('.toggle-switch');
+        const body = document.body;
+        const currentTheme = localStorage.getItem('theme') || 'light'; // По умолчанию - светлая тема
+
+        // Установка начальной темы
+        body.classList.add(currentTheme);
+
+        // Обработка переключения темы
+        themeToggle.addEventListener('click', () => {
+            const newTheme = body.classList.contains('dark') ? 'light' : 'dark';
+            body.classList.replace(currentTheme, newTheme); // Заменяем текущий класс темы на новый
+            localStorage.setItem('theme', newTheme); // Обновляем localStorage
+        });
+    });
+
+
+
 
 </script>
 </body>

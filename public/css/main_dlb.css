@@ -17,7 +17,7 @@
 
     --table-bg: #ffffff;
     --table-text: #000000;
-    --table-border: #dddddd;
+    --table-border: #dddddd;/*#dddddd */
     --table-hover-bg: #f1f1f1;
     --table-header-bg: #e0e0e0;
 
@@ -42,8 +42,8 @@ body.dark{
     --text-color: #CCC;
 
     --table-bg: #242526;
-    --table-text: #e4e6eb;
-    --table-border: #3a3b3c;
+    --table-text: #e4e6eb; /*#e4e6eb*/
+    --table-border: #000000; /*#3a3b3c*/
     --table-hover-bg: #3a3b3c;
     --table-header-bg: #18191A;
 }
@@ -266,22 +266,4 @@ body.dark .switch::before{
     width: calc(100% - 88px);
 
 }
-.table {
-    background-color: var(--table-bg);
-    color: var(--table-text);
-    border-color: var(--table-border);
-    transition: var(--tran-05);
-}
 
-.table th {
-    background-color: var(--table-header-bg);
-    color: var(--table-text);
-}
-
-.table td {
-    color: var(--table-text);
-}
-
-.table-hover tbody tr:hover {
-    background-color: var(--table-hover-bg);
-}
