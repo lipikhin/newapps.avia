@@ -143,18 +143,23 @@
     document.addEventListener('DOMContentLoaded', () => {
         const themeToggle = document.querySelector('.toggle-switch');
         const body = document.body;
-        const currentTheme = localStorage.getItem('theme') || 'light'; // По умолчанию - светлая тема
+        let currentTheme = localStorage.getItem('theme') || 'light'; // По умолчанию - светлая тема
 
         // Установка начальной темы
         body.classList.add(currentTheme);
 
         // Обработка переключения темы
         themeToggle.addEventListener('click', () => {
-            const newTheme = body.classList.contains('dark') ? 'light' : 'dark';
-            body.classList.replace(currentTheme, newTheme); // Заменяем текущий класс темы на новый
-            localStorage.setItem('theme', newTheme); // Обновляем localStorage
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark'; // Определение новой темы
+            body.classList.replace(currentTheme, newTheme); // Замена текущей темы
+            localStorage.setItem('theme', newTheme); // Обновление темы в localStorage
+            currentTheme = newTheme; // Обновление текущей темы
         });
     });
+
+
+
+
 
 
 
