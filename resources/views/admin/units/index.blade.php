@@ -17,8 +17,12 @@
                             }}</button>
                 </div>
             </div>
-
             <div class="card-body">
+                @if($groupedUnits->isEmpty())
+                    <div class="alert alert-info text-center">
+                        {{ __('No units available.') }}
+                    </div>
+                @else
                 <table id="cmmTable" data-toggle="table"
                        data-search="true"
                        data-pagination="false"
@@ -220,6 +224,7 @@
 
                     </tbody>
                 </table>
+                @endif
             </div>
         </div>
 
@@ -300,8 +305,7 @@
                             </div>
                         </div>
                         <div class="col">
-
-                            @if ($units && $units->count() > 0)
+                            @if(isset($units) && $units->isNotEmpty())
                                 <p id="editUnitModalNumber"></p>
                                 <div id="partNumbersList"></div>
                             @else
