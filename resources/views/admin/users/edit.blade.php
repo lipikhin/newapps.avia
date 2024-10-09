@@ -23,7 +23,7 @@
 
                     <!-- Поле для имени -->
                     <div class="form-group">
-                        <label for="name">{{ __('Имя') }}</label>
+                        <label for="name">{{ __('Name') }}</label>
                         <input type="text" id="name" class="form-control" name="name"
                                value="{{ old('name', $user->name) }}" required>
                     </div>
@@ -36,15 +36,21 @@
                     </div>
 
                     <!-- Поле для аватара -->
-                    <div class="form-group mt-2">
-                        <label for="avatar">{{ __('Аватар') }}</label>
-                        <input type="file" name="avatar" class="form-control" placeholder="Avatar">
-                        @if ($user->avatar)
-                            <img src="{{ asset('storage/avatars/' .$user->avatar) }}" style="height: 50px;"
-                                 alt="Текущий аватар">
-                        @endif
+                    <div class="form-group mt-2 ">
+                        <label for="avatar">{{ __('Avatar') }}</label>
+                        <div class="d-flex">
+                            @if ($user->avatar)
+                                <img src="{{ asset('storage/avatars/'
+                                .$user->avatar) }}" style="height: 36px;"
+                                     alt="Avatar" class="pe-2 ">
+                            @endif
+                                <input type="file" name="avatar"
+                                       class=" form-control"
+                                       placeholder="Avatar">
+                        </div>
+
                     </div>
-                    <div>
+                    <div class="mt-2">
                         <label for="is_admin">{{ __('Admin') }}</label>
                         <input class="form-check-input ms-3" type="checkbox"
                                id="is_admin" name="is_admin"
@@ -53,49 +59,52 @@
 
                     <!-- Поле для роли -->
                     <div class="form-group mt-2">
-                        <label for="roles_id">{{ __('Роль') }}</label>
+                        <label for="roles_id">{{ __('Role') }}</label>
                         <select id="roles_id" name="roles_id" class="form-control" required>
-                            <option value="">{{ __('Выберите роль') }}</option>
+                            <option value="">{{ __('Select Role') }}</option>
                             @foreach ($roles as $role)
                                 <option value="{{ $role->id }}" {{ $user->roles_id == $role->id ? 'selected' : '' }}>{{ $role->name }}</option>
                             @endforeach
                         </select>
                         <button type="button" class="btn btn-link" data-bs-toggle="modal"
                                 data-bs-target="#addRoleModal">
-                            {{ __('Добавить роль') }}
+                            {{ __('Add Role') }}
                         </button>
                     </div>
 
                     <!-- Поле для команды -->
                     <div class="form-group mt-2">
-                        <label for="teams_id">{{ __('Команда') }}</label>
+                        <label for="teams_id">{{ __('Team') }}</label>
                         <select id="teams_id" name="teams_id" class="form-control" required>
-                            <option value="">{{ __('Выберите команду') }}</option>
+                            <option value="">{{ __('Select Team') }}</option>
                             @foreach ($teams as $team)
                                 <option value="{{ $team->id }}" {{ $user->teams_id == $team->id ? 'selected' : '' }}>{{ $team->name }}</option>
                             @endforeach
                         </select>
                         <button type="button" class="btn btn-link" data-bs-toggle="modal"
                                 data-bs-target="#addTeamModal">
-                            {{ __('Добавить команду') }}
+                            {{ __('Add Team') }}
                         </button>
                     </div>
 
                     <!-- Остальные поля -->
                     <div class="mt-2">
-                        <label for="phone">{{ __('Телефон') }}</label>
+                        <label for="phone">{{ __('Phone') }}</label>
                         <input id="phone" type="text" class="form-control" name="phone"
                                value="{{ old('phone', $user->phone) }}">
                     </div>
 
                     <div class="mt-2">
-                        <label for="stamp">{{ __('Штамп') }}</label>
+                        <label for="stamp">{{ __('Stamp') }}</label>
                         <input id="stamp" type="text" class="form-control" name="stamp"
                                value="{{ old('stamp', $user->stamp) }}">
                     </div>
+                    <div class="d-flex justify-content-between">
+{{--                        <button type="button" class="btn-close mt-3"></button>--}}
+                        <!-- Кнопка для сохранения изменений -->
+                        <button type="submit" class="btn btn-primary mt-3">{{ __('Обновить') }}</button>
+                    </div>
 
-                    <!-- Кнопка для сохранения изменений -->
-                    <button type="submit" class="btn btn-primary mt-3">{{ __('Обновить') }}</button>
                 </form>
             </div>
         </div>
@@ -120,7 +129,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        {{--                            <button type="button" class="btn-close" data-bs-dismiss="modal">{{ __('Close') }}</button>--}}
+{{--                        <button type="button" class="btn-close" data-bs-dismiss="modal">{{ __('Close') }}</button>--}}
                         <button type="submit" class="btn btn-primary">{{ __('Save Role') }}</button>
                     </div>
 

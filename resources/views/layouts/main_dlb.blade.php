@@ -8,9 +8,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Custom Styles -->
 
-
-
-
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
 
     <link rel="stylesheet" href="{{asset('css/bootstrap-icons.css')}}">
@@ -59,6 +56,24 @@
         .btn-primary{
             background-color: var(--primary-color);
         }
+        .modal-header{
+            background-color:var(--table-hover-bg) ;
+            color: var(--table-text);
+        }
+        .btn-close {
+            color: var(--table-text);
+        }
+        .modal-body{
+            color: var(--primary-color);
+        }
+        .modal-footer{
+            color: var(--primary-color);
+        }
+        .dropdown-menu{
+            background: var(--table-header-bg);
+
+        }
+
 
     </style>
 
@@ -81,33 +96,74 @@
             </div>
         </div>
         <i class='bi bi-chevron-right toggle' ></i>
+
     </header>
 
+        <div class="user-info ms-2 mt-4 ps-2 d-flex">
+            @if( Auth::user()->avatar )
+                <img src="/storage/avatars/{{ Auth::user()->avatar }}" id="user-avatar"
+                     class="rounded-circle justify-content-center elevation-2"
+                     alt="User Avatar" style="width: 40px">
+            @else
+                <i class="bi bi-person-circle"></i>
+            @endif
+
+            <!-- Выпадающее меню -->
+            <div class=" text dropdown ms-3">
+                <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="ms-2  text">{{ Auth::user()->name }}</span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <li><a class="dropdown-item" href="{{ route('user.profile.profile') }}">
+                            <i class="bi bi-person-lines-fill icon"></i>
+                            <span class="text nav-text"> {{__('Profile')}}</span>
+
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="bi bi-box-arrow-left icon"></i>
+                            <span class="text nav-text">{{__('Logout')}}</span>
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+
     <div class="list-bar">
+
         @include('includes.sidebar_main')
 
         <div class="bottom-content">
-            <li class="">
-                <a href="{{ route('logout') }}"
-                   onclick="event.preventDefault();
-                       document.getElementById('logout-form').submit();">
-                    <i class="bi bi-box-arrow-left icon"></i>
-                    <span class="text nav-text">{{__('Logout')}}</span>
-                </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                    @csrf
-                </form>
-            </li>
             <li class="mode">
                 <div class="moon-sun">
-                    <i class='bx bxs-moon icon moon'></i>
-                    <i class='bx bxs-sun icon sun'></i>
+                    <i class='bi bi-moon icon moon'></i>
+                    <i class='bi bi-sun icon sun'></i>
                 </div>
                 <span class="mode-text text">{{__('Dark Mode')}}</span>
                 <div class="toggle-switch" >
                     <span class="switch"></span>
                 </div>
             </li>
+            <li class="">
+{{--                <a href="{{ route('logout') }}"--}}
+{{--                   onclick="event.preventDefault();--}}
+{{--                       document.getElementById('logout-form').submit();">--}}
+{{--                    <i class="bi bi-box-arrow-left icon"></i>--}}
+{{--                    <span class="text nav-text">{{__('Logout')}}</span>--}}
+{{--                </a>--}}
+{{--                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">--}}
+{{--                    @csrf--}}
+{{--                </form>--}}
+            </li>
+
         </div>
     </div>
 
@@ -134,10 +190,10 @@
 
 
 </section>
-
+<script src="{{asset('js/main_dl.js')}}"></script>
 <script src="{{asset('js/jquery-3.7.1.min.js')}}"></script>
 <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
-<script src="{{asset('js/main_dl.js')}}"></script>
+
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -156,12 +212,6 @@
             currentTheme = newTheme; // Обновление текущей темы
         });
     });
-
-
-
-
-
-
 
 
 </script>

@@ -97,7 +97,8 @@
                             <div class="form-group mt-2">
                                 <label for="scopes_id">{{ __('Scope') }}</label>
                                 <select id="scopes_id" name="scopes_id" class="form-control" required>
-                                    <option value="">{{ __('Выберите Scope') }}</option>
+                                    <option value="">{{ __('Select Scope')
+                                    }}</option>
                                     @foreach ($scopes as $scope)
                                         <option value="{{ $scope->id }}" {{ $scope->id == $cmm->scopes_id ? 'selected' : '' }}>{{ $scope->scope }}</option>
                                     @endforeach
@@ -129,20 +130,23 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addAirCraftModalLabel">{{ __('Добавить самолет') }}</h5>
+                    <h5 class="modal-title" id="addAirCraftModalLabel">{{ __
+                    ('Add AirCraft') }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
                 </div>
                 <form method="POST" id="addAirCraftForm">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="airCraftName">{{ __('Название самолета') }}</label>
+                            <label for="airCraftName">{{ __('Type AirCraft')
+                            }}</label>
                             <input type="text" class="form-control" id="airCraftName" name="type" required>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
-                        <button type="submit" class="btn btn-primary">{{ __('Сохранить') }}</button>
+                        <button type="submit" class="btn btn-primary">{{ __
+                        ('Save') }}</button>
                     </div>
                 </form>
             </div>
@@ -154,20 +158,22 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addMFRModalLabel">{{ __('Добавить MFR') }}</h5>
+                    <h5 class="modal-title" id="addMFRModalLabel">{{ __('Add
+                    MFR') }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
                 </div>
                 <form method="POST" id="addMFRForm">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="mfrName">{{ __('Название MFR') }}</label>
+                            <label for="mfrName">{{ __('Name MFR') }}</label>
                             <input type="text" class="form-control" id="mfrName" name="name" required>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
-                        <button type="submit" class="btn btn-primary">{{ __('Сохранить') }}</button>
+                        <button type="submit" class="btn btn-primary">{{ __
+                        ('Save') }}</button>
                     </div>
                 </form>
             </div>
@@ -179,20 +185,23 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addScopeModalLabel">{{ __('Добавить Scope') }}</h5>
+                    <h5 class="modal-title" id="addScopeModalLabel">{{ __('Add
+                    Scope') }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
                 </div>
                 <form method="POST" id="addScopeForm">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="scopeName">{{ __('Название Scope') }}</label>
+                            <label for="scopeName">{{ __('Name Scope')
+                            }}</label>
                             <input type="text" class="form-control" id="scopeName" name="scope" required>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
-                        <button type="submit" class="btn btn-primary">{{ __('Сохранить') }}</button>
+                        <button type="submit" class="btn btn-primary">{{ __
+                        ('Save') }}</button>
                     </div>
                 </form>
             </div>
