@@ -145,14 +145,7 @@
 
                             <td class="text-center">{{ $trainingList['first_training']->manual->units_pn ?? 'N/A' }}</td>
 
-                            <td class="text-center">
-                                <a href="" data-bs-toggle="modal"
-                                   data-bs-target="#cmmModal{{
-                                       $trainingList['first_training']->manual->id }}">
-                                    {{ $trainingList['first_training']->manual->title ?? 'N/A' }}
-                                </a>
-
-                            </td>
+                            <td class="text-center">{{ $trainingList['first_training']->manual->title ?? 'N/A' }}</td>
 
                             <td class="text-center">
                                 {{ isset($trainingList['first_training']) ? Carbon::parse($trainingList['first_training']->date_training)->format('m-d-Y') : 'N/A' }}
@@ -248,55 +241,6 @@
                                                         data-bs-dismiss="modal">
                                                     Close
                                                 </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {{--    <!-- Модальное окно для просмотра деталей CMM -->--}}
-
-                                <div class="modal fade" id="cmmModal{{
-                            $trainingList['first_training']->manual->id }}" tabindex="-1"
-                                     role="dialog" aria-labelledby="cmmModalLabel{{
-                                  $trainingList['first_training']->manual->id }}"
-                                     aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <div>
-                                                    <h5 class="modal-title"
-                                                        id="imageModalLabel{{ $trainingList['first_training']->manual->id }}">
-                                                        {{ $trainingList['first_training']->manual->title }}{{__(': ')}}
-                                                    </h5 >
-                                                    <h6>{{ $trainingList['first_training']->manual->units_pn }}</h6>
-                                                </div>
-                                                <button type="button"
-                                                        class="btn-close pb-2"
-                                                        data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                            </div>
-
-                                            <div class="modal-body">
-                                                <div class="d-flex">
-                                                    <div class="me-2">
-                                                        <img src="{{ asset('storage/image/cmm/' . $trainingList['first_training']->manual->img) }}"
-                                                             style="max-width: 200px;"
-                                                             alt="{{ $trainingList['first_training']->manual->title }}">
-                                                    </div>
-                                                    <div>
-                                                        <p><strong>{{ __('CMM:') }}</strong> {{ $trainingList['first_training']->manual->number }}</p>
-                                                        <p><strong>{{ __('Description:') }}</strong>
-                                                            {{ $trainingList['first_training']->manual->title }}</p>
-                                                        <p><strong>{{ __('Revision Date:')}}</strong> {{ $trainingList['first_training']->manual->revision_date }}</p>
-                                                        <p><strong>{{ __('AirCraft Type:')}}</strong>
-                                                            {{ $planes[$trainingList['first_training']->manual->planes_id] ?? 'N/A' }}</p>
-                                                        <p><strong>{{ __('MFR:') }}</strong> {{$builders[$trainingList['first_training']->manual->builders_id] ?? 'N/A' }}</p>
-                                                        <p><strong>{{ __('Scope:') }}</strong> {{$scopes[$trainingList['first_training']->manual->scopes_id] ?? 'N/A' }}</p>
-                                                        <p><strong>{{ __('Library:') }}</strong> {{$trainingList['first_training']->manual->lib }}</p>
-                                                    </div>
-
-                                                </div>
-
                                             </div>
                                         </div>
                                     </div>

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Builder;
 use App\Models\Manual;
+use App\Models\Plane;
+use App\Models\Scope;
 use App\Models\Training;
 use Illuminate\Http\Request;
 
@@ -39,9 +42,12 @@ class TrainingController extends Controller
                 'last_training' => $lastTraining,
                 'trainings' => $sortedTrainings, // Добавляем все тренировки в группу
             ];
+            $planes = Plane::pluck('type', 'id');
+            $builders = Builder::pluck('name', 'id');
+            $scopes = Scope::pluck('scope', 'id');
         }
 
-        return view('user.trainings.index', compact('formattedTrainingLists'));
+        return view('user.trainings.index', compact('formattedTrainingLists', 'planes', 'builders', 'scopes'));
     }
 
 
