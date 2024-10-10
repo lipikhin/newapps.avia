@@ -27,6 +27,10 @@ class TrainingController extends Controller
 
         // Обрабатываем группы тренировок для установки дат
         $formattedTrainingLists = [];
+        $planes = Plane::pluck('type', 'id');
+        $builders = Builder::pluck('name', 'id');
+        $scopes = Scope::pluck('scope', 'id');
+
         foreach ($trainingLists as $manualId => $trainings) {
             // Сортируем тренировки по дате
             $sortedTrainings = $trainings->sortBy('date_training');
@@ -42,9 +46,7 @@ class TrainingController extends Controller
                 'last_training' => $lastTraining,
                 'trainings' => $sortedTrainings, // Добавляем все тренировки в группу
             ];
-            $planes = Plane::pluck('type', 'id');
-            $builders = Builder::pluck('name', 'id');
-            $scopes = Scope::pluck('scope', 'id');
+
         }
 
         return view('user.trainings.index', compact('formattedTrainingLists', 'planes', 'builders', 'scopes'));

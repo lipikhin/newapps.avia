@@ -169,7 +169,7 @@
                 <h5 class="user-name mb-0 fw-bold"> {{ Auth::user()->name }}</h5>
                 {{--                <p class="mb-0"> {{ Auth::user()->role->name }}</p>--}}
             </div>
-            <div class="list-group list-group-flush mt-3 profil-menu fw-bold">
+            <div class="list-group list-group-flush mt-3 profile-menu fw-bold">
                 <a href="{{ route('user.profile.profile') }}"
                    class="list-group-item list-group-item-action d-flex align-items-center gap-2 border-top"><i
                         class="material-icons-outlined">person_outline</i>Profile</a>

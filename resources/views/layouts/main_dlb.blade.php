@@ -109,43 +109,43 @@
 
     </header>
 
-        <div class="user-info  mt-4 ps-2 d-flex">
-            <a href="{{ route('user.profile.profile') }}" data-bs-toggle="tooltip" title="Profile">
-                @if( Auth::user()->avatar )
-                    <img src="/storage/avatars/{{ Auth::user()->avatar }}" id="user-avatar"
-                         class="rounded-circle justify-content-center
+    <div class="user-info  mt-4 ps-2 d-flex">
+        <a href="{{ route('user.profile.profile') }}" data-bs-toggle="tooltip" title="Profile">
+            @if( Auth::user()->avatar )
+                <img src="/storage/avatars/{{ Auth::user()->avatar }}" id="user-avatar"
+                     class="rounded-circle justify-content-center
                          elevation-2  bordered-image"
-                         alt="User Avatar" style="width: 56px">
-                @else
-                    <i class="bi bi-person-circle"></i>
-                @endif
-            </a>
-            <!-- Выпадающее меню -->
-            <div class=" text dropdown ms-3">
-                <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                    <span class="ms-2  text">{{ Auth::user()->name }}</span>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <li><a class="dropdown-item" href="{{ route('user.profile.profile') }}">
-                            <i class="bi bi-person-lines-fill icon"></i>
-                            <span class="text nav-text"> {{__('Profile')}}</span>
+                     alt="User Avatar" style="width: 56px">
+            @else
+                <i class="bi bi-person-circle"></i>
+            @endif
+        </a>
+        <!-- Выпадающее меню -->
+        <div class=" text dropdown ms-3">
+            <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="ms-2  text">{{ Auth::user()->name }}</span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li><a class="dropdown-item" href="{{ route('user.profile.profile') }}">
+                        <i class="bi bi-person-lines-fill icon"></i>
+                        <span class="text nav-text"> {{__('Profile')}}</span>
 
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="{{ route('logout') }}"
-                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            <i class="bi bi-box-arrow-left icon"></i>
-                            <span class="text nav-text">{{__('Logout')}}</span>
-                        </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                    </li>
-                </ul>
-            </div>
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="bi bi-box-arrow-left icon"></i>
+                        <span class="text nav-text">{{__('Logout')}}</span>
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                </li>
+            </ul>
         </div>
+    </div>
 
 
 
