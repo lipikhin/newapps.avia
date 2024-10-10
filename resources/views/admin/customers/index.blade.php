@@ -47,7 +47,7 @@
                     @foreach($custs as $cust)
                         <tr>
                             <td>{{$cust->name}}</td>
-                            <td>
+                            <td class="text-center">
                                 <a href="{{ route('admin.customers.edit', $cust->id) }}" class="btn btn-primary btn-sm">
 {{--                                    {{__('Edit')}}--}}
                                     <i class="bi bi-pencil-square"></i>
