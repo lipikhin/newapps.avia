@@ -68,13 +68,14 @@
                             <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
                                 <div class="form-group">
                                     {{__('Signature:')}}
-                                    <h6 style="font-size: 0.75rem;">{{__
-                                    ('(Image with resolution 200px : 100px)')
-                                    }}</h6>
+
                                     <input type="file" name="sign"
                                            class="form-control"
                                            placeholder="image">
                                 </div>
+                                <h6 style="font-size: 0.75rem;">{{__
+                                    ('(Image with resolution 200px : 100px)')
+                                    }}</h6>
                             </div>
 
                             <!-- Остальные поля профиля -->

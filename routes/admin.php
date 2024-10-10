@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\ScopeController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\TrainingController;
 use Illuminate\Support\Facades\Route;
 
@@ -112,6 +113,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function (){
     Route::delete('/users/{users}', [UsersController::class, 'destroy'])->name
     ('admin.users.destroy');
 
+    Route::get('/home', [HomeController::class, 'index'])->name('home.index');
 
 
 
@@ -128,5 +130,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function (){
         Route::get('/{id}', [TrainingController::class, 'show'])->name('admin.trainings.show'); // Просмотр деталей тренинга
         Route::delete('/{id}', [TrainingController::class, 'destroy'])->name('admin.trainings.destroy'); // Удаление тренинга
     });
+
+    Route::get('/home', [HomeController::class, 'index'])->name('home.index');
 
 });

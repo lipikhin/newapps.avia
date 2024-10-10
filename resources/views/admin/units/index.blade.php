@@ -136,7 +136,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger btn-sm" type="submit"
-                                                onclick="return confirm('Вы уверены, что хотите удалить все юниты в этой группе?');">
+                                                onclick="return confirm('Are you sure you want to delete all units in this group?');">
                                             <i class="bi bi-trash"></i>
                                         </button>
                                     </form>
@@ -289,11 +289,8 @@
                     <h5 class="modal-title" id="editUnitModalLabel"></h5>
                     <button type="button" class="btn btn-primary"
                             id="addUnitButton">
-{{--                        <i class="bi bi-plus-circle"></i>--}}
                         {{__('Add PN')}}
                     </button>
-{{--                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--}}
-
                 </div>
                 <div class="modal-body">
 
@@ -504,11 +501,6 @@
             });
         });
 
-
-        // // Инициализация DataTables
-        // $(document).ready(function () {
-        //     $('#cmmTable').DataTable();
-        // });
 
     </script>
 @endsection

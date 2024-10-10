@@ -164,14 +164,18 @@ body.dark .sidebar header .toggle{
     align-items: center;
     text-decoration: none;
     border-radius: 6px;
-    transition: var(--tran-05);
+    transition: var(--tran-04);
 }
 .sidebar li a:hover{
     background: var(--primary-color);
-    border-left: 5px solid var(--border_left-color);
-
-
+    border-left: 6px solid var(--border_left-color);
 }
+.sidebar.close li a:hover{
+    background: var(--primary-color);
+    width: 68px;
+    border-left: 6px solid var(--border_left-color);
+}
+
 .sidebar li a:hover .icon,
 .sidebar li a:hover .text{
     color: var(--sidebar-color);
@@ -180,9 +184,10 @@ body.dark .sidebar li a:hover .icon,
 body.dark .sidebar li a:hover .text{
     background: var(--primary-color);
     color: var(--border_left-color);
+
 }
 .sidebar .list-bar{
-    height: calc(100% - 50px);
+    height: calc(100% - 105px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -272,3 +277,11 @@ body.dark .switch::before{
 
 }
 
+.bordered-image {
+    border: 2px solid  var(--primary-color); /* 2px ширина, черный цвет */
+    padding: 3px; /* Отступ между изображением и рамкой */
+}
+.bordered-image:hover {
+    border: 3px solid  #377ff1; /* 2px ширина, черный цвет */
+    padding: 3px; /* Отступ между изображением и рамкой */
+}

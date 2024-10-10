@@ -73,6 +73,15 @@
             background: var(--table-header-bg);
 
         }
+        .sidebar:not(.close) .bottom-content .logout {
+            display: none; /* По умолчанию скрыто */
+        }
+
+        .sidebar.close .bottom-content .logout {
+            display: block; /* Показываем кнопку, когда sidebar закрыт */
+        }
+
+
 
 
     </style>
@@ -83,8 +92,8 @@
     <header>
         <div class="image-text">
                 <span class="image">
-                    <img class="logo" src="{{asset('image/AT.png')}}"
-                         alt="AT_Logo">
+                    <img class="logo  bordered-image " src="{{asset('image/AT.png')}}"
+                         alt="AT_Logo"  style="width: 56px">
                 </span>
             <div class="text header-text">
                 {{--                    <span class="name">Aviatechnik</span>--}}
@@ -99,15 +108,17 @@
 
     </header>
 
-        <div class="user-info ms-2 mt-4 ps-2 d-flex">
-            @if( Auth::user()->avatar )
-                <img src="/storage/avatars/{{ Auth::user()->avatar }}" id="user-avatar"
-                     class="rounded-circle justify-content-center elevation-2"
-                     alt="User Avatar" style="width: 40px">
-            @else
-                <i class="bi bi-person-circle"></i>
-            @endif
-
+        <div class="user-info  mt-4 ps-2 d-flex">
+            <a href="{{ route('user.profile.profile') }}" data-bs-toggle="tooltip" title="Profile">
+                @if( Auth::user()->avatar )
+                    <img src="/storage/avatars/{{ Auth::user()->avatar }}" id="user-avatar"
+                         class="rounded-circle justify-content-center
+                         elevation-2  bordered-image"
+                         alt="User Avatar" style="width: 56px">
+                @else
+                    <i class="bi bi-person-circle"></i>
+                @endif
+            </a>
             <!-- Выпадающее меню -->
             <div class=" text dropdown ms-3">
                 <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton"
@@ -138,11 +149,22 @@
 
 
     <div class="list-bar">
-
         @include('includes.sidebar_main')
-
         <div class="bottom-content">
-            <li class="mode">
+            <li class="logout">
+                <a href="{{ route('logout') }}"
+                   onclick="event.preventDefault();
+                   document.getElementById('logout-form').submit();"
+                   data-bs-toggle="tooltip" title="Logout">
+                    <i class="bi bi-box-arrow-left icon"></i>
+                    <span class="text nav-text">{{__('Logout')}}</span>
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+            </li>
+
+            <li class="mode ">
                 <div class="moon-sun">
                     <i class='bi bi-moon icon moon'></i>
                     <i class='bi bi-sun icon sun'></i>
@@ -152,17 +174,7 @@
                     <span class="switch"></span>
                 </div>
             </li>
-            <li class="">
-{{--                <a href="{{ route('logout') }}"--}}
-{{--                   onclick="event.preventDefault();--}}
-{{--                       document.getElementById('logout-form').submit();">--}}
-{{--                    <i class="bi bi-box-arrow-left icon"></i>--}}
-{{--                    <span class="text nav-text">{{__('Logout')}}</span>--}}
-{{--                </a>--}}
-{{--                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">--}}
-{{--                    @csrf--}}
-{{--                </form>--}}
-            </li>
+
 
         </div>
     </div>
