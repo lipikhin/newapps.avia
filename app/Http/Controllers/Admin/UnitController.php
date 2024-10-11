@@ -23,27 +23,28 @@ class UnitController extends Controller
 
         // Проверка загруженных данных
         if ($units->isEmpty()) {
-            // Возвращаем представление с сообщением об отсутствии данных
+            // Если юнитов нет, возвращаем представление с сообщением
             return view('admin.units.index', [
-                'message' => 'No units found.',
-                'restManuals' => Manual::whereNotIn('id', Unit::pluck('manuals_id')->toArray())->get(),
+                'message' => 'No units available at the moment.', // Сообщение о том, что юнитов нет
+                'restManuals' => Manual::whereNotIn('id', [])->get(),
                 'manuals' => Manual::all(),
                 'planes' => Plane::pluck('type', 'id'),
                 'builders' => Builder::pluck('name', 'id'),
                 'scopes' => Scope::pluck('scope', 'id'),
-                'groupedUnits' => collect() // Пустая коллекция, если нет данных
+                'groupedUnits' => collect() // Пустая коллекция
             ]);
         }
             // Если юниты есть, продолжаем обработку
         $manualIdsInUnits = $units->pluck('manuals_id')->toArray();
 
-        // Группируем по manuals->number, если у unit есть связанные manuals
+        // Если юниты есть, продолжаем обработку
+        $manualIdsInUnits = $units->pluck('manuals_id')->toArray();
         $groupedUnits = $units->groupBy(function ($unit) {
             return $unit->manuals ? $unit->manuals->number : 'No CMM';
         });
 
-        // Подготовка данных для отображения в виде
-        $restManuals = Manual::whereNotIn('id', Unit::pluck('manuals_id')->toArray())->get();
+        // Подготовка общих данных для отображения в виде
+        $restManuals = Manual::whereNotIn('id', $manualIdsInUnits)->get();
         $manuals = Manual::all();
         $planes = Plane::pluck('type', 'id');
         $builders = Builder::pluck('name', 'id');
@@ -52,6 +53,7 @@ class UnitController extends Controller
         // Передаем данные в представление
         return view('admin.units.index', compact('groupedUnits', 'restManuals', 'manuals', 'planes', 'builders', 'scopes'));
     }
+
 
     /**
      * Show the form for creating a new resource.
