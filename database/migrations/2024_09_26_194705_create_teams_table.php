@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->string('name')->default('Aviatechnik Corp.')->nullable();
+            $table->string('name')->nullable();
         });
         Schema::table('users', function (Blueprint $table) {
             $table->foreign('teams_id')->references('id')->on('teams')
