@@ -169,18 +169,15 @@
             </li>
 
             <li class="mode ">
-                <div class="text-switch d-flex">
                     <div class="moon-sun">
                         <i class='bi bi-moon icon moon'></i>
                         <i class='bi bi-sun icon sun'></i>
                     </div>
-                    <span class="mode-text text p-3">{{__('Dark Mode')}}</span>
-                </div>
+                    <span class="mode-text text ">{{__('Dark Mode')}}</span>
 
-
-                <div class="toggle-switch side-off " >
-                    <span class="switch"></span>
-                </div>
+{{--                <div class="toggle-switch" >--}}
+{{--                    <span class="switch"></span>--}}
+{{--                </div>--}}
             </li>
 
 
@@ -216,38 +213,87 @@
 
 
 <script>
+
+    // document.addEventListener('DOMContentLoaded', () => {
+    //     const themeToggle = document.querySelector('.toggle-switch');
+    //     const body = document.body;
+    //     let currentTheme = localStorage.getItem('theme') || 'light'; // По умолчанию - светлая тема
+    //
+    //     // Установка начальной темы
+    //     body.classList.add(currentTheme);
+    //
+    //     // Обработка переключения темы
+    //     themeToggle.addEventListener('click', () => {
+    //         const newTheme = currentTheme === 'dark' ? 'light' : 'dark'; // Определение новой темы
+    //         body.classList.replace(currentTheme, newTheme); // Замена текущей темы
+    //         localStorage.setItem('theme', newTheme); // Обновление темы в localStorage
+    //         currentTheme = newTheme; // Обновление текущей темы
+    //     });
+    // });
+
     document.addEventListener('DOMContentLoaded', () => {
-        const themeToggle = document.querySelector('.toggle-switch');
         const body = document.body;
+        const sidebar = document.querySelector('.sidebar'); // Замените на правильный селектор вашего сайдбара
+        const moonSunIcons = document.querySelector('.moon-sun');
+        const modeText = document.querySelector('.mode-text');
+
         let currentTheme = localStorage.getItem('theme') || 'light'; // По умолчанию - светлая тема
 
         // Установка начальной темы
         body.classList.add(currentTheme);
+        updateModeText(currentTheme);
 
-        // Обработка переключения темы
-        themeToggle.addEventListener('click', () => {
+        // Функция для обновления отображения текста в зависимости от состояния сайдбара
+        function updateModeDisplay() {
+            if (sidebar.classList.contains('sidebar-closed')) {
+                // Сайдбар закрыт - показываем только иконку
+                moonSunIcons.style.display = 'flex';
+                modeText.style.display = 'none';
+            } else {
+                // Сайдбар открыт - показываем иконку и текст
+                moonSunIcons.style.display = 'flex';
+                modeText.style.display = 'inline-block';
+            }
+        }
+
+        // При загрузке страницы проверяем состояние и применяем нужный вид
+        updateModeDisplay();
+
+        // Функция для переключения темы
+        function toggleTheme() {
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark'; // Определение новой темы
             body.classList.replace(currentTheme, newTheme); // Замена текущей темы
             localStorage.setItem('theme', newTheme); // Обновление темы в localStorage
             currentTheme = newTheme; // Обновление текущей темы
+            updateModeText(newTheme); // Обновление текста для переключения
+        }
+
+        // Функция для обновления текста переключения темы
+        function updateModeText(theme) {
+            modeText.textContent = theme === 'dark' ? '{{__("Light Mode")}}' : '{{__("Dark Mode")}}';
+        }
+
+        // Обработка переключения темы для иконок и текста
+        moonSunIcons.addEventListener('click', () => {
+            toggleTheme();
+        });
+
+        modeText.addEventListener('click', () => {
+            toggleTheme();
+        });
+
+        // Обработчик события для изменения состояния сайдбара
+        document.querySelector('.toggle-sidebar-button').addEventListener('click', () => {
+            // Переключаем класс для сайдбара
+            sidebar.classList.toggle('sidebar-closed');
+
+            // Обновляем состояние отображения текста в зависимости от состояния сайдбара
+            updateModeDisplay();
         });
     });
-    document.addEventListener('DOMContentLoaded', () => {
-        const themeToggleText = document.querySelector('.text-switch');
-        const body = document.body;
-        let currentTheme = localStorage.getItem('theme') || 'light'; // По умолчанию - светлая тема
 
-        // Установка начальной темы
-        body.classList.add(currentTheme);
 
-        // Обработка переключения темы
-        themeToggleText.addEventListener('click', () => {
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark'; // Определение новой темы
-            body.classList.replace(currentTheme, newTheme); // Замена текущей темы
-            localStorage.setItem('theme', newTheme); // Обновление темы в localStorage
-            currentTheme = newTheme; // Обновление текущей темы
-        });
-    });
+
 
 
 </script>
