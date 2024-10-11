@@ -80,6 +80,9 @@
         .sidebar.close .bottom-content .logout {
             display: block; /* Показываем кнопку, когда sidebar закрыт */
         }
+        .sidebar:not(.close) .bottom-content .side-off {
+            display: none; /* По умолчанию скрыто */
+        }
 
 
 
@@ -166,12 +169,16 @@
             </li>
 
             <li class="mode ">
-                <div class="moon-sun">
-                    <i class='bi bi-moon icon moon'></i>
-                    <i class='bi bi-sun icon sun'></i>
+                <div class="text-switch d-flex">
+                    <div class="moon-sun">
+                        <i class='bi bi-moon icon moon'></i>
+                        <i class='bi bi-sun icon sun'></i>
+                    </div>
+                    <span class="mode-text text p-3">{{__('Dark Mode')}}</span>
                 </div>
-                <span class="mode-text text">{{__('Dark Mode')}}</span>
-                <div class="toggle-switch" >
+
+
+                <div class="toggle-switch side-off " >
                     <span class="switch"></span>
                 </div>
             </li>
@@ -219,6 +226,22 @@
 
         // Обработка переключения темы
         themeToggle.addEventListener('click', () => {
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark'; // Определение новой темы
+            body.classList.replace(currentTheme, newTheme); // Замена текущей темы
+            localStorage.setItem('theme', newTheme); // Обновление темы в localStorage
+            currentTheme = newTheme; // Обновление текущей темы
+        });
+    });
+    document.addEventListener('DOMContentLoaded', () => {
+        const themeToggleText = document.querySelector('.text-switch');
+        const body = document.body;
+        let currentTheme = localStorage.getItem('theme') || 'light'; // По умолчанию - светлая тема
+
+        // Установка начальной темы
+        body.classList.add(currentTheme);
+
+        // Обработка переключения темы
+        themeToggleText.addEventListener('click', () => {
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark'; // Определение новой темы
             body.classList.replace(currentTheme, newTheme); // Замена текущей темы
             localStorage.setItem('theme', newTheme); // Обновление темы в localStorage
