@@ -328,6 +328,7 @@
                 const currentYear = new Date().getFullYear();
 
 // Создаем массив для данных, которые будем отправлять
+
                 let trainingData = {
                     manuals_id: [],
                     date_training: [],

@@ -18,4 +18,9 @@ class Unit extends Model
     {
         return $this->belongsTo(Manual::class,'manuals_id');
     }
+    public function work_orders()
+    {
+        return $this->hasMany(Manual::class,'work_orders_id');
+    }
+
 }
