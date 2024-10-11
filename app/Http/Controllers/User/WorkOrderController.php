@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\WorkOrder;
 use Illuminate\Http\Request;
 
 class WorkOrderController extends Controller
@@ -12,7 +13,8 @@ class WorkOrderController extends Controller
      */
     public function index()
     {
-        //
+        $wos = WorkOrder::with(['unit','instruction','customer','user'])->get();
+        return view('user.work_orders.index', compact('wos'));
     }
 
     /**

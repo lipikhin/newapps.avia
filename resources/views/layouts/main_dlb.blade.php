@@ -97,7 +97,7 @@
                 <span class="image">
                     <img class=" rounded-circle bordered-image"
                          src="{{asset('image/AT.png')}}"
-                         alt="Logo"  style="width: 56px">
+                         alt="Logo"  style="width: 48px">
                 </span>
             <div class="text header-text">
                 {{--                    <span class="name">Aviatechnik</span>--}}

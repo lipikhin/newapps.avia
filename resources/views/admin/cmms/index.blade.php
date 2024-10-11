@@ -73,7 +73,6 @@
                             class="text-center">{{__('Revision Date')}}</th>
                         <th data-field="lib" data-visible="true" data-priority="6"
                             class="text-center">{{__('Library')}}</th>
-
                         <th data-field="action" data-visible="true"
                             data-priority="7" class="text-center">{{__
                         ('Action')}}</th>
