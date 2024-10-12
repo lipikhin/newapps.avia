@@ -9,7 +9,7 @@
                 <li class="breadcrumb-item"><a href="{{route('home.index')}}"
                                                class="btn btn-primary">Home</a></li>
 
-                <li class="nav-item"><a href="{{route('user.work_orders.index')}}"
+                <li class="nav-item ms-2"><a href="{{route('user.work_orders.index')}}"
                                                class="btn
                                                btn-primary">{{__('Work Orders')
                                                }}</a></li>

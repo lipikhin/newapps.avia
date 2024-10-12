@@ -3,6 +3,11 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Customer;
+use App\Models\Instruction;
+use App\Models\Manual;
+use App\Models\Unit;
+use App\Models\User;
 use App\Models\WorkOrder;
 use Illuminate\Http\Request;
 
@@ -22,7 +27,13 @@ class WorkOrderController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::all();
+        $units = Unit::all();
+        $manuals = Manual::all();
+        $instructions = Instruction::all();
+        $customers = Customer::all();
+        return view('user.work_orders.create', compact('users','units','manuals', 'instructions', 'customers'));
+
     }
 
     /**
