@@ -23,7 +23,7 @@
                     @csrf
 
                     <div class="form-group d-flex">
-                        <div class="mt-2 m-3 border p-2">
+                        <div class="mt-2 m-3  p-2">
                             <div>
                                 <label for="wo">{{ __('Номер CMM') }}</label>
                                 <input id='wo' type="text" class="form-control" name="number" required>
@@ -61,7 +61,7 @@
                                        required>
                             </div>
                         </div>
-                        <div style="width: 320px" class="m-3 p-2 border">
+                        <div style="width: 320px" class="m-3 p-2 ">
                             <div class="form-group ">
                                 <label for="planes_id">{{ __('AirCraft Type')
                             }}</label>
