@@ -19,6 +19,7 @@ class WorkOrder extends Model
         'customers_id',
         'open_at',
         'users_id',
+        'active',
 
     ];
     public function units()

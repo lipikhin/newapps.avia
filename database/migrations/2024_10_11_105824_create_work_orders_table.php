@@ -25,7 +25,7 @@ return new class extends Migration
             $table->foreignId('customers_id')->constrained()->onDelete('cascade');
             $table->date('open_at')->nullable();
             $table->foreignId('users_id')->constrained()->onDelete('cascade');
-
+            $table->boolean('active')->default(true);
 
         });
     }
