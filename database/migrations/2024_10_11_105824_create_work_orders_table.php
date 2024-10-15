@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->integer('number')->unique();
+            $table->integer('number_wo')->unique();
             $table->boolean('approve')->default(false);
             $table->date('approve_at')->nullable();
             $table->foreignId('units_id')->constrained()->onDelete('cascade');

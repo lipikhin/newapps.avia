@@ -8,33 +8,38 @@ use Illuminate\Database\Eloquent\Model;
 class WorkOrder extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        'number',
+        'number_wo',
         'approve',
         'approve_at',
-        'units_id',
+        'unit_id',
         'serial_number',
         'notes',
-        'instructions_id',
-        'customers_id',
+        'instruction_id',
+        'customer_id',
         'open_at',
-        'users_id',
+        'user_id',
         'active',
     ];
-    public function units()
+
+    public function unit()
     {
-        return $this->belongsTo(Unit::class,'units_id');
+        return $this->belongsTo(Unit::class, 'unit_id');
     }
+
     public function instruction()
     {
-        return $this->belongsTo(Instruction::class,'instructions_id');
+        return $this->belongsTo(Instruction::class, 'instruction_id');
     }
+
     public function customer()
     {
-        return $this->belongsTo(Instruction::class,'customers_id');
+        return $this->belongsTo(Customer::class, 'customer_id');
     }
+
     public function user()
     {
-        return $this->belongsTo(User::class,'users_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

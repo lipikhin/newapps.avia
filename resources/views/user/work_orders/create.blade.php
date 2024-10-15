@@ -13,15 +13,20 @@
                     @csrf
                     <div class="m-auto " style="width: 350px"  >
                         <div class="form-group mb-2">
-                            <label  for="wo_number">{{'Work Order Number'}}</label>
-                            <input  id="wo_number" class="form-control" style="width: 250px"
-                                    name="number" min="100000"
+                            <label  for="number_wo">{{'Work Order Number'}}</label>
+                            <input  id="number_wo" class="form-control" style="width: 250px"
+                                    name="number_wo" min="100000"
                                     oninput="this.value=this.value.slice(0,this.dataset.maxlength)"
                                     type = "number"
                                     data-maxlength="6">
-                            @error('number')
+                            @error('number_wo')
                             <div class="text-danger">{{ $message }}</div>
                             @enderror
+                        </div>
+                        <div class="form-group mb-2">
+                            <label  for="open_at">{{'Open'}}</label>
+                            <input id='open_at' type="date" class="form-control" name="open_at"
+                                   style="width: 250px" required>
                         </div>
                         <div class="form-group mb-2">
                             <label for="unitDataList" class="form-label">{{__('Unit Part Number')}}</label>
@@ -32,6 +37,7 @@
                                     <option value="{{$unit->part_number}}">
                                 @endforeach
                             </datalist>
+
                         </div>
                         <div class="form-group mb-2">
                             <label  for="serial_number">{{'Serial Number'}}</label>
@@ -69,20 +75,23 @@
                                     data-bs-target="#addCustomerModal">{{ __('Add Customer') }}</button>
                         </div>
                         <div class="form-group">
-                            <label for="user_id">{{__('Technician')}}</label>
-                            <select id="user_id" name="customer_id" class="form-control"  style="width:
+                            <label for="user_id">{{__('Technician')}} </label>
+                            <select id="user_id" name="user_id" class="form-control"  style="width:
                             250px" required>
-                                <option value="">{{ __('Select Technician')
-                                }}</option>
+                                <option value="">{{ __('Select Technician')}}</option>
                                 @foreach ($users as $user)
-                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+{{--                                    @if($user->role->name !== 'Shop Certifying Authority (SCA)' )--}}
+                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+{{--                                    @endif--}}
                                 @endforeach
                             </select>
-                            <button type="button" class="btn btn-link" data-bs-toggle="modal"
-                                    data-bs-target="#adduserModal">{{ __('Add Technician') }}</button>
                         </div>
+                        <div class="form-group">
+                            <label for="note">{{__('Note')}} </label>
+                            <textarea class="form-control" id="note" rows="3" name="notes" style="width:
+                            250px" ></textarea>
 
-
+                        </div>
 
                     </div>
                     <button type="submit" class="btn btn-primary mt-3">

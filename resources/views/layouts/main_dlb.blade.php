@@ -207,7 +207,7 @@
 
 
 </section>
-<script src="{{asset('js/main_dl.js')}}"></script>
+<script src="{{asset('js/main_dlb.js')}}"></script>
 <script src="{{asset('js/jquery-3.7.1.min.js')}}"></script>
 <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
 
@@ -233,11 +233,12 @@
 
     document.addEventListener('DOMContentLoaded', () => {
         const body = document.body;
-        const sidebar = document.querySelector('.sidebar'); // Замените на правильный селектор вашего сайдбара
+        const sidebar = document.querySelector('.sidebar');
         const moonSunIcons = document.querySelector('.moon-sun');
         const modeText = document.querySelector('.mode-text');
+        const toggleSidebarButton = document.querySelector('.toggle-sidebar-button');
 
-        let currentTheme = localStorage.getItem('theme') || 'light'; // По умолчанию - светлая тема
+        let currentTheme = localStorage.getItem('theme') || 'light';
 
         // Установка начальной темы
         body.classList.add(currentTheme);
@@ -246,50 +247,87 @@
         // Функция для обновления отображения текста в зависимости от состояния сайдбара
         function updateModeDisplay() {
             if (sidebar.classList.contains('sidebar-closed')) {
-                // Сайдбар закрыт - показываем только иконку
                 moonSunIcons.style.display = 'flex';
                 modeText.style.display = 'none';
             } else {
-                // Сайдбар открыт - показываем иконку и текст
                 moonSunIcons.style.display = 'flex';
                 modeText.style.display = 'inline-block';
             }
         }
 
         // При загрузке страницы проверяем состояние и применяем нужный вид
-        updateModeDisplay();
+        if (sidebar) {
+            updateModeDisplay();
+        }
 
         // Функция для переключения темы
         function toggleTheme() {
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark'; // Определение новой темы
-            body.classList.replace(currentTheme, newTheme); // Замена текущей темы
-            localStorage.setItem('theme', newTheme); // Обновление темы в localStorage
-            currentTheme = newTheme; // Обновление текущей темы
-            updateModeText(newTheme); // Обновление текста для переключения
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            body.classList.replace(currentTheme, newTheme);
+            localStorage.setItem('theme', newTheme);
+            currentTheme = newTheme;
+            updateModeText(newTheme);
         }
 
         // Функция для обновления текста переключения темы
         function updateModeText(theme) {
-            modeText.textContent = theme === 'dark' ? '{{__("Light Mode")}}' : '{{__("Dark Mode")}}';
+            if (modeText) {
+                modeText.textContent = theme === 'dark' ? '{{__("Light Mode")}}' : '{{__("Dark Mode")}}';
+            }
         }
 
         // Обработка переключения темы для иконок и текста
-        moonSunIcons.addEventListener('click', () => {
-            toggleTheme();
-        });
+        if (moonSunIcons) {
+            moonSunIcons.addEventListener('click', () => {
+                toggleTheme();
+            });
+        }
 
-        modeText.addEventListener('click', () => {
-            toggleTheme();
-        });
+        if (modeText) {
+            modeText.addEventListener('click', () => {
+                toggleTheme();
+            });
+        }
 
         // Обработчик события для изменения состояния сайдбара
-        document.querySelector('.toggle-sidebar-button').addEventListener('click', () => {
-            // Переключаем класс для сайдбара
-            sidebar.classList.toggle('sidebar-closed');
+        if (toggleSidebarButton) {
+            toggleSidebarButton.addEventListener('click', () => {
+                if (sidebar) {
+                    sidebar.classList.toggle('sidebar-closed');
+                    updateModeDisplay();
+                }
+            });
+        }
+    });
+    document.addEventListener('DOMContentLoaded', () => {
+        const body = document.querySelector('body');
+        const sidebar = body.querySelector('.sidebar');
+        const toggle = body.querySelector('.toggle');
+        const modeSwitch = body.querySelector('.toggle-switch');
+        const modeText = body.querySelector('.mode-text');
 
-            // Обновляем состояние отображения текста в зависимости от состояния сайдбара
-            updateModeDisplay();
-        });
+        if (toggle) {
+            toggle.addEventListener('click', () => {
+                if (sidebar) {
+                    sidebar.classList.toggle('close');
+                }
+            });
+        }
+
+        if (modeSwitch) {
+            modeSwitch.addEventListener('click', () => {
+                body.classList.toggle('dark');
+                if (body.classList.contains('dark')) {
+                    if (modeText) {
+                        modeText.innerText = 'Light Mode';
+                    }
+                } else {
+                    if (modeText) {
+                        modeText.innerText = 'Dark Mode';
+                    }
+                }
+            });
+        }
     });
 
 
