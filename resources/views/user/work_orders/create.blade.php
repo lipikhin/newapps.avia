@@ -15,10 +15,11 @@
                         <div class="form-group mb-2">
                             <label  for="number_wo">{{'Work Order Number'}}</label>
                             <input  id="number_wo" class="form-control" style="width: 250px"
-                                    name="number_wo" min="100000"
-                                    oninput="this.value=this.value.slice(0,this.dataset.maxlength)"
+                                    name="number_wo"
+{{--                                    oninput="this.value=this.value.slice(0,this.dataset.maxlength)"--}}
                                     type = "number"
-                                    data-maxlength="6">
+{{--                                    data-maxlength="6"--}}
+                            >
                             @error('number_wo')
                             <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -29,14 +30,25 @@
                                    style="width: 250px" required>
                         </div>
                         <div class="form-group mb-2">
-                            <label for="unitDataList" class="form-label">{{__('Unit Part Number')}}</label>
-                            <input type="text" list="dataListOptions" class="form-control" id="unitDataList"
-                                   placeholder="Unit Part Number ..." style="width: 250px" name="unit_id">
-                            <datalist id="dataListOptions">
-                                @foreach($units as $unit)
-                                    <option value="{{$unit->part_number}}">
+                            <label for="units_id">{{__('unit')}}</label>
+                            <select id="units_id" name="units_id" class="form-control"  style="width:
+                            250px" required>
+                                <option value="">{{ __('Select unit')
+                                }}</option>
+                                @foreach ($units as $unit)
+                                    <option value="{{ $unit->id }}">{{ $unit->part_number }}</option>
                                 @endforeach
-                            </datalist>
+                            </select>
+
+
+{{--                            <label for="unitDataList" class="form-label">{{__('Unit Part Number')}}</label>--}}
+{{--                            <input type="text" list="dataListOptions" class="form-control" id="unitDataList"--}}
+{{--                                   placeholder="Unit Part Number ..." style="width: 250px" name="unit_id">--}}
+{{--                            <datalist id="dataListOptions">--}}
+{{--                                @foreach($units as $unit)--}}
+{{--                                    <option value="{{$unit->part_number}}">--}}
+{{--                                @endforeach--}}
+{{--                            </datalist>--}}
 
                         </div>
                         <div class="form-group mb-2">
@@ -49,8 +61,8 @@
                             @enderror
                         </div>
                         <div class="form-group mb-2">
-                            <label for="instruction_id">{{__('Instruction')}}</label>
-                            <select id="instruction_id" name="instruction_id" class="form-control"  style="width:
+                            <label for="instructions_id">{{__('Instruction')}}</label>
+                            <select id="instructions_id" name="instructions_id" class="form-control"  style="width:
                             250px" required>
                                 <option value="">{{ __('Select Instruction')
                                 }}</option>
@@ -62,8 +74,8 @@
                                     data-bs-target="#addInstructionModal">{{ __('Add Instruction') }}</button>
                         </div>
                         <div class="form-group">
-                            <label for="customer_id">{{__('Customer')}}</label>
-                            <select id="customer_id" name="customer_id" class="form-control"  style="width:
+                            <label for="customers_id">{{__('Customer')}}</label>
+                            <select id="customers_id" name="customers_id" class="form-control"  style="width:
                             250px" required>
                                 <option value="">{{ __('Select Customer')
                                 }}</option>
@@ -75,8 +87,8 @@
                                     data-bs-target="#addCustomerModal">{{ __('Add Customer') }}</button>
                         </div>
                         <div class="form-group">
-                            <label for="user_id">{{__('Technician')}} </label>
-                            <select id="user_id" name="user_id" class="form-control"  style="width:
+                            <label for="users_id">{{__('Technician')}} </label>
+                            <select id="users_id" name="users_id" class="form-control"  style="width:
                             250px" required>
                                 <option value="">{{ __('Select Technician')}}</option>
                                 @foreach ($users as $user)

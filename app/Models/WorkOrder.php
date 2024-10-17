@@ -13,13 +13,13 @@ class WorkOrder extends Model
         'number_wo',
         'approve',
         'approve_at',
-        'unit_id',
+        'units_id',
         'serial_number',
         'notes',
-        'instruction_id',
-        'customer_id',
+        'instructions_id',
+        'customers_id',
         'open_at',
-        'user_id',
+        'users_id',
         'active',
     ];
 
