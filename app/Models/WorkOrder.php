@@ -25,21 +25,21 @@ class WorkOrder extends Model
 
     public function unit()
     {
-        return $this->belongsTo(Unit::class, 'unit_id');
+        return $this->belongsTo(Unit::class, 'units_id');
     }
 
     public function instruction()
     {
-        return $this->belongsTo(Instruction::class, 'instruction_id');
+        return $this->belongsTo(Instruction::class, 'instructions_id');
     }
 
     public function customer()
     {
-        return $this->belongsTo(Customer::class, 'customer_id');
+        return $this->belongsTo(Customer::class, 'customers_id');
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'users_id');
     }
 }

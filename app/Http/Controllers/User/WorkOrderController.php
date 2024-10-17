@@ -19,6 +19,8 @@ class WorkOrderController extends Controller
      */
     public function index()
     {
+
+
         $wos = WorkOrder::with(['unit','instruction','customer','user'])->get();
         return view('user.work_orders.index', compact('wos'));
     }
@@ -40,6 +42,13 @@ class WorkOrderController extends Controller
         return view('user.work_orders.create', compact('users','units','manuals', 'instructions', 'customers'));
 
     }
+    public function checkNumber(Request $request)
+    {
+        $number_wo = $request->input('number_wo');
+        $exists = WorkOrder::where('number_wo', $number_wo)->exists();
+
+        return response()->json(['exists' => $exists]);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -49,26 +58,24 @@ class WorkOrderController extends Controller
 
 //        dd($request);
 
+//        $validatedData = $request->validate([
+//            'number_wo' => 'required|numeric|min:100000|max:999999|unique:work_orders,number_wo',
+//            'approve' => 'nullable',
+//            'approve_at' => 'nullable',
+//            'unit_id' => 'required|exists:units,id',
+//            'serial_number' => 'required',
+//            'instruction_id' => 'required|exists:instructions,id',
+//            'customer_id' => 'required|exists:customers,id',
+//            'open_at' => 'required|date',
+//            'user_id' => 'required|exists:users,id',
+//            'notes' => 'nullable',
+//            'active' => 'true',
+//        ]);
 
-
+        // Если валидация успешна, создаем запись
         WorkOrder::create($request->all());
 
-
-
-//            // Валидация данных
-//            $validatedData = $request->validate([
-//                'number_wo' => 'required|numeric|min:100000|max:999999',
-//                'approve' => 'nullable',
-//                'approve_at' => 'nullable',
-////                'unit_id' => 'required|exists:units,id',
-//                'serial_number' => 'required',
-//                'instruction_id' => 'required|exists:instructions,id',
-//                'customer_id' => 'required|exists:customers,id',
-//                'open_at' => 'required|date',
-//                'user_id' => 'required|exists:users,id',
-//                'notes' => 'nullable',
-//                'active' => 'true',
-//            ]);
+        return redirect()->route('user.work_orders.index')->with('success', 'Work order created successfully.');
 
     }
 

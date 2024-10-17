@@ -13,28 +13,30 @@
                     @csrf
                     <div class="m-auto " style="width: 350px"  >
                         <div class="form-group mb-2">
-                            <label  for="number_wo">{{'Work Order Number'}}</label>
-                            <input  id="number_wo" class="form-control" style="width: 250px"
-                                    name="number_wo"
-{{--                                    oninput="this.value=this.value.slice(0,this.dataset.maxlength)"--}}
-                                    type = "number"
-{{--                                    data-maxlength="6"--}}
-                            >
+                            <label for="number_wo">{{ 'Work Order Number' }}</label>
+                            <input id="number_wo" class="form-control" style="width: 250px"
+                                   name="number_wo" min="100000"
+                                   oninput="this.value=this.value.slice(0,this.dataset.maxlength)"
+                                   type="number" data-maxlength="6">
+                            <div id="number_wo_error" class=" m-1 text-danger" style="font-size: 12px"></div> <!-- Здесь
+                            отображается ошибка -->
                             @error('number_wo')
-                            <div class="text-danger">{{ $message }}</div>
+                            <div class="text-danger" >{{ $message }}</div>
                             @enderror
                         </div>
+
                         <div class="form-group mb-2">
                             <label  for="open_at">{{'Open'}}</label>
                             <input id='open_at' type="date" class="form-control" name="open_at"
                                    style="width: 250px" required>
                         </div>
                         <div class="form-group mb-2">
-                            <label for="units_id">{{__('unit')}}</label>
-                            <select id="units_id" name="units_id" class="form-control"  style="width:
+                            <label for="units_id" class="form-label">{{__('unit')}}</label>
+
+                            <select id="units_id" name="units_id" class="form-select"  style="width:
                             250px" required>
-                                <option value="">{{ __('Select unit')
-                                }}</option>
+                                <option value="">{{ __('Select unit')}}</option>
+
                                 @foreach ($units as $unit)
                                     <option value="{{ $unit->id }}">{{ $unit->part_number }}</option>
                                 @endforeach
@@ -113,6 +115,7 @@
             </div>
         </div>
     </div>
+    <script src="{{asset('js/jquery-3.7.1.min.js')}}"></script>
     <script>
 
         function isNumericKey(evt)
@@ -124,7 +127,32 @@
             return false;
         }
 
+            $(document).ready(function() {
+            $('#number_wo').on('input', function() {
+                var numberWo = $(this).val();
+                if (numberWo.length === 6) {
+                    $.ajax({
+                        url: '{{ route('user.work_orders.checkNumber') }}',
+                        method: 'POST',
+                        data: {
+                            number_wo: numberWo,
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function(response) {
+                            if (response.exists) {
+                                $('#number_wo_error').text('This Work Order number is already taken.');
+                            } else {
+                                $('#number_wo_error').text('');
+                            }
+                        }
+                    });
+                } else {
+                    $('#number_wo_error').text('');
+                }
+            });
+        });
     </script>
+
 
 
 @endsection

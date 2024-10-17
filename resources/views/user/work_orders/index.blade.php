@@ -56,15 +56,32 @@
                     <tbody>
                     @foreach($wos as $wo)
                         <tr>
-                            <td class="test-center">{{$wo->number}}</td>
-                            <td
-                                class="test-center">{{$wo->units->manuals->title}}</td>
-                            <td class="test-center">{{$wo->number}}</td>
-                            <td class="test-center">{{$wo->number}}</td>
-                            <td class="test-center">{{$wo->number}}</td>
-                            <td class="test-center">{{$wo->number}}</td>
-                            <td class="test-center">{{$wo->number}}</td>
-                            <td class="test-center">{{$wo->number}}</td>
+                            <td class="test-center">{{$wo->number_wo}}</td>
+                            <td class="test-center">{{$wo->unit->manuals->title}}</td>
+                            <td class="test-center">{{$wo->unit->part_number}}</td>
+                            <td class="test-center">{{$wo->serial_number}}</td>
+                            <td class="test-center">{{$wo->customer->name}}</td>
+                            <td class="test-center">{{$wo->instruction->name}}</td>
+                            <td class="test-center">{{$wo->open_at}}</td>
+                            <td class="test-center">{{$wo->user->name}}</td>
+                            <td class="test-center">{{$wo->approve}}</td>
+                            <td class="text-center">
+                                <a href="{{ route('user.work_orders.edit', $wo->id) }}"
+                                   class="btn btn-primary btn-sm">
+                                    <i class="bi bi-pencil-square"></i>
+                                    {{--                                    {{__('Edit')}}--}}
+                                </a>
+                                <form action="{{ route('user.work_orders.destroy', $wo->id) }}" method="POST"
+                                      style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm"
+                                            onclick="return confirm('Are you sure?');">
+                                        {{--                                        {{__('Delete')}}--}}
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
 
                     @endforeach

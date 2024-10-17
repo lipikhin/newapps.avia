@@ -35,6 +35,7 @@ Route::prefix('user')->middleware(['auth'])->group(function (){
     Route::delete('work_orders/{work_order}',
         [WorkOrderController::class, 'destroy'])->name('user.work_orders.destroy');
 
+    Route::post('work_orders/check_number', [WorkOrderController::class, 'checkNumber'])->name('user.work_orders.checkNumber');
 
 
     Route::get('profile', [ProfileController::class, 'index'])->name('user.profile.profile');

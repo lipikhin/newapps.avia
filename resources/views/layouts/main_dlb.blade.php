@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{asset('css/bootstrap-icons.css')}}">
 
     <link rel="stylesheet" href="{{ asset('css/main_dlb.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
+{{--    <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">--}}
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -208,10 +208,12 @@
 
 
 </section>
+
 <script src="{{asset('js/main_dlb.js')}}"></script>
-<script src="{{asset('js/select2.full.min.js')}}"></script>
+{{--<script src="{{asset('js/select2.min.js')}}"></script>--}}
 <script src="{{asset('js/jquery-3.7.1.min.js')}}"></script>
 <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
+
 
 
 <script>
