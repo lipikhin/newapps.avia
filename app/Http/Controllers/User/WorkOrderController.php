@@ -49,6 +49,8 @@ class WorkOrderController extends Controller
 
 //        dd($request);
 
+
+
         WorkOrder::create($request->all());
 
 
