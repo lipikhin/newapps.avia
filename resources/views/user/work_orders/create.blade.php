@@ -1,7 +1,7 @@
 @extends('layouts.main_dlb')
 
 @section('content')
-    <div class="container" style="width: 350px">
+    <div class="container" style="width: 650px">
         <div class="card">
             <div class="card-header">
                 {{__('New Work Order')}}
@@ -11,99 +11,103 @@
                       enctype="multipart/form-data"
                       id="createWOForm">
                     @csrf
-                    <div class="m-auto " style="width: 350px"  >
-                        <div class="form-group mb-2">
-                            <label for="number_wo">{{ 'Work Order Number' }}</label>
-                            <input id="number_wo" class="form-control" style="width: 250px"
-                                   name="number_wo" min="100000"
-                                   oninput="this.value=this.value.slice(0,this.dataset.maxlength)"
-                                   type="number" data-maxlength="6">
-                            <div id="number_wo_error" class=" m-1 text-danger" style="font-size: 12px"></div> <!-- Здесь
-                            отображается ошибка -->
-                            @error('number_wo')
-                            <div class="text-danger" >{{ $message }}</div>
-                            @enderror
-                        </div>
+                    <div class="m-auto " style="width: 650px"  >
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group mb-2">
+                                    <label id="number_wo_label" for="number_wo">{{ 'Work Order Number' }}</label>
+                                    <input id="number_wo" class="form-control" style="width: 250px"
+                                           name="number_wo" min="100000"
+                                           oninput="this.value=this.value.slice(0,this.dataset.maxlength)"
+                                           type="number" data-maxlength="6">
+                                    <div id="number_wo_error" class="m-1 text-danger" style="font-size: 12px"></div> <!-- Ошибка -->
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label  for="open_at">{{'Open'}}</label>
+                                    <input id='open_at' type="date" class="form-control" name="open_at"
+                                           style="width: 250px" required>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <div class="d-flex">
+                                        <div class=" me-2">
+                                            <label for="unit_id" class="form-label">{{__('Unit PN')}}</label>
+                                            <select id="unit_id" name="unit_id"
+                                                    class="form-select"
+                                                    style="width:150px" required>
+                                                <option value="">{{ __('Select unit')}}</option>
+                                                @foreach ($units as $unit)
+                                                    <option value="{{ $unit->id }}">{{ $unit->part_number }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="">
+                                            <label
+                                                for="serial_number">{{'Amendment'}}</label>
+                                            <input  id="amendment"
+                                                    class="form-control mt-2"
+                                                    style="width: 90px"
+                                                    name="amendment"
+                                                    type = "text">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label  for="serial_number">{{'Serial Number'}}</label>
+                                    <input  id="serial_number" class="form-control" style="width: 250px"
+                                            name="serial_number"
+                                            type = "text">
+                                </div>
 
-                        <div class="form-group mb-2">
-                            <label  for="open_at">{{'Open'}}</label>
-                            <input id='open_at' type="date" class="form-control" name="open_at"
-                                   style="width: 250px" required>
-                        </div>
-                        <div class="form-group mb-2">
-                            <label for="units_id" class="form-label">{{__('unit')}}</label>
-
-                            <select id="units_id" name="units_id" class="form-select"  style="width:
+                            </div>
+                            <div class="col">
+                                <div class="form-group mb-2">
+                                    <label for="instruction_id">{{__('Instruction')}}</label>
+                                    <select id="instruction_id" name="instruction_id" class="form-control"  style="width:
                             250px" required>
-                                <option value="">{{ __('Select unit')}}</option>
-
-                                @foreach ($units as $unit)
-                                    <option value="{{ $unit->id }}">{{ $unit->part_number }}</option>
-                                @endforeach
-                            </select>
-
-
-{{--                            <label for="unitDataList" class="form-label">{{__('Unit Part Number')}}</label>--}}
-{{--                            <input type="text" list="dataListOptions" class="form-control" id="unitDataList"--}}
-{{--                                   placeholder="Unit Part Number ..." style="width: 250px" name="unit_id">--}}
-{{--                            <datalist id="dataListOptions">--}}
-{{--                                @foreach($units as $unit)--}}
-{{--                                    <option value="{{$unit->part_number}}">--}}
-{{--                                @endforeach--}}
-{{--                            </datalist>--}}
-
-                        </div>
-                        <div class="form-group mb-2">
-                            <label  for="serial_number">{{'Serial Number'}}</label>
-                            <input  id="serial_number" class="form-control" style="width: 250px"
-                                    name="serial_number"
-                                    type = "text">
-                            @error('number')
-                            <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="form-group mb-2">
-                            <label for="instructions_id">{{__('Instruction')}}</label>
-                            <select id="instructions_id" name="instructions_id" class="form-control"  style="width:
-                            250px" required>
-                                <option value="">{{ __('Select Instruction')
+                                        <option value="">{{ __('Select Instruction')
                                 }}</option>
-                                @foreach ($instructions as $instruction)
-                                    <option value="{{ $instruction->id }}">{{ $instruction->name }}</option>
-                                @endforeach
-                            </select>
-                            <button type="button" class="btn btn-link" data-bs-toggle="modal"
-                                    data-bs-target="#addInstructionModal">{{ __('Add Instruction') }}</button>
-                        </div>
-                        <div class="form-group">
-                            <label for="customers_id">{{__('Customer')}}</label>
-                            <select id="customers_id" name="customers_id" class="form-control"  style="width:
+                                        @foreach ($instructions as $instruction)
+                                            <option value="{{ $instruction->id }}">{{ $instruction->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <button type="button" class="btn btn-link" data-bs-toggle="modal"
+                                            data-bs-target="#addInstructionModal">{{ __('Add Instruction') }}</button>
+                                </div>
+                                <div class="form-group">
+                                    <label for="customer_id">{{__('Customer')}}</label>
+                                    <select id="customer_id" name="customer_id" class="form-control"  style="width:
                             250px" required>
-                                <option value="">{{ __('Select Customer')
+                                        <option value="">{{ __('Select Customer')
                                 }}</option>
-                                @foreach ($customers as $customer)
-                                    <option value="{{ $customer->id }}">{{ $customer->name }}</option>
-                                @endforeach
-                            </select>
-                            <button type="button" class="btn btn-link" data-bs-toggle="modal"
-                                    data-bs-target="#addCustomerModal">{{ __('Add Customer') }}</button>
-                        </div>
-                        <div class="form-group">
-                            <label for="users_id">{{__('Technician')}} </label>
-                            <select id="users_id" name="users_id" class="form-control"  style="width:
+                                        @foreach ($customers as $customer)
+                                            <option value="{{ $customer->id }}">{{ $customer->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <button type="button" class="btn btn-link" data-bs-toggle="modal"
+                                            data-bs-target="#addCustomerModal">{{ __('Add Customer') }}</button>
+                                </div>
+                                <div class="form-group">
+                                    <label for="user_id">{{__('Technician')}} </label>
+                                    <select id="user_id" name="user_id" class="form-control"  style="width:
                             250px" required>
-                                <option value="">{{ __('Select Technician')}}</option>
-                                @foreach ($users as $user)
-{{--                                    @if($user->role->name !== 'Shop Certifying Authority (SCA)' )--}}
-                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
-{{--                                    @endif--}}
-                                @endforeach
-                            </select>
+                                        <option value="">{{ __('Select Technician')}}</option>
+                                        @foreach ($users as $user)
+                                            @if($user->role->name !== 'Shop Certifying Authority (SCA)' )
+                                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                         </div>
+
+
+
+
                         <div class="form-group">
                             <label for="note">{{__('Note')}} </label>
                             <textarea class="form-control" id="note" rows="3" name="notes" style="width:
-                            250px" ></textarea>
+                            580px" ></textarea>
 
                         </div>
 
@@ -118,18 +122,12 @@
     <script src="{{asset('js/jquery-3.7.1.min.js')}}"></script>
     <script>
 
-        function isNumericKey(evt)
-        {
-            var charCode = (evt.which) ? evt.which : evt.keyCode;
-            if (charCode != 46 && charCode > 31
-                && (charCode < 48 || charCode > 57))
-                return true;
-            return false;
-        }
 
-            $(document).ready(function() {
+        $(document).ready(function() {
             $('#number_wo').on('input', function() {
                 var numberWo = $(this).val();
+                var $label = $('#number_wo_label');
+
                 if (numberWo.length === 6) {
                     $.ajax({
                         url: '{{ route('user.work_orders.checkNumber') }}',
@@ -140,14 +138,20 @@
                         },
                         success: function(response) {
                             if (response.exists) {
-                                $('#number_wo_error').text('This Work Order number is already taken.');
+                                // Показать ошибку в метке и изменить стиль
+                                $label.text('Work Order Number is already taken.');
+                                $label.addClass('text-danger');
                             } else {
-                                $('#number_wo_error').text('');
+                                // Вернуть исходный текст метки, если нет ошибок
+                                $label.text('Work Order Number');
+                                $label.removeClass('text-danger');
                             }
                         }
                     });
                 } else {
-                    $('#number_wo_error').text('');
+                    // Если количество символов меньше 6, вернуть исходный текст метки
+                    $label.text('Work Order Number');
+                    $label.removeClass('text-danger');
                 }
             });
         });

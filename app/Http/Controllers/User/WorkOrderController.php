@@ -19,8 +19,6 @@ class WorkOrderController extends Controller
      */
     public function index()
     {
-
-
         $wos = WorkOrder::with(['unit','instruction','customer','user'])->get();
         return view('user.work_orders.index', compact('wos'));
     }
@@ -30,7 +28,7 @@ class WorkOrderController extends Controller
      */
     public function create()
     {
-//        $users = User::all();
+//
         $users = User::whereHas('role', function ($query) {
             $query->where('name', '!=', 'Shop Certifying Authority (SCA)');
         })->get();

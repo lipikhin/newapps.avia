@@ -121,7 +121,7 @@
                     <tbody>
                     @foreach($formattedTrainingLists as $trainingList)
                         <tr>
-                            <td class="text-center ">
+                            <td class="text-center align-middle" style="font-size: 12px">
                                 <div class="form-check form-switch mt-2 ms-4">
                                     <input class="form-check-input "
                                            type="checkbox"
@@ -135,7 +135,7 @@
 
                                 </div>
                             </td>
-                            <td class="text-center">
+                            <td class="text-center align-middle" style="font-size: 12px">
                                 @if(isset($trainingList['first_training']) && $trainingList['first_training']->form_type == 132)
                                     <label>OK</label>
                                 @else
@@ -143,9 +143,10 @@
                                 @endif
                             </td>
 
-                            <td class="text-center">{{ $trainingList['first_training']->manual->units_pn ?? 'N/A' }}</td>
+                            <td class="text-center align-middle" style="font-size: 12px">{{
+                            $trainingList['first_training']->manual->units_pn ?? 'N/A' }}</td>
 
-                            <td class="text-center">
+                            <td class="text-center align-middle" style="font-size: 12px">
                                 <a href="" data-bs-toggle="modal"
                                    data-bs-target="#cmmModal{{
                                        $trainingList['first_training']->manual->id }}">
@@ -154,18 +155,18 @@
 
                             </td>
 
-                            <td class="text-center">
+                            <td class="text-center align-middle" style="font-size: 12px">
                                 {{ isset($trainingList['first_training']) ? Carbon::parse($trainingList['first_training']->date_training)->format('m-d-Y') : 'N/A' }}
                             </td>
 
-                            <td class="text-center"
+                            <td class="text-center align-middle"
                                 @if(isset($trainingList['last_training']) && Carbon::parse($trainingList['last_training']->date_training)->diffInDays(Carbon::now()) > 340)
-                                    style="color: red"
+                                    style="color: red "
                                 @endif>
                                 {{ isset($trainingList['last_training']) ? Carbon::parse($trainingList['last_training']->date_training)->format('m-d-Y') : 'N/A' }}
                             </td>
 
-                            <td class="text-center">
+                            <td class="text-center align-middle" style="font-size: 12px">
                                 <!-- Кнопка для вызова модального окна -->
                                 <button class="btn btn-primary"
                                         data-bs-toggle="modal"
