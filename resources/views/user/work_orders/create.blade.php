@@ -29,7 +29,7 @@
                                 </div>
                                 <div class="form-group mb-2">
                                     <div class="d-flex">
-                                        <div class=" me-2">
+                                        <div class="m-1">
                                             <label for="unit_id" class="form-label">{{__('Unit PN')}}</label>
                                             <select id="unit_id" name="unit_id"
                                                     class="form-select"
@@ -40,7 +40,7 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="">
+                                        <div class="p-1">
                                             <label
                                                 for="serial_number">{{'Amendment'}}</label>
                                             <input  id="amendment"
@@ -122,6 +122,11 @@
     <script src="{{asset('js/jquery-3.7.1.min.js')}}"></script>
     <script>
 
+        $(document).ready(function() {
+            $('#unit_id').select2({
+                width: 'resolve' // можно использовать 'resolve' или конкретное значение, например, '150px'
+            });
+        });
 
         $(document).ready(function() {
             $('#number_wo').on('input', function() {

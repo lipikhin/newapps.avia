@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="{{asset('css/bootstrap-table.min.css')}}">
 
     <link rel="stylesheet" href="{{ asset('css/main_dlb.css') }}">
-{{--    <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">--}}
+    <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -216,7 +216,7 @@
 <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('js/bootstrap-table.min.js')}}"></script>
 
-{{--<script src="{{asset('js/select2.min.js')}}"></script>--}}
+<script src="{{asset('js/select2.min.js')}}"></script>
 <script src="{{asset('js/main_dlb.js')}}"></script>
 
 <script>
