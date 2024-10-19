@@ -27,9 +27,9 @@
                                     <input id='open_at' type="date" class="form-control" name="open_at"
                                            style="width: 250px" required>
                                 </div>
-                                <div class="form-group mb-2">
-                                    <div class="d-flex">
-                                        <div class="m-1">
+                                <div class="form-group ">
+                                    <div class="mt-2 d-block">
+                                        <div class="">
                                             <label for="unit_id" class="form-label">{{__('Unit PN')}}</label>
                                             <select id="unit_id" name="unit_id"
                                                     class="form-select"
@@ -40,9 +40,9 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="p-1">
+                                        <div class="mt-2 d-flex align-middle">
                                             <label
-                                                for="serial_number">{{'Amendment'}}</label>
+                                                for="serial_number" class="">{{'Amendment'}}</label>
                                             <input  id="amendment"
                                                     class="form-control mt-2"
                                                     style="width: 90px"

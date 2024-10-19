@@ -159,11 +159,12 @@
                                 {{ isset($trainingList['first_training']) ? Carbon::parse($trainingList['first_training']->date_training)->format('m-d-Y') : 'N/A' }}
                             </td>
 
-                            <td class="text-center align-middle"
+                            <td class="text-center align-middle" style="font-size: 12px"
                                 @if(isset($trainingList['last_training']) && Carbon::parse($trainingList['last_training']->date_training)->diffInDays(Carbon::now()) > 340)
                                     style="color: red "
                                 @endif>
                                 {{ isset($trainingList['last_training']) ? Carbon::parse($trainingList['last_training']->date_training)->format('m-d-Y') : 'N/A' }}
+
                             </td>
 
                             <td class="text-center align-middle" style="font-size: 12px">
@@ -171,7 +172,7 @@
                                 <button class="btn btn-primary"
                                         data-bs-toggle="modal"
                                         data-bs-target="#trainingModal{{
-                                        $trainingList['first_training']->manuals_id }}">
+                                        $trainingList['first_training']->manuals_id }}" style="font-size: 12px">
                                    {{__('View Training')}}
                                 </button>
 

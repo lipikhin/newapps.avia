@@ -30,7 +30,7 @@
                        class="table table-bordered data-table">
                     <thead>
                     <tr>
-                        <th data-field="number" data-visible="true" data-priority="1"
+                        <th data-field="#" data-visible="true" data-priority="1"
                             class="text-center">{{__('#')}}</th>
                         <th data-field="part_title" data-visible="true"
                             data-priority="2" class="text-center">{{__('Unit
