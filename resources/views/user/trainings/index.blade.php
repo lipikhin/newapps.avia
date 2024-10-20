@@ -121,7 +121,7 @@
                     <tbody>
                     @foreach($formattedTrainingLists as $trainingList)
                         <tr>
-                            <td class="text-center align-middle" style="font-size: 12px">
+                            <td class="text-center align-middle">
                                 <div class="form-check form-switch mt-2 ms-4">
                                     <input class="form-check-input "
                                            type="checkbox"
@@ -159,7 +159,7 @@
                                 {{ isset($trainingList['first_training']) ? Carbon::parse($trainingList['first_training']->date_training)->format('m-d-Y') : 'N/A' }}
                             </td>
 
-                            <td class="text-center align-middle" style="font-size: 12px"
+                            <td class="text-center align-middle"
                                 @if(isset($trainingList['last_training']) && Carbon::parse($trainingList['last_training']->date_training)->diffInDays(Carbon::now()) > 340)
                                     style="color: red "
                                 @endif>
@@ -346,16 +346,16 @@
                 }
 
 // Подготовка сообщения для подтверждения
-                let confirmationMessage = "Предоставленные данные для создания тренингов:\n";
+                let confirmationMessage = "Provided data for creating trainings:\n";
                 trainingData.manuals_id.forEach((id, index) => {
                     confirmationMessage += `\nTraining for ${lastTrainingYear + index + 1} years:\n`;
                     confirmationMessage += `Manuals ID: ${id} ${manualsTitle}\n`;
-                    confirmationMessage += `Дата тренировки: ${trainingData.date_training[index]} \n`;
-                    confirmationMessage += `Форма: ${trainingData.form_type[index]} \n`;
+                    confirmationMessage += `Training date: ${trainingData.date_training[index]} \n`;
+                    confirmationMessage += `Form: ${trainingData.form_type[index]} \n`;
                 });
 
 // Показываем сообщение для подтверждения
-                if (confirm(confirmationMessage + "\nВы уверены, что хотите продолжить создание тренингов?")) {
+                if (confirm(confirmationMessage + "\nAre you sure you want to continue creating trainings?")) {
 // Если пользователь подтвердил, выполняем запрос
                     fetch('{{ route('user.trainings.createTraining') }}', {
                         method: 'POST',
@@ -369,17 +369,17 @@
 
                         .then(data => {
                             if (data.success) {
-                                alert('Тренинги успешно созданы!');
+                                alert('Trainings have been successfully created!');
                                 location.reload();
                                 checkbox.checked = false;
                             } else {
-                                alert('Ошибка при создании тренингов.');
+                                alert('Error while creating trainings.');
                             }
                         })
 
                         .catch(error => {
-                            console.error('Ошибка:', error);
-                            alert('Произошла ошибка: ' + error.message);
+                            console.error('Error:', error);
+                            alert('An error occurred: ' + error.message);
                         });
                 } else {
 // Если пользователь отказался, снимаем галочку

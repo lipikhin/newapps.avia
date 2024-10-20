@@ -223,7 +223,11 @@
             <h5><strong>Trainee Position:</strong></h5>
         </div>
         <div class="col-6 text-black text-center border-bottom border-dark">
+        @if(!$training->user || !$training->user->role)
+                <h5 style="color: red"><strong> {{ __('No Trainee position') }}</strong></h5>
+        @else
             <h5><strong>{{ $training->user->role->name }}</strong></h5>
+        @endif
         </div>
     </div>
     <div class="row mt-1" style="width: 900px">

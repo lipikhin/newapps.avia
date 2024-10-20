@@ -19,7 +19,7 @@ return new class extends Migration
             $table->boolean('approve')->default(false);
             $table->date('approve_at')->nullable();
             $table->foreignId('unit_id')->constrained()->onDelete('cascade');
-            $table->string('amendment')->nullable();
+            $table->string('amdt')->nullable();
             $table->string('serial_number')->nullable();
             $table->text('notes')->nullable();
             $table->foreignId('instruction_id')->constrained()->onDelete('cascade');

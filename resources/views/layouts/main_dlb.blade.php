@@ -122,7 +122,7 @@
                          elevation-2  bordered-image"
                      alt="User Avatar" style="width: 56px">
             @else
-                <i class="bi bi-person-circle"></i>
+                <i class="bi bi-person-circle" style="width: 56px; height: 56px"></i>
             @endif
         </a>
         <!-- Выпадающее меню -->
@@ -221,22 +221,7 @@
 
 <script>
 
-    // document.addEventListener('DOMContentLoaded', () => {
-    //     const themeToggle = document.querySelector('.toggle-switch');
-    //     const body = document.body;
-    //     let currentTheme = localStorage.getItem('theme') || 'light'; // По умолчанию - светлая тема
-    //
-    //     // Установка начальной темы
-    //     body.classList.add(currentTheme);
-    //
-    //     // Обработка переключения темы
-    //     themeToggle.addEventListener('click', () => {
-    //         const newTheme = currentTheme === 'dark' ? 'light' : 'dark'; // Определение новой темы
-    //         body.classList.replace(currentTheme, newTheme); // Замена текущей темы
-    //         localStorage.setItem('theme', newTheme); // Обновление темы в localStorage
-    //         currentTheme = newTheme; // Обновление текущей темы
-    //     });
-    // });
+
 
     document.addEventListener('DOMContentLoaded', () => {
         const body = document.body;

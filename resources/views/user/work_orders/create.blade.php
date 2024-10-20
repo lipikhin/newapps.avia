@@ -28,28 +28,33 @@
                                            style="width: 250px" required>
                                 </div>
                                 <div class="form-group ">
-                                    <div class="mt-2 d-block">
-                                        <div class="">
-                                            <label for="unit_id" class="form-label">{{__('Unit PN')}}</label>
-                                            <select id="unit_id" name="unit_id"
-                                                    class="form-select"
-                                                    style="width:150px" required>
-                                                <option value="">{{ __('Select unit')}}</option>
-                                                @foreach ($units as $unit)
-                                                    <option value="{{ $unit->id }}">{{ $unit->part_number }}</option>
-                                                @endforeach
-                                            </select>
+                                    <div class="row mb-2">
+                                        <div class="col">
+                                            <div class="">
+                                                <label for="unit_id" class="form-label">{{__('Unit PN')}}</label>
+                                                <select id="unit_id" name="unit_id"
+                                                        class="form-select"
+                                                        style="width:160px" required>
+                                                    <option value="">{{ __('Select unit')}}</option>
+                                                    @foreach ($units as $unit)
+                                                        <option value="{{ $unit->id }}">{{ $unit->part_number }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                         </div>
-                                        <div class="mt-2 d-flex align-middle">
-                                            <label
-                                                for="serial_number" class="">{{'Amendment'}}</label>
-                                            <input  id="amendment"
-                                                    class="form-control mt-2"
-                                                    style="width: 90px"
-                                                    name="amendment"
-                                                    type = "text">
+                                        <div class="col">
+                                            <div class=" ">
+                                                <label
+                                                    for="serial_number" class="mb-2 ">{{'Amdt'}}</label>
+                                                <input  id="amendment"
+                                                        class="form-control"
+                                                        style="width: 70px; height: 30px"
+                                                        name="amendment"
+                                                        type = "text">
+                                            </div>
                                         </div>
                                     </div>
+
                                 </div>
                                 <div class="form-group mb-2">
                                     <label  for="serial_number">{{'Serial Number'}}</label>
