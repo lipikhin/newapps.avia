@@ -1,7 +1,48 @@
 @extends('layouts.main_dlb')
 
 @section('content')
+    <style>
+        @media (max-width: 1400px) {
+            .table th:nth-child(8),
+            .table td:nth-child(8) {
+                display: none;
+            }
+        }
+        @media (max-width: 1250px) {
 
+            .table th:nth-child(8),
+            .table td:nth-child(8),
+            .table th:nth-child(9),
+            .table td:nth-child(9) {
+                display: none;
+            }
+        }
+        @media (max-width: 1050px) {
+
+            .table th:nth-child(7),
+            .table td:nth-child(7),
+            .table th:nth-child(8),
+            .table td:nth-child(8),
+            .table th:nth-child(9),
+            .table td:nth-child(9) {
+                display: none;
+            }
+        }
+        @media (max-width: 1000px) {
+            .table th:nth-child(2),
+            .table td:nth-child(2),
+
+            .table th:nth-child(7),
+            .table td:nth-child(7),
+            .table th:nth-child(8),
+            .table td:nth-child(8),
+            .table th:nth-child(9),
+            .table td:nth-child(9) {
+                display: none;
+            }
+        }
+
+    </style>
 
     <div class="container">
         <div class="card shadow">
@@ -20,7 +61,7 @@
                        data-pagination="false"
                        data-show-columns="false"
                        data-show-export="false"
-                       data-show-refresh="true"
+                       data-show-refresh="false"
                        data-filter-control="true"
                        data-filter-show-clear="true"
                        class="table table-bordered">
@@ -40,18 +81,18 @@
                         <th data-field="serial_number" data-visible="true" data-priority="4" class="text-center align-middle">
                             {{__('Serial Number')}}
                         </th>
-                        <th data-field="customer_id" data-visible="true"
+                        <th data-field="customer" data-visible="true"
                             data-priority="5" class="text-center align-middle">
                             {{__('Customer')}}
                         </th>
-                        <th data-field="instruction_id" data-visible="true"
+                        <th data-field="instruction" data-visible="true"
                             data-priority="6" class="text-center align-middle">
                             {{__('Instruction')}}
                         </th>
-                        <th data-field="open_at" data-visible="true" data-priority="7" class="text-center align-middle">
+                        <th data-field="open" data-visible="true" data-priority="7" class="text-center align-middle">
                             {{__('Open')}}
                         </th>
-                        <th data-field="technician_id" data-visible="true"
+                        <th data-field="technician" data-visible="true"
                             data-priority="8" class="text-center align-middle">
                             {{__('Technician')}}
                         </th>
@@ -87,7 +128,7 @@
                                     <i class="bi bi-x"></i>
                                 @endif
                             </td>
-                            <td class="text-center">
+                            <td class="text-center align-middle">
                                 <a href="{{ route('user.work_orders.edit', $wo->id) }}" class="btn btn-primary btn-sm">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
