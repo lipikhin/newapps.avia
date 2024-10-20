@@ -66,7 +66,7 @@
                 <table id="userTable"
                     data-toggle="table"
                     data-search="true"
-                    data-pagination="true"
+                    data-pagination="false"
                     data-page-size="10"
                     class="table table-bordered" >
                     <thead>
@@ -75,17 +75,17 @@
                             {{{__('Avatar')}}}</th>
                         <th data-field="name" data-visible="true" data-priority="2">
                             {{__('Name')}}</th>
-                        <th data-field="email" data-visible="false" data-priority="4">
+                        <th data-field="email" data-visible="true" data-priority="4">
                             {{__('Email')}}</th>
-                        <th data-field="is_admin" data-visible="false" data-priority="5">
+                        <th data-field="is_admin" data-visible="true" data-priority="5">
                             {{__('Admin')}}</th>
-                        <th data-field="roles_id" data-visible="false" data-priority="6">
+                        <th data-field="roles_id" data-visible="true" data-priority="6">
                             {{__('Role')}}</th>
-                        <th data-field="teams_id" data-visible="false" data-priority="7">
+                        <th data-field="teams_id" data-visible="true" data-priority="7">
                             {{__('Team')}}</th>
-                        <th data-field="phone" data-visible="false" data-priority="8">
+                        <th data-field="phone" data-visible="true" data-priority="8">
                             {{__('Phone')}}</th>
-                        <th data-field="stamp" data-visible="false" data-priority="9">
+                        <th data-field="stamp" data-visible="true" data-priority="9">
                             {{__('Stamp')}}</th>
                         <th data-field="action" data-visible="true" data-priority="3">
                             {{__('Action')}}</th>
