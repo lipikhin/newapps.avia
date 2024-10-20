@@ -16,6 +16,7 @@ class ManualController extends Controller
     {
         $this->middleware('auth');
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -53,8 +54,8 @@ class ManualController extends Controller
                 'title' => 'required',
                 'img' => 'image|nullable',
                 'revision_date' => 'required',
-                'units_pn'=>'nullable',
-                'units_tr'=>'nullable',
+                'units_pn' => 'nullable',
+                'units_tr' => 'nullable',
                 'planes_id' => 'required|exists:planes,id',
                 'builders_id' => 'required|exists:builders,id',
                 'scopes_id' => 'required|exists:scopes,id',
@@ -147,26 +148,6 @@ class ManualController extends Controller
     }
 
 
-//       // dd($request,$id);
-//        $cmm = Manual::findOrFail($id);
-//
-//        // Пример валидации, добавьте свои правила
-//        $request->validate([
-//            'number' => 'required|string|max:255',
-//            'title' => 'required|string|max:255',
-//            // Добавьте другие поля по мере необходимости
-//        ]);
-//
-//        $cmm->update($request->all());
-//
-//        return redirect()->route('admin.cmms.index')->with('success', 'Manual updated successfully');
-
-
-
-
-
-
-
 // Destroy method
     public function destroy($id)
     {
@@ -174,25 +155,6 @@ class ManualController extends Controller
         $cmm->delete();
         return redirect()->route('admin.cmms.index')->with('success', 'Manual deleted successfully');
     }
-
-//    public function edit(string $id)
-//    {
-//        //
-//    }
-//
-//    /**
-//     * Update the specified resource in storage.
-//     */
-//    public function update(Request $request, string $id)
-//    {
-//        //
-//    }
-//
-//    /**
-//     * Remove the specified resource from storage.
-//     */
-//    public function destroy(string $id)
-//    {
-//        //
-//    }
 }
+
+

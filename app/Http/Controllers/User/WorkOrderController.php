@@ -94,22 +94,36 @@ class WorkOrderController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $wo = WorkOrder::findOrFail($id);
+        $users = User::all();
+        $units = Unit::all();
+        $manuals = Manual::all();
+        $instructions = Instruction::all();
+        $customers = Customer::all();
+        return view('user.work_orders.edit', compact('wo','users','units','manuals', 'instructions', 'customers'));
+
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $workOrder = WorkOrder::findOrFail($id);
+        $workOrder->update($request->all());
+
+        return redirect()->route('user.work_orders.index')->with('success', 'Work Order updated successfully.');
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $wo = WorkOrder::findOrFail($id);
+        $wo->delete();
+        return redirect()->route('user.work_orders.index')->with('success', 'Work orders deleted successfully');
     }
 }

@@ -29,7 +29,7 @@
                         <th data-field="number_wo" data-visible="true" data-priority="1" class="text-center align-middle">
                             {{__('Number')}}
                         </th>
-                        <th data-field="unit_id" data-visible="true"
+                        <th data-field="description" data-visible="true"
                             data-priority="2" class="text-center align-middle">
                             {{__('Description')}}
                         </th>
@@ -68,7 +68,13 @@
                         <tr>
                             <td class="text-center align-middle" style="font-size: 12px"> {{$wo->number_wo}}</td>
                             <td class="text-center align-middle" style="font-size: 12px">{{$wo->unit->manuals->title}}</td>
-                            <td class="text-center align-middle" style="font-size: 12px">{{$wo->unit->part_number}}</td>
+
+                            <td class="text-center align-middle" style="font-size: 12px">{{$wo->unit->part_number}}
+                                @if(!empty($wo->amdt))
+                                    "{{ $wo->amdt }}"
+                                @endif
+                            </td>
+
                             <td class="text-center align-middle" style="font-size: 12px">{{$wo->serial_number}}</td>
                             <td class="text-center align-middle" style="font-size: 12px">{{$wo->customer->name}}</td>
                             <td class="text-center align-middle" style="font-size: 12px">{{$wo->instruction->name}}</td>

@@ -45,11 +45,11 @@
                                         <div class="col">
                                             <div class=" ">
                                                 <label
-                                                    for="serial_number" class="mb-2 ">{{'Amdt'}}</label>
-                                                <input  id="amendment"
+                                                    for="amdt" class="mb-2 ">{{'Amdt'}}</label>
+                                                <input  id="amdt"
                                                         class="form-control"
                                                         style="width: 70px; height: 30px"
-                                                        name="amendment"
+                                                        name="amdt"
                                                         type = "text">
                                             </div>
                                         </div>

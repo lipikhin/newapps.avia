@@ -14,6 +14,7 @@ class WorkOrder extends Model
         'approve',
         'approve_at',
         'unit_id',
+        'amdt',
         'serial_number',
         'notes',
         'instruction_id',
