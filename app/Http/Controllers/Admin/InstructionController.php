@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Instruction;
 use Illuminate\Http\Request;
 
 class InstructionController extends Controller
@@ -28,7 +29,15 @@ class InstructionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $instruct = new Instruction();
+        $instruct->name = $request->name;
+        $instruct->save();
+
+        return response()->json($instruct);
     }
 
     /**

@@ -38,6 +38,9 @@ Route::prefix('user')->middleware(['auth'])->group(function (){
     Route::post('work_orders/check_number', [WorkOrderController::class, 'checkNumber'])->name('user.work_orders.checkNumber');
 
 
+    Route::post('instruction/store',[WorkOrderController::class,
+        'store'])->name('user.instruction.store');
+
     Route::get('profile', [ProfileController::class, 'index'])->name('user.profile.profile');
     Route::get('profile/create', [ProfileController::class, 'create'])->name('user.profile.create');
     Route::post('profile', [ProfileController::class, 'store'])->name('user.profile.store');
