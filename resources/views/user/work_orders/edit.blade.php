@@ -120,9 +120,11 @@
     <script src="{{ asset('js/jquery-3.7.1.min.js') }}"></script>
     <script>
         $(document).ready(function() {
-            $('#unit_id').select2({
+            $('#unit_id, #user_id, #customer_id').select2({
                 width: 'resolve'
             });
         });
+
+
     </script>
 @endsection

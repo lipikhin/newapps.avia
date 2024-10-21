@@ -199,21 +199,11 @@
 
 
         $(document).ready(function() {
-            $('#unit_id').select2({
+            $('#unit_id, #user_id, #customer_id').select2({
                 width: 'resolve' // можно использовать 'resolve' или конкретное значение, например, '150px'
             });
         });
 
-        $(document).ready(function() {
-            $('#customer_id').select2({
-                width: 'resolve' // можно использовать 'resolve' или конкретное значение, например, '150px'
-            });
-        });
-        $(document).ready(function() {
-            $('#user_id').select2({
-                width: 'resolve' // можно использовать 'resolve' или конкретное значение, например, '150px'
-            });
-        });
 
         $(document).ready(function() {
             $('#number_wo').on('input', function() {
