@@ -1,6 +1,9 @@
 <?php
 
 
+use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\InstructionController;
+use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\TrainingController;
 use App\Http\Controllers\User\UserCmmController;
@@ -38,8 +41,10 @@ Route::prefix('user')->middleware(['auth'])->group(function (){
     Route::post('work_orders/check_number', [WorkOrderController::class, 'checkNumber'])->name('user.work_orders.checkNumber');
 
 
-    Route::post('instruction/store',[WorkOrderController::class,
-        'store'])->name('user.instruction.store');
+    Route::post('instruction/store',[InstructionController::class,'store'])->name('user.instruction.store');
+    Route::post('customer/store',[CustomerController::class,'store'])->name('user.customer.store');
+    Route::post('unit/store_workorder',[UnitController::class,'store'])->name
+    ('user.unit.store_workorder');
 
     Route::get('profile', [ProfileController::class, 'index'])->name('user.profile.profile');
     Route::get('profile/create', [ProfileController::class, 'create'])->name('user.profile.create');

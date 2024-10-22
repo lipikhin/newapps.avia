@@ -40,9 +40,6 @@
                                                         <option value="{{ $unit->id }}">{{ $unit->part_number }}</option>
                                                     @endforeach
                                                 </select>
-                                                <button type="button" class="btn btn-link" data-bs-toggle="modal"
-                                                        data-bs-target="#addUnitModal">{{ __('Add Unit') }}</button>
-
                                             </div>
                                         </div>
                                         <div class="col">
@@ -100,14 +97,17 @@
                             250px" required>
                                         <option value="">{{ __('Select Technician')}}</option>
                                         @foreach ($users as $user)
-                                            {{--                                            @if($user->role->name !== 'Shop Certifying Authority (SCA)' )--}}
+{{--                                            @if($user->role->name !== 'Shop Certifying Authority (SCA)' )--}}
                                             <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                            {{--                                            @endif--}}
+{{--                                            @endif--}}
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                         </div>
+
+
+
 
                         <div class="form-group">
                             <label for="note">{{__('Note')}} </label>
@@ -126,102 +126,35 @@
     </div>
 
     <!-- Модальное окно для добавления Instruction -->
-        <div class="modal fade" id="addInstructionModal" tabindex="-1" aria-labelledby="addInstructionModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="addInstructionModalLabel">
-                            {{__('Add Instruction') }}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form method="POST" id="addInstructionForm">
-                        @csrf
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label for="instructionName">{{ __('Instruction')}}</label>
-                                <input type="text" class="form-control"
-                                       id="instructionName" name="name" required>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
-                        </div>
-                    </form>
+{{--    <div class="modal fade" id="addInstructionModal" tabindex="-1" aria-labelledby="addInstructionModalLabel"--}}
+{{--         aria-hidden="true">--}}
+{{--        <div class="modal-dialog">--}}
+{{--            <div class="modal-content">--}}
+{{--                <div class="modal-header">--}}
+{{--                    <h5 class="modal-title" id="addInstructionModalLabel">{{--}}
+{{--                    __('Add Instruction') }}</h5>--}}
+{{--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--}}
+{{--                </div>--}}
+{{--                <form method="POST" id="addInstructionForm">--}}
+{{--                    @csrf--}}
+{{--                    <div class="modal-body">--}}
+{{--                        <div class="form-group">--}}
+{{--                            <label for="instructionName">{{ __('Instruction')--}}
+{{--                            }}</label>--}}
+{{--                            <input type="text" class="form-control"--}}
+{{--                                   id="instructionName" name="name" required>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="modal-footer">--}}
+{{--                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--}}
+{{--                        <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>--}}
+{{--                    </div>--}}
+{{--                </form>--}}
 
-                </div>
-            </div>
-        </div>
-    <!-- Модальное окно для добавления Customer -->
-    <div class="modal fade" id="addCustomerModal" tabindex="-1"
-         aria-labelledby="addCustomerModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addCustomerModalLabel">
-                        {{__('Add Customer') }}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form method="POST" id="addCustomerForm">
-                    @csrf
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="customerName">{{ __('Customer')
-                            }}</label>
-                            <input type="text" class="form-control"
-                                   id="customerName" name="name" required>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
-                    </div>
-                </form>
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
-            </div>
-        </div>
-    </div>
-    <!-- Модальное окно для добавления Unit -->
-    <div class="modal fade" id="addUnitModal" tabindex="-1"
-         aria-labelledby="addUnitModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addUnitModalLabel">
-                        {{__('Add Unit') }}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form method="POST" id="addUnitForm">
-                    @csrf
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="cmmSelect" class="form-label">Select CMM</label>
-                            <select class="form-select" id="cmmSelect">
-                                @foreach($manuals as $manual)
-                                    <option value="{{ $manual->id }}">{{ $manual->title }}
-                                        ({{ $manual->number }})
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="unitName">{{ __('Unit')}}</label>
-                            <input type="text" class="form-control"
-                                   id="unitName" name="part_number" required>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
-                    </div>
-                </form>
-
-            </div>
-        </div>
-    </div>
 
 
     <script src="{{asset('js/jquery-3.7.1.min.js')}}"></script>
@@ -271,49 +204,48 @@
             });
         });
 
-        function handleFormSubmission(formId, route, selectId, dataKey, dataValue, modalId) {
-            document.getElementById(formId).addEventListener('submit', function (event) {
-                event.preventDefault();
-                if (this.submitted) {
-                    return;
-                }
-                this.submitted = true;
+        {{--function handleFormSubmission(formId, route, selectId, dataKey, dataValue, modalId) {--}}
+        {{--    document.getElementById(formId).addEventListener('submit', function (event) {--}}
+        {{--        event.preventDefault();--}}
+        {{--        if (this.submitted) {--}}
+        {{--            return;--}}
+        {{--        }--}}
+        {{--        this.submitted = true;--}}
 
-                let formData = new FormData(this);
-                fetch(route, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    }
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        // Добавляем новый элемент в Select
-                        let select = document.getElementById(selectId);
-                        let option = document.createElement('option');
-                        option.value = data[dataKey];
-                        option.text = data[dataValue];
-                        option.selected = true; // Автоматически выбираем новый элемент
-                        select.add(option);
+        {{--        let formData = new FormData(this);--}}
+        {{--        fetch(route, {--}}
+        {{--            method: 'POST',--}}
+        {{--            body: formData,--}}
+        {{--            headers: {--}}
+        {{--                'X-CSRF-TOKEN': '{{ csrf_token() }}'--}}
+        {{--            }--}}
+        {{--        })--}}
+        {{--            .then(response => response.json())--}}
+        {{--            .then(data => {--}}
+        {{--                // Добавляем новый элемент в Select--}}
+        {{--                let select = document.getElementById(selectId);--}}
+        {{--                let option = document.createElement('option');--}}
+        {{--                option.value = data[dataKey];--}}
+        {{--                option.text = data[dataValue];--}}
+        {{--                option.selected = true; // Автоматически выбираем новый элемент--}}
+        {{--                select.add(option);--}}
 
-                        // Закрываем модальное окно
-                        let modal = bootstrap.Modal.getInstance(document.getElementById(modalId));
-                        modal.hide();
+        {{--                // Закрываем модальное окно--}}
+        {{--                let modal = bootstrap.Modal.getInstance(document.getElementById(modalId));--}}
+        {{--                modal.hide();--}}
 
-                        // Сброс формы
-                        document.getElementById(formId).reset();
-                        this.submitted = false;
-                    })
-                    .catch(error => {
-                        console.error('Ошибка:', error);
-                        this.submitted = false;
-                    });
-            });
-        }
-        handleFormSubmission('addInstructionForm', '{{ route('user.instruction.store') }}', 'instruction_id', 'id', 'name', 'addInstructionModal');
-        handleFormSubmission('addCustomerForm', '{{ route('user.customer.store') }}', 'customer_id', 'id', 'name', 'addCustomerModal');
-        handleFormSubmission('addUnitForm', '{{ route('user.unit.store_workorder') }}', 'unit_id', 'id', 'name', 'addUnitModal');
+        {{--                // Сброс формы--}}
+        {{--                document.getElementById(formId).reset();--}}
+        {{--                this.submitted = false;--}}
+        {{--            })--}}
+        {{--            .catch(error => {--}}
+        {{--                console.error('Ошибка:', error);--}}
+        {{--                this.submitted = false;--}}
+        {{--            });--}}
+        {{--    });--}}
+        {{--}--}}
+        {{--handleFormSubmission('addInstructionForm', '{{ route('user.instruction.store') }}', 'instruction_id', 'id', 'name', 'addInstructionModal');--}}
+
 
 
     </script>

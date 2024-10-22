@@ -35,15 +35,29 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
+        // Валидация данных
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
         ]);
 
-        $customer = new Customer();
-        $customer->name = $request->name;
-        $customer->save(); // <-- Это важно
+        try {
+            // Создание инструкции
 
-        return redirect()->route('admin.customers.index')->with('success', 'Customer added successfully');
+            $customer = new Customer();
+            $customer->name = $request->name;
+            $customer->save();
+
+            // Успешный ответ
+            return response()->json([
+                'success' => true,
+                'id' => $customer->id,
+                'name' => $customer->name,
+            ]);
+        } catch (\Exception $e) {
+            // Логирование ошибки и ответ с кодом 500
+            \Log::error('Ошибка при сохранении инструкции: ' . $e->getMessage());
+            return response()->json(['success' => false, 'message' => 'Ошибка при сохранении инструкции.'], 500);
+        }
     }
 
 

@@ -27,18 +27,45 @@ class InstructionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+//    public function store(Request $request)
+//    {
+//        $validatedData = $request->validate([
+//            'name' => 'required|string|max:255',
+//        ]);
+//
+//        $instruct = new Instruction();
+//        $instruct->name = $request->name;
+//        $instruct->save();
+//
+//        return response()->json($instruct);
+//    }
     public function store(Request $request)
     {
+        // Валидация данных
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
         ]);
 
-        $instruct = new Instruction();
-        $instruct->name = $request->name;
-        $instruct->save();
+        try {
+            // Создание инструкции
 
-        return response()->json($instruct);
+            $instruct = new Instruction();
+            $instruct->name = $request->name;
+            $instruct->save();
+
+            // Успешный ответ
+            return response()->json([
+                'success' => true,
+                'id' => $instruct->id,
+                'name' => $instruct->name,
+            ]);
+        } catch (\Exception $e) {
+            // Логирование ошибки и ответ с кодом 500
+            \Log::error('Ошибка при сохранении инструкции: ' . $e->getMessage());
+            return response()->json(['success' => false, 'message' => 'Ошибка при сохранении инструкции.'], 500);
+        }
     }
+
 
     /**
      * Display the specified resource.

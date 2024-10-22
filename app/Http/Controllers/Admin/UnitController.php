@@ -91,7 +91,33 @@ class UnitController extends Controller
 
         return response()->json(['success' => true]);
     }
+    public function store_workorder(Request $request)
+    {
 
+        // Валидация данных
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        try {
+            // Создание инструкции
+
+            $unit = new Unit();
+            $unit->name = $request->name;
+            $unit->save();
+
+            // Успешный ответ
+            return response()->json([
+                'success' => true,
+                'id' => $unit->id,
+                'name' => $unit->name,
+            ]);
+        } catch (\Exception $e) {
+            // Логирование ошибки и ответ с кодом 500
+            \Log::error('Ошибка при сохранении инструкции: ' . $e->getMessage());
+            return response()->json(['success' => false, 'message' => 'Ошибка при сохранении инструкции.'], 500);
+        }
+    }
 
 
     /**
