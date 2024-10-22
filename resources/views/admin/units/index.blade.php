@@ -247,9 +247,14 @@
                     <div class="mb-3">
                         <label for="cmmSelect" class="form-label">Select CMM</label>
                         <select class="form-select" id="cmmSelect">
-                            @foreach($restManuals as $restManual)
-                                <option value="{{ $restManual->id }}">{{ $restManual->title }}
-                                    ({{ $restManual->number }})
+{{--                            @foreach($restManuals as $restManual)--}}
+{{--                                <option value="{{ $restManual->id }}">{{ $restManual->title }}--}}
+{{--                                    ({{ $restManual->number }})--}}
+{{--                                </option>--}}
+{{--                            @endforeach--}}
+                            @foreach($manuals as $manual)
+                                <option value="{{ $manual->id }}">{{ $manual->title }}
+                                    ({{ $manual->number }})
                                 </option>
                             @endforeach
                         </select>
