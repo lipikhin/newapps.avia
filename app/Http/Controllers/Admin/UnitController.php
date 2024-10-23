@@ -80,7 +80,7 @@ class UnitController extends Controller
             'part_numbers.*' => 'string|distinct',
         ]);
 
-        \DB::transaction(function() use ($request) {
+        DB::transaction(function() use ($request) {
             foreach ($request->part_numbers as $partNumber) {
                 Unit::create([
                     'manuals_id' => $request->cmm_id,
@@ -91,31 +91,39 @@ class UnitController extends Controller
 
         return response()->json(['success' => true]);
     }
-    public function store_workorder(Request $request)
+    public function storeWorkorder(Request $request)
     {
-
         // Валидация данных
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
+        $request->validate([
+            'manual_id' => 'required|exists:manuals,id',
+            'part_number' => 'required|string|distinct',
         ]);
 
         try {
-            // Создание инструкции
+            // Сохранение нового юнита
+            $unit = Unit::create([
+                'manuals_id' => $request->manual_id,
+                'part_number' => $request->part_number,
+                'verified' => false,
+            ]);
 
-            $unit = new Unit();
-            $unit->name = $request->name;
+            return response()->json(['success' => true, 'id' => $unit->id, 'part_number' => $unit->part_number]);
+        } catch (\Exception $e) {
+            \Log::error('Error saving unit: ' . $e->getMessage());
+            return response()->json(['success' => false, 'error' => 'An error occurred while saving the unit.'], 500);
+        }
+    }
+
+    public function toggleVerified(Request $request, Unit $unit)
+    {
+        try {
+            $unit->verified = $request->input('verified');
             $unit->save();
 
-            // Успешный ответ
-            return response()->json([
-                'success' => true,
-                'id' => $unit->id,
-                'name' => $unit->name,
-            ]);
+            return response()->json(['success' => true]);
         } catch (\Exception $e) {
-            // Логирование ошибки и ответ с кодом 500
-            \Log::error('Ошибка при сохранении инструкции: ' . $e->getMessage());
-            return response()->json(['success' => false, 'message' => 'Ошибка при сохранении инструкции.'], 500);
+            \Log::error('Error toggling verified status: ' . $e->getMessage());
+            return response()->json(['success' => false, 'error' => 'An error occurred while updating verified status.'], 500);
         }
     }
 

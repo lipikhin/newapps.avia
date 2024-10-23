@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('part_number')->unique();
             $table->foreignId('manuals_id')->constrained()->onDelete('cascade');
 
-            $table->boolean('active')->default(true);
+            $table->boolean('verified')->default(true);
+
         });
     }
 

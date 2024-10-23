@@ -194,19 +194,19 @@
                         {{__('Add Unit') }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form method="POST" id="addUnitForm">
+                <form method="POST" id="addUnitForm" action="{{ route('user.unit.storeWorkorder') }}">
                     @csrf
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="cmmSelect" class="form-label">Select CMM</label>
-                            <select class="form-select" id="cmmSelect">
+                            <select class="form-select" id="cmmSelect" name="manual_id" required>
+                                <option value="">{{ __('Select CMM') }}</option>
                                 @foreach($manuals as $manual)
-                                    <option value="{{ $manual->id }}">{{ $manual->title }}
-                                        ({{ $manual->number }})
-                                    </option>
+                                    <option value="{{ $manual->id }}">{{ $manual->title }} ({{ $manual->number }})</option>
                                 @endforeach
                             </select>
                         </div>
+
                         <div class="form-group">
                             <label for="unitName">{{ __('Unit')}}</label>
                             <input type="text" class="form-control"
@@ -225,10 +225,8 @@
 
 
     <script src="{{asset('js/jquery-3.7.1.min.js')}}"></script>
+
     <script>
-
-
-
 
 
         $(document).ready(function() {
@@ -311,9 +309,64 @@
                     });
             });
         }
+
+        document.getElementById('addUnitForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // Если форма уже была отправлена, прерываем дальнейшие действия
+            if (this.submitted) {
+                return;
+            }
+            this.submitted = true;
+
+            let formData = new FormData(this);
+            fetch('{{ route('user.unit.storeWorkorder') }}', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok: ' + response.status);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        // Добавляем новый элемент в Select
+                        let select = document.getElementById('unit_id');
+                        let option = document.createElement('option');
+                        option.value = data.id;
+                        option.text = data.part_number;
+                        option.selected = true; // Автоматически выбираем новый элемент
+                        select.add(option);
+
+                        // Закрываем модальное окно
+                        let modal = bootstrap.Modal.getInstance(document.getElementById('addUnitModal'));
+                        modal.hide();
+
+                        // Сброс формы
+                        document.getElementById('addUnitForm').reset();
+                    } else {
+                        console.error('Ошибка:', data.error);
+                    }
+                    this.submitted = false;
+                })
+                .catch(error => {
+                    console.error('Ошибка:', error);
+                    this.submitted = false;
+                });
+        });
+
+
+
+
         handleFormSubmission('addInstructionForm', '{{ route('user.instruction.store') }}', 'instruction_id', 'id', 'name', 'addInstructionModal');
         handleFormSubmission('addCustomerForm', '{{ route('user.customer.store') }}', 'customer_id', 'id', 'name', 'addCustomerModal');
-        handleFormSubmission('addUnitForm', '{{ route('user.unit.store_workorder') }}', 'unit_id', 'id', 'name', 'addUnitModal');
+
+
 
 
     </script>

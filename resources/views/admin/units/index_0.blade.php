@@ -302,48 +302,32 @@
         </div>
     </div>
 
+    <!-- Модальное окно Edit Unit  -->
 
-
-    <!-- Модальное окно Edit Unit -->
-    <div class="modal fade" id="editUnitModal" tabindex="-1" role="dialog" aria-labelledby="editUnitModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editUnitModal" tabindex="-1" role="dialog" aria-labelledby="editUnitModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header justify-content-between">
                     <h5 class="modal-title" id="editUnitModalLabel"></h5>
-                    <button type="button" class="btn btn-primary" id="addUnitButton">
-                        {{ __('Add PN') }}
+                    <button type="button" class="btn btn-primary"
+                            id="addUnitButton">
+                        {{__('Add PN')}}
                     </button>
                 </div>
                 <div class="modal-body">
+
                     <div class="row">
                         <div class="col">
                             <div class="modal-body text-center">
                                 <img id="cmmImage" src="" style="max-width: 150px;" alt="Image CMM">
+
                             </div>
                         </div>
                         <div class="col">
                             @if(isset($units) && $units->isNotEmpty())
                                 <p id="editUnitModalNumber"></p>
-                                <div id="partNumbersList">
-                                    @foreach($units as $unit)
-                                        <div class="d-flex align-items-center mb-2">
-                                            <!-- Проверяем verified и устанавливаем стиль для текста -->
-                                            <span class="@if(!$unit->verified) text-danger @endif">
-                                            {{ $unit->part_number }}
-                                        </span>
-
-                                            <!-- Кнопка для изменения статуса verified -->
-                                            <button type="button" class="btn btn-sm btn-link ms-2 changeVerifiedButton"
-                                                    data-unit-id="{{ $unit->id }}" data-verified="{{ $unit->verified }}">
-                                                @if($unit->verified)
-                                                    Mark as Unverified
-                                                @else
-                                                    Verify
-                                                @endif
-                                            </button>
-                                        </div>
-                                    @endforeach
-                                </div>
+                                <div id="partNumbersList"></div>
                             @else
                                 <p>No part numbers found for this manual.</p>
                             @endif
@@ -360,5 +344,200 @@
 
 
 
-   с
+    <script>
+
+
+        // Добавление нового поля ввода PN
+        document.getElementById('addPnField').addEventListener('click', function () {
+            const newPnField = document.createElement('div');
+            newPnField.className = 'input-group mb-2 pn-field';
+            newPnField.innerHTML = ` <input type="text" class="form-control"
+                                    placeholder="Enter PN"
+                                     style="width: 200px;" name="pn[]">
+                <button class="btn btn-danger removePnField" type="button">
+                        Delete
+                </button> `;
+            document.getElementById('pnInputs').appendChild(newPnField);
+        });
+
+        // Удаление поля ввода PN
+        document.addEventListener('click', function (event) {
+            if (event.target.classList.contains('removePnField')) {
+                event.target.parentElement.remove();
+            }
+        });
+
+        // Add Unit
+        document.getElementById('createUnitBtn').addEventListener('click', function () {
+            const cmmId = document.getElementById('cmmSelect').value;
+            const pnValues = Array.from(document.querySelectorAll('input[name="pn[]"]')).map(input => input.value.trim());
+
+            // AJAX-запрос для отправки данных на сервер
+            if (cmmId && pnValues.length > 0) {
+                $.ajax({
+                    url: '{{ route('admin.units.store') }}', // Обновите с вашим маршрутом для сохранения юнитов
+                    type: 'POST',
+                    data: {
+                        cmm_id: cmmId,
+                        part_numbers: pnValues,
+                        _token: '{{ csrf_token() }}' // CSRF токен для Laravel
+                    },
+                    success: function (response) {
+                        // Обработка успешного ответа
+                        console.log(response);
+                        location.reload(); // Перезагрузка страницы, чтобы увидеть новый юнит в таблице
+                    },
+                    error: function (xhr) {
+                        // Обработка ошибок
+                        console.error(xhr.responseText);
+                        alert('An error occurred while creating the unit. Please try again.');
+                    }
+                });
+            } else {
+                alert('Please select CMM and enter at least one PN.');
+            }
+        });
+
+
+
+
+        // Логика для Edit Unit
+        document.addEventListener('click', function (event) {
+            // Проверяем, нажали ли на элемент с классом .edit-unit-btn или на дочерний элемент кнопки
+            if (event.target.matches('.edit-unit-btn') || event.target.closest('.edit-unit-btn')) {
+                const button = event.target.closest('.edit-unit-btn'); // Находим нужную кнопку, если был клик по дочернему элементу
+                const manualId = button.getAttribute('data-manuals-id');
+                const manualTitle = button.getAttribute('data-manual');
+                const manualImage = button.getAttribute('data-manual-image');
+                const manualNumber = button.getAttribute('data-manual-number');
+
+                // console.log('Кнопка нажата');
+                console.log('Manual ID:', manualId);
+                console.log('Manual Title:', manualTitle);
+                console.log('Manual Number:', manualNumber);
+                console.log('Manual Image:', manualImage);
+
+                // Установка данных в модальное окно
+                document.getElementById('editUnitModalLabel').innerText = `${manualTitle}`;
+                document.getElementById('editUnitModalNumber').innerText = `CMM: ${manualNumber}`;
+
+                // Установка изображения
+                const cmmImage = document.getElementById('cmmImage');
+                if (manualImage) {
+                    cmmImage.src = `/storage/image/cmm/${manualImage}`;
+                } else {
+                    cmmImage.src = `/storage/image/Noimage.svg`; // Путь к изображению по умолчанию
+                }
+
+                // Очистить текущий список part_number
+                const partNumbersList = document.getElementById('partNumbersList');
+                partNumbersList.innerHTML = '';
+
+                // Отправка запроса для получения юнитов, связанных с мануалом
+                fetch(`units/${manualId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.units && data.units.length > 0) {
+                            data.units.forEach(function (unit) {
+                                addPartNumberRow(unit.part_number);
+                            });
+                        } else {
+                            const noUnitsItem = document.createElement('div');
+                            noUnitsItem.className = 'mb-2';
+                            noUnitsItem.innerText = 'No part numbers found for this manual.';
+                            partNumbersList.appendChild(noUnitsItem);
+                        }
+                        $('#editUnitModal').modal('show'); // Открываем модальное окно после получения данных
+                    })
+                    .catch(error => {
+                        console.error('Error loading units:', error);
+                    });
+            }
+        });
+        document.addEventListener('click', function (event) {
+            // Проверяем, что кнопка, которая открывает модальное окно, нажата
+            if (event.target.matches('.edit-unit-btn') || event.target.closest('.edit-unit-btn')) {
+                $('#editUnitModal').on('shown.bs.modal', function () {
+                    const addUnitButton = document.getElementById('addUnitButton');
+                    if (addUnitButton) {
+                        console.log('Кнопка addUnitButton найдена после открытия модального окна');
+                        addUnitButton.addEventListener('click', handleAddUnitClick);
+                    } else {
+                        console.error('Кнопка addUnitButton не найдена после открытия модального окна');
+                    }
+                });
+            }
+        });
+        function handleAddUnitClick() {
+            addPartNumberRow('');
+        }
+
+
+        // Функция для добавления новой строки с part_number
+        function addPartNumberRow(partNumber = '') {
+            const partNumbersList = document.getElementById('partNumbersList');
+
+            // Создаем новый элемент для списка part_numbers
+            const listItem = document.createElement('div');
+            listItem.className = 'mb-2 d-flex align-items-center';
+
+            // Создаем поле ввода
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.className = 'form-control';
+            input.style.width = '200px';
+            input.value = partNumber;
+
+            // Создаем кнопку для удаления
+            const deleteButton = document.createElement('button');
+            deleteButton.className = 'btn btn-danger btn-sm ms-1';
+            deleteButton.innerText = 'Del';
+            deleteButton.onclick = function () {
+                listItem.remove();
+            };
+
+            // Добавляем поле ввода и кнопку в список
+            listItem.appendChild(input);
+            listItem.appendChild(deleteButton);
+            partNumbersList.appendChild(listItem);
+        }
+
+        // Обработчик кнопки Update
+        document.getElementById('updateUnitButton').addEventListener('click', function () {
+            const partNumbers = Array.from(document.querySelectorAll('#partNumbersList input')).map(input => input.value);
+            const manualId = document.querySelector('.edit-unit-btn').getAttribute('data-manuals-id');
+
+            console.log("Part Numbers:", partNumbers);  // Для проверки
+            console.log("Manual ID:", manualId);  // Для проверки
+
+            // Отправляем запрос на обновление part_numbers
+            fetch(`units/update/${manualId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({
+                    part_numbers: partNumbers
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Units updated successfully');
+                        $('#editUnitModal').modal('hide');
+                        // Обновляем страницу после закрытия модального окна
+                        window.location.href = '/admin/units';
+                    } else {
+                        alert('Error updating units');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error updating units:', error);
+                });
+        });
+
+
+
+    </script>
 @endsection

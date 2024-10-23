@@ -92,6 +92,8 @@ Route::prefix('admin')->middleware(['auth'])->group(function (){
         'update'])->name('admin.units.update');
     Route::delete('units/{unit}',[UnitController::class,
         'destroy'])->name('admin.units.destroy');
+    Route::post('units/{unit}/toggleVerified', [UnitController::class, 'toggleVerified'])->name('admin.units.toggleVerified');
+
 
 // В вашем routes/
     Route::get('units/{manualId}', [UnitController::class,

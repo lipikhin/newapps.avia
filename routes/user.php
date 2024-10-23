@@ -43,8 +43,8 @@ Route::prefix('user')->middleware(['auth'])->group(function (){
 
     Route::post('instruction/store',[InstructionController::class,'store'])->name('user.instruction.store');
     Route::post('customer/store',[CustomerController::class,'store'])->name('user.customer.store');
-    Route::post('unit/store_workorder',[UnitController::class,'store'])->name
-    ('user.unit.store_workorder');
+    Route::post('unit/store', [UnitController::class, 'storeWorkorder'])->name('user.unit.storeWorkorder');
+
 
     Route::get('profile', [ProfileController::class, 'index'])->name('user.profile.profile');
     Route::get('profile/create', [ProfileController::class, 'create'])->name('user.profile.create');
