@@ -491,7 +491,6 @@
             checkbox.type = 'checkbox';
             checkbox.className = 'form-check-input me-2';
 
-
             // Создаем поле ввода
             const input = document.createElement('input');
             input.type = 'text';
