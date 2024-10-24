@@ -439,7 +439,7 @@
                     .then(data => {
                         if (data.units && data.units.length > 0) {
                             data.units.forEach(function (unit) {
-                                addPartNumberRow(unit.part_number);
+                                addPartNumberRow(unit.part_number, unit.verified);
                             });
                         } else {
                             const noUnitsItem = document.createElement('div');
@@ -474,7 +474,7 @@
 
 
         // Функция для добавления новой строки с part_number
-        function addPartNumberRow(partNumber = '') {
+        function addPartNumberRow(partNumber = '', verified = true) {
             const partNumbersList = document.getElementById('partNumbersList');
 
             if (!partNumbersList) {
@@ -491,6 +491,7 @@
             checkbox.type = 'checkbox';
             checkbox.className = 'form-check-input me-2';
 
+            checkbox.checked = verified;
 
             // Создаем поле ввода
             const input = document.createElement('input');
@@ -516,7 +517,14 @@
 
         // Обработчик кнопки Update
         document.getElementById('updateUnitButton').addEventListener('click', function () {
-            const partNumbers = Array.from(document.querySelectorAll('#partNumbersList input')).map(input => input.value);
+            const partNumbers = Array.from(document.querySelectorAll('#partNumbersList .d-flex.align-items-center')).map(listItem => {
+                const input = listItem.querySelector('.form-control');
+                const checkbox = listItem.querySelector('.form-check-input');
+                return {
+                    part_number: input.value,
+                    verified: checkbox.checked
+                };
+            });
             const manualId = document.querySelector('.edit-unit-btn').getAttribute('data-manuals-id');
 
             console.log("Part Numbers:", partNumbers);  // Для проверки
@@ -548,8 +556,6 @@
                     console.error('Error updating units:', error);
                 });
         });
-
-
 
     </script>
 @endsection

@@ -9,6 +9,7 @@ use App\Models\Plane;
 use App\Models\Scope;
 use App\Models\Unit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 
 class UnitController extends Controller
@@ -198,20 +199,32 @@ class UnitController extends Controller
         try {
             $manual = Manual::findOrFail($manualId);
 
+            // Извлекаем только part_numbers из входящего массива объектов
+            $newPartNumbersArray = array_map(function($unit) {
+                return $unit['part_number'];
+            }, $request->input('part_numbers'));
+
             $existingPartNumbers = $manual->units()->pluck('part_number')->toArray();
-            $newPartNumbers = $request->input('part_numbers');
 
             \Log::info('Existing part numbers:', $existingPartNumbers);
-            \Log::info('New part numbers:', $newPartNumbers);
+            \Log::info('New part numbers:', $newPartNumbersArray);
 
             // Удаляем все part_number, которых нет в новом списке
             Unit::where('manuals_id', $manualId)
-                ->whereNotIn('part_number', $newPartNumbers)
+                ->whereNotIn('part_number', $newPartNumbersArray)
                 ->delete();
 
-            foreach ($newPartNumbers as $partNumber) {
-                if (!in_array($partNumber, $existingPartNumbers)) {
-                    $manual->units()->firstOrCreate(['part_number' => $partNumber]);
+            foreach ($request->input('part_numbers') as $unit) {
+                if (!in_array($unit['part_number'], $existingPartNumbers)) {
+                    $manual->units()->create([
+                        'part_number' => $unit['part_number'],
+                        'verified' => $unit['verified']
+                    ]);
+                } else {
+                    // Обновляем существующий unit, если он уже есть
+                    $manual->units()
+                        ->where('part_number', $unit['part_number'])
+                        ->update(['verified' => $unit['verified']]);
                 }
             }
 
@@ -227,6 +240,7 @@ class UnitController extends Controller
             ], 500);
         }
     }
+
 
 
 //        $manual = Manual::findOrFail($manualId);
