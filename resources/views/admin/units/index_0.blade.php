@@ -81,7 +81,7 @@
                             </td>
 
                             {{--                            <td>--}}
-{{--                                <select class="form-select">--}}
+{{--                                <select class="forms-select">--}}
 {{--                                    @foreach($units as $unit)--}}
 {{--                                        <!-- Итерируем по $units, а не $groupedUnits -->--}}
 {{--                                        @if ($unit->manuals)--}}
@@ -484,7 +484,7 @@
             // Создаем поле ввода
             const input = document.createElement('input');
             input.type = 'text';
-            input.className = 'form-control';
+            input.className = 'forms-control';
             input.style.width = '200px';
             input.value = partNumber;
 

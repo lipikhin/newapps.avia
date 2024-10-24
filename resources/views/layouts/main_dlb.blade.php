@@ -140,7 +140,7 @@
                 </li>
                 <li>
                     <a class="dropdown-item" href="{{ route('logout') }}"
-                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                       onclick="event.preventDefault(); document.getElementById('logout-forms').submit();">
                         <i class="bi bi-box-arrow-left icon"></i>
                         <span class="text nav-text">{{__('Logout')}}</span>
                     </a>
@@ -160,7 +160,7 @@
             <li class="logout">
                 <a href="{{ route('logout') }}"
                    onclick="event.preventDefault();
-                   document.getElementById('logout-form').submit();"
+                   document.getElementById('logout-forms').submit();"
                    data-bs-toggle="tooltip" title="Logout">
                     <i class="bi bi-box-arrow-left icon"></i>
                     <span class="text nav-text">{{__('Logout')}}</span>

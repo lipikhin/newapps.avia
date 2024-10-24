@@ -51,7 +51,7 @@
                     display: none;
                 }
 
-                /*.form-switch {*/
+                /*.forms-switch {*/
                 /*    display: none;*/
                 /*}*/
 
@@ -402,7 +402,7 @@
         }
 
 
-        document.querySelectorAll('.form-check-input').forEach(checkbox => {
+        document.querySelectorAll('.forms-check-input').forEach(checkbox => {
             checkbox.addEventListener('change', function () {
                 const showImage = this.checked ? 'true' : 'false';  // Получаем значение параметра showImage
                 // const manualsId = this.id.replace('showImage', ''); // Получаем manuals_id из id чекбокса

@@ -81,7 +81,7 @@
                             </td>
 
                             {{--                            <td>--}}
-{{--                                <select class="form-select">--}}
+{{--                                <select class="forms-select">--}}
 {{--                                    @foreach($units as $unit)--}}
 {{--                                        <!-- Итерируем по $units, а не $groupedUnits -->--}}
 {{--                                        @if ($unit->manuals)--}}

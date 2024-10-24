@@ -81,7 +81,7 @@
                                 </td>
 
                                 {{--                            <td>--}}
-                                {{--                                <select class="form-select">--}}
+                                {{--                                <select class="forms-select">--}}
                                 {{--                                    @foreach($units as $unit)--}}
                                 {{--                                        <!-- Итерируем по $units, а не $groupedUnits -->--}}
                                 {{--                                        @if ($unit->manuals)--}}
@@ -489,14 +489,14 @@
             // Создаем чекбокс для верификации
             const checkbox = document.createElement('input');
             checkbox.type = 'checkbox';
-            checkbox.className = 'form-check-input me-2';
+            checkbox.className = 'forms-check-input me-2';
 
             checkbox.checked = verified;
 
             // Создаем поле ввода
             const input = document.createElement('input');
             input.type = 'text';
-            input.className = 'form-control';
+            input.className = 'forms-control';
             input.style.width = '180px';
             input.value = partNumber;
 
@@ -518,8 +518,8 @@
         // Обработчик кнопки Update
         document.getElementById('updateUnitButton').addEventListener('click', function () {
             const partNumbers = Array.from(document.querySelectorAll('#partNumbersList .d-flex.align-items-center')).map(listItem => {
-                const input = listItem.querySelector('.form-control');
-                const checkbox = listItem.querySelector('.form-check-input');
+                const input = listItem.querySelector('.forms-control');
+                const checkbox = listItem.querySelector('.forms-check-input');
                 return {
                     part_number: input.value,
                     verified: checkbox.checked

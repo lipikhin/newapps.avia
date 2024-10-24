@@ -81,7 +81,7 @@
                                 </td>
 
                                 {{--                            <td>--}}
-                                {{--                                <select class="form-select">--}}
+                                {{--                                <select class="forms-select">--}}
                                 {{--                                    @foreach($units as $unit)--}}
                                 {{--                                        <!-- Итерируем по $units, а не $groupedUnits -->--}}
                                 {{--                                        @if ($unit->manuals)--}}
@@ -489,12 +489,12 @@
             // Создаем чекбокс для верификации
             const checkbox = document.createElement('input');
             checkbox.type = 'checkbox';
-            checkbox.className = 'form-check-input me-2';
+            checkbox.className = 'forms-check-input me-2';
 
             // Создаем поле ввода
             const input = document.createElement('input');
             input.type = 'text';
-            input.className = 'form-control';
+            input.className = 'forms-control';
             input.style.width = '180px';
             input.value = partNumber;
 
